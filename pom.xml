@@ -2,50 +2,65 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
 	<groupId>com.yb.yff.sb</groupId>
 	<artifactId>yufenfen</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${yufenfen.version}</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 	<description>Demo project for Spring Boot </description>
 
 	<!--modules -->
 	<modules>
-		<module>yufenfen-rocketmq</module>
+		<module>yufenfen-dependencies</module>
+		<module>yufenfen-framework</module>
+        <module>yufenfen-mq</module>
 	</modules>
+
 	<properties>
-		<!-- JAVA 版本 -->
-		<java.version>17</java.version>
+		<!-- version -->
+		<yufenfen.version>0.0.1-SNAPSHOT</yufenfen.version>
+
+		<!-- boot -->
+		<spring.boot.version>3.2.1</spring.boot.version>
+
 		<!-- Maven 相关 -->
+		<java.version>17</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 		<flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
-		<!-- boot -->
-		<spring.boot.version>3.3.0</spring.boot.version>
-		<!-- cloud -->
-		<spring.cloud.version>2023.0.0</spring.cloud.version>
-		<!-- 消息队列 -->
-		<rocketmq-spring.version>2.2.3</rocketmq-spring.version>
-		<!--mapstruct-->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<lombok.version>1.18.32</lombok.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.apache.rocketmq</groupId>
-				<artifactId>rocketmq-spring-boot-starter</artifactId>
-				<version>${rocketmq-spring.version}</version>
+				<groupId>com.yb.yff.sb</groupId>
+				<artifactId>yufenfen-dependencies</artifactId>
+				<version>${yufenfen.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
+	<!-- 使用 huawei / aliyun 的 Maven 源，提升下载速度 -->
+	<repositories>
+		<repository>
+			<id>huaweicloud</id>
+			<name>huawei</name>
+			<url>https://mirrors.huaweicloud.com/repository/maven/</url>
+		</repository>
+		<repository>
+			<id>aliyunmaven</id>
+			<name>aliyun</name>
+			<url>https://maven.aliyun.com/repository/public</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<pluginManagement>
@@ -56,6 +71,18 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven-surefire-plugin.version}</version>
+				</plugin>
+				<!-- 解决 Cannot resolve plugin org.apache.maven.plugins:maven-jar-plugin:3.3.0 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<!-- 解决 Cannot resolve plugin org.apache.maven.plugins:maven-resources-plugin:3.3.1 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
 				</plugin>
 				<!-- maven-compiler-plugin 插件，解决 Lombok + MapStruct 组合 -->
 				<!-- https://stackoverflow.com/questions/33483697/re-run-spring-boot-configuration-annotation-processor-to-update-generated-metada -->
@@ -90,48 +117,5 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-
-		<plugins>
-			<!-- 统一 revision 版本 -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<version>${flatten-maven-plugin.version}</version>
-				<configuration>
-					<flattenMode>resolveCiFriendliesOnly</flattenMode>
-					<updatePomFile>true</updatePomFile>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>flatten</goal>
-						</goals>
-						<id>flatten</id>
-						<phase>process-resources</phase>
-					</execution>
-					<execution>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-						<id>flatten.clean</id>
-						<phase>clean</phase>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
 	</build>
-
-	<!-- 使用 huawei / aliyun 的 Maven 源，提升下载速度 -->
-	<repositories>
-		<repository>
-			<id>huaweicloud</id>
-			<name>huawei</name>
-			<url>https://mirrors.huaweicloud.com/repository/maven/</url>
-		</repository>
-		<repository>
-			<id>aliyunmaven</id>
-			<name>aliyun</name>
-			<url>https://maven.aliyun.com/repository/public</url>
-		</repository>
-	</repositories>
 </project>

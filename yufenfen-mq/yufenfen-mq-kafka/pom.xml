@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yb.yff.sb</groupId>
+        <artifactId>yufenfen-mq</artifactId>
+        <version>${yufenfen.version}</version>
+    </parent>
+
+    <artifactId>yufenfen-mq-kafka</artifactId>
+
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description> kafka demo</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yb.yff.sb</groupId>
+            <artifactId>yufenfen-framework-web</artifactId>
+            <version>${yufenfen.version}</version>
+        </dependency>
+
+        <!-- Spring Kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <!-- Jackson for JSON serialization and deserialization -->
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-databind</artifactId>-->
+<!--        </dependency>-->
+
+        <!-- javax -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>

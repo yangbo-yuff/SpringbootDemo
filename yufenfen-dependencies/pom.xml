@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yb.yff.sb</groupId>
+    <artifactId>yufenfen-dependencies</artifactId>
+    <version>${yufenfen.version}</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>dependencies of Demo project for Spring Boot </description>
+
+    <properties>
+        <!-- boot -->
+        <spring.boot.version>3.2.1</spring.boot.version>
+
+        <!-- version -->
+        <yufenfen.version>0.0.1-SNAPSHOT</yufenfen.version>
+
+        <!-- 消息队列 -->
+        <rocketmq-spring.version>2.2.3</rocketmq-spring.version>
+
+        <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
+
+        <!--mapstruct-->
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <!--fastjson-->
+        <fastjson.version>1.2.83</fastjson.version>
+        <!--reids-->
+        <redisson.version>3.26.0</redisson.version>
+        <!--springdoc-->
+        <springdoc.version>2.2.0</springdoc.version>
+        <knife4j.version>4.3.0</knife4j.version>
+        <!-- lombok-->
+        <lombok.version>1.18.32</lombok.version>
+        <!-- kafka-->
+        <kafka.version>3.1.1</kafka.version>
+        <!-- jackson -->
+        <jackson.databind.version>2.17.1</jackson.databind.version>
+        <!-- javax -->
+        <javax.version>1.2</javax.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- 统一依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--MQ-->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq-spring.version}</version>
+            </dependency>
+
+            <!--fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!--reids -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <!--springdoc -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId> <!-- 接口文档 UI：knife4j【网关专属】 -->
+                <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!--lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- Spring Kafka -->
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${kafka.version}</version>
+            </dependency>
+            <!-- Jackson for JSON serialization and deserialization-->
+<!--            <dependency>-->
+<!--                <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--                <artifactId>jackson-databind</artifactId>-->
+<!--                <version>${jackson.databind.version}</version>-->
+<!--            </dependency>-->
+            <!-- javax -->
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>${javax.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <!-- 统一 revision 版本 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten-maven-plugin.version}</version>
+                <configuration>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                    <updatePomFile>true</updatePomFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
