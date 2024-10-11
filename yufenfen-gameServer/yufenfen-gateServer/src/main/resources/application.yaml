@@ -1,0 +1,17 @@
+server:
+  port: 18004
+
+#spring:
+#  main:
+#    allow-circular-references: true # 允许循环依赖，因为项目是三层架构，无法避免这个情况。
+#    web-application-type: none
+
+socketio:
+  host: 0.0.0.0
+  port: 18004
+  bossCount: 1
+  workerCount: 100
+  allowCustomRequests: true
+  upgradeTimeout: 10000
+  pingTimeout: 60000
+  pingInterval: 25000

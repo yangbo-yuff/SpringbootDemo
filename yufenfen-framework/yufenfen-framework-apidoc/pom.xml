@@ -9,28 +9,27 @@
         <version>${yufenfen.version}</version>
     </parent>
 
-    <artifactId>yufenfen-framework-web</artifactId>
+    <artifactId>yufenfen-framework-apidoc</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <description>Web 框架</description>
 
 
     <dependencies>
-        <!-- framework-common -->
-        <dependency>
-            <groupId>com.yb.yff.sb</groupId>
-            <artifactId>yufenfen-framework-common</artifactId>
-            <version>${yufenfen.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
+<!--        &lt;!&ndash; framework-common &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.yb.yff.sb</groupId>-->
+<!--            <artifactId>yufenfen-framework-common</artifactId>-->
+<!--            <version>${yufenfen.version}</version>-->
+<!--            <type>pom</type>-->
+<!--            <scope>import</scope>-->
+<!--        </dependency>-->
 
-        <!-- Spring 核心 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
+<!--        &lt;!&ndash; Spring Web 核心 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-web</artifactId>-->
+<!--        </dependency>-->
 
         <!-- 接口文档 -->
         <dependency>

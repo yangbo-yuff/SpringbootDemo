@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.yb.yff.sb</groupId>
-            <artifactId>yufenfen-framework-web</artifactId>
+            <artifactId>yufenfen-framework-apidoc</artifactId>
             <version>${yufenfen.version}</version>
         </dependency>
 

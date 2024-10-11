@@ -5,15 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.yb.yff.sb</groupId>
-        <artifactId>yufenfen-mq</artifactId>
+        <artifactId>yufenfen</artifactId>
         <version>${yufenfen.version}</version>
     </parent>
 
-    <artifactId>yufenfen-mq-rocketmq</artifactId>
-
-    <packaging>jar</packaging>
-    <name>${project.artifactId}</name>
-    <description> rocketmq demo</description>
+    <groupId> com.yb.yff.sb.jvm</groupId>
+    <artifactId>yufenfen-javaAdvanced</artifactId>
 
     <properties>
         <maven.compiler.source>20</maven.compiler.source>
@@ -21,12 +18,4 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.yb.yff.sb</groupId>
-            <artifactId>yufenfen-framework-apidoc</artifactId>
-            <version>${yufenfen.version}</version>
-        </dependency>
-
-    </dependencies>
 </project>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yb.yff.game</groupId>
+        <artifactId>yufenfen-gameServer</artifactId>
+        <version>${mygame.version}</version>
+    </parent>
+
+    <artifactId>yufenfen-gateServer</artifactId>
+
+    <properties>
+        <netty-socketio.version>2.0.11</netty-socketio.version>
+        <netty.version>4.1.114.Final</netty.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>io.netty</groupId>-->
+<!--            <artifactId>netty-all</artifactId>-->
+<!--            <version>${netty.version}</version> &lt;!&ndash; 请检查最新版本 &ndash;&gt;-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; spring-boot 核心 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; socketio 相关 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.corundumstudio.socketio</groupId>-->
+<!--            <artifactId>netty-socketio</artifactId>-->
+<!--            <version>${netty-socketio.version}</version>-->
+<!--        </dependency>-->
+
+
+
+<!--        <dependency>-->
+<!--            <groupId>com.yb.yff.game</groupId>-->
+<!--            <artifactId>yufenfen-gameData</artifactId>-->
+<!--            <version>${mygame.version}</version>-->
+<!--        </dependency>-->
+    </dependencies>
+</project>

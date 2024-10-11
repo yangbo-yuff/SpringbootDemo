@@ -19,7 +19,8 @@
     <modules>
 
         <module>yufenfen-framework-common</module>
-        <module>yufenfen-framework-web</module>
+        <module>yufenfen-framework-apidoc</module>
+        <module>yufenfen-framework-security</module>
     </modules>
 
     <dependencyManagement>

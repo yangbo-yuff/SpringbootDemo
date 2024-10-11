@@ -79,9 +79,8 @@ public class MyKafkaconsumerService {
             return;
         }
 
-        // kafka监听器
-        Deserializer<String> stringDeserializer = new StringDeserializer();
-        DefaultKafkaConsumerFactory<String, String> factory = new DefaultKafkaConsumerFactory<>(consumerFactory(groupId), stringDeserializer, stringDeserializer);
+        // kafka 消费者
+        DefaultKafkaConsumerFactory<String, String> factory = consumerFactory(groupId);
 
         ContainerProperties props = new ContainerProperties(topic);
 
@@ -97,7 +96,12 @@ public class MyKafkaconsumerService {
         messageListeners.put(key, container);
     }
 
-    private Map<String, Object> consumerFactory(String groupId) {
+    /***
+     * 消费者工厂
+     * @param groupId
+     * @return
+     */
+    private DefaultKafkaConsumerFactory<String, String> consumerFactory(String groupId) {
         // consumer配置
         Map<String, Object> configMap = new HashMap();
         // 采用手动提交的方式
@@ -112,8 +116,10 @@ public class MyKafkaconsumerService {
 
         configMap.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class.getName());
 
+        // 序列化
+        Deserializer<String> stringDeserializer = new StringDeserializer();
 
-        return configMap;
+        return new DefaultKafkaConsumerFactory<>(configMap, stringDeserializer, stringDeserializer);
     }
 
 
@@ -139,11 +145,10 @@ public class MyKafkaconsumerService {
             return;
         }
 
+        // kafka 消费者
+        DefaultKafkaConsumerFactory<String, String> consumerFactory = consumerFactory(groupId);
 
-        Deserializer<String> stringDeserializer = new StringDeserializer();
-
-        DefaultKafkaConsumerFactory<String, String> consumerFactory = new DefaultKafkaConsumerFactory<>(consumerFactory(groupId), stringDeserializer, stringDeserializer);
-
+        // 相关属性
         ContainerProperties props = new ContainerProperties(topic);
 
         // 设置监听器(区分死信队列与非死信队列)
