@@ -21,6 +21,7 @@
         <module>yufenfen-framework-common</module>
         <module>yufenfen-framework-apidoc</module>
         <module>yufenfen-framework-security</module>
+        <module>yufenfen-framework-webSocket</module>
     </modules>
 
     <dependencyManagement>

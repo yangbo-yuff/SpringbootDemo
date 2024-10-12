@@ -18,6 +18,7 @@
         <module>yufenfen-AccountServer</module>
         <module>yufenfen-slgServer</module>
         <module>yufenfen-libs-data</module>
+        <module>yufenfen-libs-dto</module>
     </modules>
     <version>${mygame.version}</version>
     <name>${project.artifactId}</name>

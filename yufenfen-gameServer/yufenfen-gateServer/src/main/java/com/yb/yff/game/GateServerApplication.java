@@ -3,6 +3,7 @@ package com.yb.yff.game;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.
@@ -23,6 +24,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @Slf4j
+@ComponentScan(basePackages = {"com.yb.yff.game", "com.yb.yff.sb", "com.yb.yff.flux"})
 public class GateServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(GateServerApplication.class, args);

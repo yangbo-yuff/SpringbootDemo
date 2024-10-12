@@ -1,5 +1,8 @@
-package com.yb.yff.game.myWebSocket;
+package com.yb.yff.flux.server.config;
 
+import com.yb.yff.flux.server.handler.WSServerHandler;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.HandlerMapping;
@@ -7,8 +10,8 @@ import org.springframework.web.reactive.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.server.support.WebSocketHandlerAdapter;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.
@@ -24,25 +27,27 @@ import java.util.HashMap;
  * @Class: MyWebSocketConfig
  * @CreatedOn 2024/10/4.
  * @Email: yangboyff@gmail.com
- * @Description: 配置 WebSocket 路由
+ * @Description: 配置 WebSocket 服务端
  */
 
 @Configuration
-public class MyWebSocketConfig  {
-    @Bean
-    public HandlerMapping webSocketHandlerMapping(MyWebSocketHandlerImpl webSocketHandler) {
-        Map<String, WebSocketHandler> map = new HashMap<>();
-        map.put("/ws", webSocketHandler);  // WebSocket will be accessible at ws://localhost:8080/ws
+@Slf4j
+public class WSServerConfig {
+	@Bean
+	public HandlerMapping webSocketHandlerMapping( WSServerHandler webSocketHandler) {
+		log.info("====== webSocketHandlerMapping");
+		Map<String, WebSocketHandler> map = new HashMap<>();
+		map.put("/ws", webSocketHandler);  // WebSocket will be accessible at ws://localhost:8080/ws
 
-        SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
-        handlerMapping.setUrlMap(map);
-        handlerMapping.setOrder(1);
+		SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
+		handlerMapping.setUrlMap(map);
+		handlerMapping.setOrder(1);
 
-        return handlerMapping;
-    }
+		return handlerMapping;
+	}
 
-    @Bean
-    public WebSocketHandlerAdapter webSocketHandlerAdapter() {
-        return new WebSocketHandlerAdapter();
-    }
+	@Bean
+	public WebSocketHandlerAdapter webSocketHandlerAdapter() {
+		return new WebSocketHandlerAdapter();
+	}
 }

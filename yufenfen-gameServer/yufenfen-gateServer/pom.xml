@@ -18,33 +18,21 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <groupId>com.yb.yff.sb</groupId>
+            <artifactId>yunfefen-framework-webSocket-server</artifactId>
+            <version>${yufenfen.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yb.yff.sb</groupId>
+            <artifactId>yufenfen-framework-webSocket-client</artifactId>
+            <version>${yufenfen.version}</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>io.netty</groupId>-->
-<!--            <artifactId>netty-all</artifactId>-->
-<!--            <version>${netty.version}</version> &lt;!&ndash; 请检查最新版本 &ndash;&gt;-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; spring-boot 核心 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter</artifactId>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; socketio 相关 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.corundumstudio.socketio</groupId>-->
-<!--            <artifactId>netty-socketio</artifactId>-->
-<!--            <version>${netty-socketio.version}</version>-->
-<!--        </dependency>-->
-
-
-
-<!--        <dependency>-->
-<!--            <groupId>com.yb.yff.game</groupId>-->
-<!--            <artifactId>yufenfen-gameData</artifactId>-->
-<!--            <version>${mygame.version}</version>-->
-<!--        </dependency>-->
+        <!-- data libs -->
+        <dependency>
+            <groupId>com.yb.yff.game</groupId>
+            <artifactId>yufenfen-libs-dto</artifactId>
+            <version>${mygame.version}</version>
+        </dependency>
     </dependencies>
 </project>

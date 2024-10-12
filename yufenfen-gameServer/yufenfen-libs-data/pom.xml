@@ -25,9 +25,11 @@
     </properties>
 
     <dependencies>
+        <!-- data libs -->
         <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
+            <groupId>com.yb.yff.game</groupId>
+            <artifactId>yufenfen-libs-dto</artifactId>
+            <version>${mygame.version}</version>
         </dependency>
 
         <dependency>

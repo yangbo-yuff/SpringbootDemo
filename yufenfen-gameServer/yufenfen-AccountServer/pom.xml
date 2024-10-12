@@ -24,7 +24,7 @@
 <!--            <artifactId>spring-boot-starter-web</artifactId>-->
 <!--        </dependency>-->
 
-        <!-- dataserver -->
+        <!-- data libs -->
         <dependency>
             <groupId>com.yb.yff.game</groupId>
             <artifactId>yufenfen-libs-data</artifactId>

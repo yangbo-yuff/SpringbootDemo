@@ -1,6 +1,4 @@
-package com.yb.yff.game.data.dto;
-
-import lombok.Data;
+package com.yb.yff.sb.jvm.heap;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.
@@ -13,14 +11,11 @@ import lombok.Data;
  *
  * @author : YangBo
  * @Project: SpringbootDemo
- * @Class: MyGameMessage
- * @CreatedOn 2024/10/2.
+ * @Class: MyTestIF
+ * @CreatedOn 2024/9/18.
  * @Email: yangboyff@gmail.com
- * @Description: 游戏消息体
+ * @Description: 接口测试
  */
-
-@Data
-public class GameMessageDTO {
-	private String name;
-	private Object msg;
+public interface MyTestIFChild extends MyTestIF {
+    void childTest2();
 }
