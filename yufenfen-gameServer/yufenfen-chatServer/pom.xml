@@ -10,5 +10,15 @@
     </parent>
 
     <artifactId>yufenfen-chatServer</artifactId>
+    <version>${mygame.version}</version>
+    <name>${project.artifactId}</name>
+    <description> 聊天服务器 </description>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.yb.yff.sb</groupId>
+            <artifactId>yunfefen-framework-webSocket-server</artifactId>
+            <version>${yufenfen.version}</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -1,15 +1,17 @@
 package com.yb.yff.sb.kafka.controller;
 
-import com.yb.yff.sb.kafka.data.TopicData;
 import com.yb.yff.sb.kafka.data.MyKafkaListenerData;
+import com.yb.yff.sb.kafka.data.TopicData;
 import com.yb.yff.sb.kafka.service.KafkaProducerService;
 import com.yb.yff.sb.kafka.service.MyKafkaconsumerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.

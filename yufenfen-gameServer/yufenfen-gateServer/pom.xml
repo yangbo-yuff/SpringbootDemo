@@ -27,12 +27,5 @@
             <artifactId>yufenfen-framework-webSocket-client</artifactId>
             <version>${yufenfen.version}</version>
         </dependency>
-
-        <!-- data libs -->
-        <dependency>
-            <groupId>com.yb.yff.game</groupId>
-            <artifactId>yufenfen-libs-dto</artifactId>
-            <version>${mygame.version}</version>
-        </dependency>
     </dependencies>
 </project>

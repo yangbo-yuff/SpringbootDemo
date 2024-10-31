@@ -2,9 +2,7 @@ package com.yb.yff.sb.security.config;
 
 import com.yb.yff.sb.security.handler.AccessDeniedHandlerImpl;
 import com.yb.yff.sb.security.handler.AuthenticationEntryPointImpl;
-import com.yb.yff.sb.utils.JwtUtil;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

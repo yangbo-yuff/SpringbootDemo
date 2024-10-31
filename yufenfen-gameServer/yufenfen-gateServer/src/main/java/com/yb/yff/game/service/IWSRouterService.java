@@ -1,7 +1,6 @@
 package com.yb.yff.game.service;
 
-import com.yb.yff.game.data.dto.ws.GameMessageClientDTO;
-import com.yb.yff.game.data.dto.ws.GameMessageServerDTO;
+import com.yb.yff.sb.data.dto.GameMessageEnhancedResDTO;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.
@@ -21,22 +20,9 @@ import com.yb.yff.game.data.dto.ws.GameMessageServerDTO;
  */
 public interface IWSRouterService {
 	/**
-	 * 业务路由处理, 分发客户端请求到各个业务服务器
-	 * @param message
-	 */
-	void OnRouterFromClient2Server(String message);
-
-	/**
-	 * 业务路由处理, 业务服务器处理结果返回给业务发起端（客户端）
-	 * @param gameMessageServerDTO
-	 */
-	void OnRouterFromServer2Client(GameMessageServerDTO gameMessageServerDTO);
-
-	/**
 	 * 向指定客户端发送消息
-	 * @param
-	 * @param sessionID
+	 *
 	 * @param message
 	 */
-	void sendMessage(String sessionID, String message);
+	void sendMessage(GameMessageEnhancedResDTO message);
 }

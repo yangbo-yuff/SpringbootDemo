@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yb.yff.game</groupId>
+        <artifactId>yufenfen-gameServer</artifactId>
+        <version>${mygame.version}</version>
+    </parent>
+
+    <artifactId>yufenfen-libs-db</artifactId>
+    <version>${mygame.version}</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description> 数据库相关 </description>
+
+
+
+    <modules>
+        <module>yufenfen-libs-db-mysql</module>
+        <module>yufenfen-libs-db-mongo</module>
+        <module>yufenfen-libs-db-redis</module>
+        <module>yufenfen-libs-JSonDB</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+</project>

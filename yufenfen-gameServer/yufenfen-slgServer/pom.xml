@@ -10,5 +10,35 @@
     </parent>
 
     <artifactId>yufenfen-slgServer</artifactId>
+    <version>${mygame.version}</version>
+    <name>${project.artifactId}</name>
+    <description> 游戏逻辑服务器 </description>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.yb.yff.sb</groupId>
+            <artifactId>yunfefen-framework-webSocket-server</artifactId>
+            <version>${yufenfen.version}</version>
+        </dependency>
+
+        <!-- data libs -->
+        <dependency>
+            <groupId>com.yb.yff.game</groupId>
+            <artifactId>yufenfen-libs-db-mysql</artifactId>
+            <version>${mygame.version}</version>
+        </dependency>
+
+        <!-- data libs -->
+        <dependency>
+            <groupId>com.yb.yff.game</groupId>
+            <artifactId>yufenfen-libs-db-redis</artifactId>
+            <version>${mygame.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yb.yff.game</groupId>
+            <artifactId>yufenfen-libs-JSonDB</artifactId>
+            <version>${mygame.version}</version>
+        </dependency>
+    </dependencies>
 </project>

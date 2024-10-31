@@ -1,0 +1,8 @@
+server:
+  port: 18002
+
+game:
+  server:
+    check-secret: false # 作为服务端时，是否加密
+  client:
+    check-secret: false # 作为服务端时，是否加密

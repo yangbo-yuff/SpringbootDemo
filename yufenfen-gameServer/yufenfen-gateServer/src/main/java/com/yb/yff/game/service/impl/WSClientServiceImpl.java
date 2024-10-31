@@ -1,13 +1,27 @@
 package com.yb.yff.game.service.impl;
-import com.yb.yff.flux.client.data.dto.ServerInfoDTO;
-import com.yb.yff.flux.client.handler.WSClientHandler;
-import com.yb.yff.game.data.GBServerInfos;
+
+import com.alibaba.fastjson.JSONObject;
+import com.yb.yff.flux.client.service.IWSCLientsManager;
+import com.yb.yff.flux.client.service.IWSMessageListener;
+import com.yb.yff.game.constant.GlobalString;
 import com.yb.yff.game.service.IWSClientService;
+import com.yb.yff.game.service.IWSRouterService;
+import com.yb.yff.game.webClient.HttpClientHandler;
+import com.yb.yff.sb.constant.NetResponseCodeConstants;
+import com.yb.yff.sb.data.dto.GameMessageEnhancedReqDTO;
+import com.yb.yff.sb.data.dto.GameMessageEnhancedResDTO;
+import com.yb.yff.sb.data.dto.GameMessageReqDTO;
+import com.yb.yff.sb.data.dto.GameMessageResDTO;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.socket.WebSocketSession;
+import reactor.core.scheduler.Schedulers;
+
+import java.util.function.Consumer;
+
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.
@@ -27,49 +41,89 @@ import org.springframework.web.reactive.socket.WebSocketSession;
  */
 @Service
 @Slf4j
-public class WSClientServiceImpl extends WSClientHandler implements IWSClientService {
+public class WSClientServiceImpl implements IWSClientService, IWSMessageListener {
+
 	@Autowired
-	GBServerInfos gbServerInfos;
+	HttpClientHandler httpClientHandler;
+
+	@Autowired
+	IWSRouterService wsRouterService;
+
+	@Autowired
+	IWSCLientsManager wSClientsManager;
 
 	/**
-	 * 初始化连接，默认每个集群的一个服务，后期需要调整为：
-	 * 1. 账号服务，游戏服务，聊天服务，都通过负载均衡分配
+	 * 账户服务器地址
 	 */
+	private String accountServerUrl;
+
 	@PostConstruct
-	private void connectToServer() {
-//		// 链接账号服务
-//		ServerInfoDTO accountServer = gbServerInfos.getAccounts().get(0);
-//		this.connectToServer(accountServer);
-//
-//		// 链接游戏服务
-//		ServerInfoDTO gameServer = gbServerInfos.getGames().get(0);
-//		this.connectToServer(gameServer);
-//
-//		// 链接聊天服务
-//		ServerInfoDTO chatServer = gbServerInfos.getChats().get(0);
-//		this.connectToServer(chatServer);
-	}
-
-	/**
-	 * 处理客户端发送的消息
-	 *
-	 * @param session
-	 * @param message
-	 */
-	@Override
-	public void onMessage(WebSocketSession session, String message) {
-		log.info("=========== 收到 Server-" + session.getId() + "的消息: " + message);
-
+	private void init(){
+		wSClientsManager.addWSMessageListener(this);
 	}
 
 	/**
 	 * 向指定服务器发送消息
-	 * @param
-	 * @param sessionID
-	 * @param message
+	 *
+	 * @param sessionID     请求源Client与gate链接的session id
+	 * @param typeName      业务类型，根据此类型，找到对应的业务服务器，转发消息
+	 * @param fromClientDTO
 	 */
 	@Override
-	public void sendMessage(String sessionID, String message){
-		this.onSendMessage(sessionID, message);
+	public void sendMessage(String sessionID, String typeName, GameMessageReqDTO fromClientDTO) {
+		log.info("*********** Gate sendMessage typeName : " + typeName);
+
+		GameMessageEnhancedReqDTO message = new GameMessageEnhancedReqDTO();
+		BeanUtils.copyProperties(fromClientDTO, message);
+		message.setSessionClient2Gate(sessionID);
+
+		wSClientsManager.sendMessage(typeName, JSONObject.toJSONBytes(message));
+	}
+
+	/**
+	 * 发送http Get 请求
+	 *
+	 * @param typeName      业务类型，根据此类型，找到对应的业务服务器，转发消息
+	 * @param fromClientDTO
+	 * @return
+	 */
+	@Override
+	public void sendGetHttpRequest(String typeName, GameMessageReqDTO fromClientDTO, Consumer<GameMessageResDTO> callback) {
+		if (accountServerUrl == null) {
+			accountServerUrl = wSClientsManager.connectToBusinessServer();
+		}
+
+		String jonStr = JSONObject.toJSONString(fromClientDTO.getMsg());
+		httpClientHandler.getHttpRequest(accountServerUrl + GlobalString.ACCount_LOGIN, jonStr)
+				.doOnSuccess(responseDTO -> {
+					GameMessageResDTO gameMessageResDTO = new GameMessageResDTO();
+					BeanUtils.copyProperties(fromClientDTO, gameMessageResDTO);
+					gameMessageResDTO.setCode(responseDTO.getCode());
+
+					callback.accept(gameMessageResDTO);
+				})
+				.doOnError(error -> {
+					log.info("Failed to send HTTP request: " + error.getMessage());
+				})
+				.publishOn(Schedulers.boundedElastic()) // 确保回调在单独的线程池中执行
+				.subscribe();
+	}
+
+	/**
+	 * * 由实现者决定行为：
+	 * * 网关:  转发业务到其它服务器
+	 * * 非网关:  执行业务逻辑
+	 *
+	 * @param session
+	 * @param requestDTO
+	 */
+	@Override
+	public void onMessage(WebSocketSession session, GameMessageEnhancedReqDTO requestDTO) {
+		// 响应客户端数据
+		GameMessageEnhancedResDTO gameMessageResDTO = new GameMessageEnhancedResDTO();
+		BeanUtils.copyProperties(requestDTO, gameMessageResDTO);
+		gameMessageResDTO.setCode(NetResponseCodeConstants.SUCCESS.getCode());
+
+		wsRouterService.sendMessage(gameMessageResDTO);
 	}
 }

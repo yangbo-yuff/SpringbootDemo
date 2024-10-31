@@ -1,5 +1,10 @@
 package com.yb.yff.game.service;
 
+import com.yb.yff.sb.data.dto.GameMessageReqDTO;
+import com.yb.yff.sb.data.dto.GameMessageResDTO;
+
+import java.util.function.Consumer;
+
 /**
  * Copyright (c) 2024 to 2045  YangBo.
  * All rights reserved.
@@ -17,13 +22,21 @@ package com.yb.yff.game.service;
  * @Description: Websocket客户端服务 接口
  */
 public interface IWSClientService {
-
-
 	/**
 	 * 向指定服务器发送消息
-	 * @param
-	 * @param sessionID
-	 * @param message
+	 *
+	 * @param sessionID     请求源Client与gate链接的session id
+	 * @param typeName      业务类型，根据此类型，找到对应的业务服务器，转发消息
+	 * @param fromClientDTO
 	 */
-	void sendMessage(String sessionID, String message);
+	void sendMessage(String sessionID, String typeName, GameMessageReqDTO fromClientDTO);
+
+	/**
+	 * Http Get 请求
+	 *
+	 * @param typeName      业务类型，根据此类型，找到对应的业务服务器，转发消息
+	 * @param fromClientDTO
+	 * @param callback
+	 */
+	void sendGetHttpRequest(String typeName, GameMessageReqDTO fromClientDTO, Consumer<GameMessageResDTO> callback);
 }

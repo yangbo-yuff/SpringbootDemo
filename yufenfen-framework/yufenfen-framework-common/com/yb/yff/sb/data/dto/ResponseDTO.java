@@ -42,6 +42,8 @@ public class ResponseDTO<T> implements Serializable {
 	 * @see ResponseCode#getMsg() ()
 	 */
 	private String msg;
+	public ResponseDTO() {
+	}
 
 	public ResponseDTO(ResponseCode responseCode, T data) {
 		this.code = responseCode.getCode();

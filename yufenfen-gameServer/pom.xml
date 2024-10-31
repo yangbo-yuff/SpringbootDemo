@@ -12,17 +12,17 @@
     <groupId>com.yb.yff.game</groupId>
     <artifactId>yufenfen-gameServer</artifactId>
     <packaging>pom</packaging>
+    <version>${mygame.version}</version>
+    <name>${project.artifactId}</name>
+    <description> 游戏服务器 </description>
+
     <modules>
         <module>yufenfen-chatServer</module>
         <module>yufenfen-gateServer</module>
-        <module>yufenfen-AccountServer</module>
+        <module>yufenfen-accountServer</module>
         <module>yufenfen-slgServer</module>
-        <module>yufenfen-libs-data</module>
-        <module>yufenfen-libs-dto</module>
+        <module>yufenfen-libs-db</module>
     </modules>
-    <version>${mygame.version}</version>
-    <name>${project.artifactId}</name>
-    <description> 游戏服服务器 </description>
 
     <properties>
         <!-- version -->
@@ -35,7 +35,5 @@
             <artifactId>yufenfen-framework-common</artifactId>
             <version>${yufenfen.version}</version>
         </dependency>
-
-
     </dependencies>
 </project>

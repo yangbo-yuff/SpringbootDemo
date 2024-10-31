@@ -2,7 +2,6 @@ package com.yb.yff.sb.utils;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 

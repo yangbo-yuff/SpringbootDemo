@@ -1,9 +1,18 @@
 package com.yb.yff.game.service.impl;
 
-import com.yb.yff.game.data.dto.ws.GameMessageServerDTO;
+import com.yb.yff.flux.server.service.IWSMessageListener;
+import com.yb.yff.flux.server.service.IWSServerManager;
+import com.yb.yff.game.service.IWSClientService;
 import com.yb.yff.game.service.IWSRouterService;
-import com.yb.yff.flux.server.handler.WSServerHandler;
+import com.yb.yff.sb.constant.WSNetConstant;
+import com.yb.yff.sb.data.dto.GameMessageEnhancedReqDTO;
+import com.yb.yff.sb.data.dto.GameMessageEnhancedResDTO;
+import com.yb.yff.sb.data.dto.GameMessageReqDTO;
+import com.yb.yff.sb.data.dto.GameMessageResDTO;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.socket.WebSocketSession;
 
@@ -25,51 +34,83 @@ import org.springframework.web.reactive.socket.WebSocketSession;
  */
 @Service
 @Slf4j
-public class WSRouterServiceImpl extends WSServerHandler implements IWSRouterService {
+public class WSRouterServiceImpl implements IWSRouterService, IWSMessageListener {
+	public static final String TAG = "=========== GateServer";
+
+	@Autowired
+	IWSServerManager wsServerManager;
+
+	@Autowired
+	IWSClientService wsClientService;
+
+	@PostConstruct
+	private void init() {
+		// 添加事件监听器
+		wsServerManager.addWSMessageListener(this);
+	}
+
+
 	/**
-	 * 处理客户端发送的消息
-	 *
+	 * 由实现者决定行为
+	 * 网关:  转发业务到其它服务器
+	 * 非网关:  执行业务逻辑
 	 * @param session
-	 * @param message
+	 * @param requestDTO
 	 */
 	@Override
-	public void onMessage(WebSocketSession session, String message) {
-		super.onMessage(session, message);
+	public void onMessage(WebSocketSession session, GameMessageEnhancedReqDTO requestDTO) {
+		String requestName = requestDTO.getName();
+		log.info(TAG + " onMessage requestName : " + requestName);
 
-		log.info("=========== WSRouterServiceImpl 收到 Client-" + session.getId() + "的消息: " + message);
+		String[] names = requestName.split("\\.");
 
-		// TODO
-	}
+		if (names.length != 2){
+			log.info(TAG + " onMessage 非法 requestName : " + requestName);
+			return;
+		}
 
+		String typeName = names[0];
 
-	/**
-	 * 业务路由处理, 分发客户端请求到各个业务服务器
-	 *
-	 * @param message
-	 */
-	@Override
-	public void OnRouterFromClient2Server(String message) {
-		// TODO 处理数据，解密，转为对象……
-	}
+		// 账户请求 HTTP请求账户服务器
+		if(typeName.equals(WSNetConstant.SERVER_TYPE_ACCOUNT)){
+		    accountBusiness(session.getId(), typeName, requestDTO);
+			return;
+		}
 
-	/**
-	 * 业务路由处理, 业务服务器处理结果返回给业务发起端（客户端）
-	 *
-	 * @param gameMessageServerDTO
-	 */
-	@Override
-	public void OnRouterFromServer2Client(GameMessageServerDTO gameMessageServerDTO) {
-		// TODO
+		// 暂时业务服务器只有一个，slg，后续会分化出多个业务服务器，就不用处理服务器name逻辑了
+		if(typeName.equals(WSNetConstant.SERVER_TYPE_CHAT)){
+			typeName = WSNetConstant.SERVER_TYPE_CHAT;
+		} else {
+			typeName = WSNetConstant.SERVER_TYPE_SLG;
+		}
+
+		// 其它请求，转发SLG逻辑服务器/聊天服务器
+		wsClientService.sendMessage(session.getId(), typeName, requestDTO);
 	}
 
 	/**
 	 * 向指定客户端发送消息
-	 * @param
-	 * @param sessionID
+	 *
 	 * @param message
 	 */
 	@Override
-	public void sendMessage(String sessionID, String message){
-		this.onSendMessage(sessionID, message);
+	public void sendMessage(GameMessageEnhancedResDTO message) {
+
+		GameMessageResDTO gameMessageResDTO = new GameMessageResDTO();
+		BeanUtils.copyProperties(message, gameMessageResDTO);
+
+		wsServerManager.sendMessage(message.getSessionClient2Gate(), gameMessageResDTO);
+	}
+
+	/**
+	 * 账户业务, http非阻塞请求，拿到响应结果后，直接向发送响应结果消息
+	 * @param sessionId
+	 * @param typeName
+	 * @param requestDTO
+	 */
+	private void accountBusiness(String sessionId, String typeName, GameMessageReqDTO requestDTO){
+		wsClientService.sendGetHttpRequest(typeName, requestDTO, gameMessageResDTO -> {
+			wsServerManager.sendMessage(sessionId, gameMessageResDTO);
+		});
 	}
 }

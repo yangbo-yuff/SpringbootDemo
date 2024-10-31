@@ -1,0 +1,52 @@
+server:
+  port: 18001
+
+game:
+  server:
+    check-secret: false # 作为服务端时，是否加密
+  client:
+    check-secret: false # 作为服务端时，是否加密
+
+
+spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://admin:123456@192.168.1.3:27017/?authSource=admin
+#      database: YourDatabase
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/slgGameDB?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true&useServerPreparedStmts=false&rewriteBatchedStatements=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai"
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+  druid:
+    filters: stat,wall,log4j2
+    max-active: 20
+    initial-size: 1
+    max-wait: 60000
+    min-idle: 1
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    pool-prepared-statements: true
+    max-open-prepared-statements: 20
+
+  data:
+    redis:
+      host: 192.168.1.3
+      port: 6379
+      database: 6
+
+  mybatis:
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mybatis-plus:
+    configuration:
+      map-underscore-to-camel-case: true
+    global-config:
+      db-column-underline: true
+      refresh-mapper: true
+    mapper-locations: classpath:/mapper/**/*.xml
+    typeAliasesPackage: com.yb.yff.game.data.entitys.*.*

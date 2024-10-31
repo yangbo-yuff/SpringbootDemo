@@ -48,7 +48,6 @@ public class GameBusinessType {
 	public static final String GAME_BUSINESS_TYPE_GENERAL_COMPOSEGENERAL = "general/composeGeneral";
 	public static final String GAME_BUSINESS_TYPE_GENERAL_ADDPRGENERAL = "general/addPrGeneral";
 	public static final String GAME_BUSINESS_TYPE_GENERAL_CONVERT = "general/convert";
-
 	public static final String GAME_BUSINESS_TYPE_GENERAL_UPSKILL = "general/upSkill";
 	public static final String GAME_BUSINESS_TYPE_GENERAL_DOWNSKILL = "general/downSkill";
 	public static final String GAME_BUSINESS_TYPE_GENERAL_LVSKILL = "general/lvSkill";

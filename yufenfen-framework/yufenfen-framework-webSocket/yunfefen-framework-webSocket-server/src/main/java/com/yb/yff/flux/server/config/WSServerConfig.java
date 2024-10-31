@@ -1,8 +1,7 @@
 package com.yb.yff.flux.server.config;
 
-import com.yb.yff.flux.server.handler.WSServerHandler;
+import com.yb.yff.flux.server.handler.impl.WSServerHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.HandlerMapping;

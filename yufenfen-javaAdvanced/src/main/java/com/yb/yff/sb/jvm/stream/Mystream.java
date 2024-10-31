@@ -1,10 +1,6 @@
 package com.yb.yff.sb.jvm.stream;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.

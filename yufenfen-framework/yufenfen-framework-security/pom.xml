@@ -17,7 +17,6 @@
     <properties>
         <tomcat-embed-core.version>10.1.17</tomcat-embed-core.version>
         <hutool.version>5.8.9</hutool.version>
-        <fastjson.version>1.2.83</fastjson.version>
         <guava.version>33.0.0-jre</guava.version>
         <jjwt.version>0.9.1</jjwt.version>
     </properties>
@@ -62,7 +61,6 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
         </dependency>
 
         <!-- 工具类相关 -->
@@ -71,10 +69,5 @@
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.tomcat.embed</groupId>-->
-<!--            <artifactId>tomcat-embed-core</artifactId>-->
-<!--            <version>${tomcat-embed-core.version}</version>-->
-<!--        </dependency>-->
     </dependencies>
 </project>

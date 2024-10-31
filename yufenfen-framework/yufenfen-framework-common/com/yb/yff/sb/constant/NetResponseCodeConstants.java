@@ -51,8 +51,8 @@ public interface NetResponseCodeConstants {
 	ResponseCode ArmyNotMe = new ResponseCode(15, "军队不是自己的");
 	ResponseCode ResNotEnough = new ResponseCode(16, "资源不足");
 	ResponseCode OutArmyLimit = new ResponseCode(17, "超过带兵限制");
-	ResponseCode ArmyBusy = new ResponseCode(18, "军队再忙");
-	ResponseCode GeneralBusy = new ResponseCode(19, "将领再忙");
+	ResponseCode ArmyBusy = new ResponseCode(18, "军队在忙");
+	ResponseCode GeneralBusy = new ResponseCode(19, "将领在忙");
 	ResponseCode CannotGiveUp = new ResponseCode(20, "不能放弃");
 	ResponseCode BuildNotMe = new ResponseCode(21, "领地不是自己的");
 	ResponseCode ArmyNotMain = new ResponseCode(22, "军队没有主将");
