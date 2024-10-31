@@ -1,0 +1,81 @@
+public void onMessage(WebSocketSession session, GameMessageEnhancedReqDTO requestDTO) {
+String requestName = requestDTO.getName();
+log.info(TAG + " onMessage requestName : " + requestName);
+
+String[] names = requestName.split("\\.");
+
+if (names.length != 2){
+log.info(TAG + " onMessage 非法 requestName : " + requestName);
+return;
+}
+
+// 插入 uid
+Object uidObj = session.getAttributes().get(KEY_USER_ID);
+if(uidObj != null){
+Integer uid = Integer.parseInt(uidObj.toString());
+requestDTO.setUid(uid);
+}
+
+// 插入 rid
+Object ridObj = session.getAttributes().get(KEY_ROLE_ID);
+if(ridObj != null) {
+RoleDTO roleDTO = new RoleDTO();
+BeanUtils.copyProperties(ridObj, roleDTO);
+requestDTO.setRid(roleDTO.getRid());
+}
+
+
+IBusinessService businessService = getBusinessService(names[0]);
+
+// 检查 重复任务
+if(!businessService.checkTask(requestDTO)){
+return;
+}
+
+businessLogic(requestDTO, businessService, names[1])
+.doOnNext(response -> sendMessage(session, response))
+.then(Mono.fromRunnable(() -> {
+businessService.onFinishTask(requestDTO);
+}));
+}
+
+private Mono<GameMessageEnhancedResDTO> businessLogic(GameMessageEnhancedReqDTO requestDTO, IBusinessService businessService, String businessName) {
+return Mono.fromCallable(() -> {
+// 实际处理业务
+GameMessageEnhancedResDTO resDTO = businessService.dispathBusiness(businessName, requestDTO);
+return  resDTO;
+}).subscribeOn(Schedulers.boundedElastic());
+}
+
+
+================================================================================================================
+
+
+
+
+================================================================================================================
+
+
+
+
+================================================================================================================
+
+
+
+
+================================================================================================================
+
+
+
+
+================================================================================================================
+
+
+
+
+================================================================================================================
+
+
+
+
+================================================================================================================
