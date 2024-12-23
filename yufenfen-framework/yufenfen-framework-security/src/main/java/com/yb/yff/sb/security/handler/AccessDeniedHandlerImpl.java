@@ -26,7 +26,8 @@ import java.io.IOException;
  * @Class: AccessDeniedHandlerImpl
  * @CreatedOn 2024/10/10.
  * @Email: yangboyff@gmail.com
- * @Description: 在已经认证（登录）但是没有权限的情况下，访问一个需要认证的 URL 资源，返回 {@link NetResponseCodeConstants#HTTP_FORBIDDEN} 错误码。
+ * @Description: 在已经认证（登录）但是没有权限的情况下，访问一个需要认证的 URL 资源，
+ * 返回 {@link NetResponseCodeConstants#HTTP_FORBIDDEN} 错误码。
  */
 @Slf4j
 public class AccessDeniedHandlerImpl implements AccessDeniedHandler {

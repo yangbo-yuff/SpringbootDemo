@@ -47,6 +47,7 @@ public class MysqlBatisPlusMapperCodeGenerator {
 					builder.addTablePrefix("tb_") // 过滤掉表前缀 "tb_"
 							.entityBuilder()
 							.naming(NamingStrategy.underline_to_camel) // 表名转驼峰命名
+							.columnNaming(NamingStrategy.underline_to_camel) // 字段名生转驼峰命名
 							.formatFileName("%sEntity") // 实体类命名格式：表名 + "Entity"
 							.enableLombok(); // 启用 Lombok
 				})

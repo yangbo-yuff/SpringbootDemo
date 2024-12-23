@@ -1,6 +1,7 @@
 package com.yb.yff.flux.client.service;
 
 import com.yb.yff.sb.data.dto.GameMessageEnhancedReqDTO;
+import com.yb.yff.sb.data.dto.GameMessageEnhancedResDTO;
 import org.springframework.web.reactive.socket.WebSocketSession;
 
 /**
@@ -26,8 +27,8 @@ public interface IWSMessageListener {
 	 * * 非网关:  执行业务逻辑
 	 *
 	 * @param session
-	 * @param requestDTO
+	 * @param responseDTO
 	 */
 //	@Override
-	void onMessage(WebSocketSession session, GameMessageEnhancedReqDTO requestDTO);
+	void onMessage(WebSocketSession session, GameMessageEnhancedResDTO responseDTO);
 }

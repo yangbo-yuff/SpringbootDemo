@@ -45,8 +45,8 @@ public interface NetResponseCodeConstants {
 	ResponseCode CityNotExist = new ResponseCode(10, "城市不存在");
 	ResponseCode CityNotMe = new ResponseCode(11, "城市不是自己的");
 	ResponseCode UpError = new ResponseCode(12, "升级失败");
-	ResponseCode GeneralNotFound = new ResponseCode(13, "武将不存在");
-	ResponseCode GeneralNotMe = new ResponseCode(14, "武将不是自己的");
+	ResponseCode GeneralNotFound = new ResponseCode(13, "将领不存在");
+	ResponseCode GeneralNotMe = new ResponseCode(14, "将领不是自己的");
 	ResponseCode ArmyNotFound = new ResponseCode(15, "军队不存在");
 	ResponseCode ArmyNotMe = new ResponseCode(15, "军队不是自己的");
 	ResponseCode ResNotEnough = new ResponseCode(16, "资源不足");
@@ -62,8 +62,8 @@ public interface NetResponseCodeConstants {
 	ResponseCode GoldNotEnough = new ResponseCode(26, "金币不足");
 	ResponseCode GeneralRepeat = new ResponseCode(27, "重复上阵");
 	ResponseCode CostNotEnough = new ResponseCode(28, "cost不足");
-	ResponseCode GeneralNoHas = new ResponseCode(29, "没有该合成武将");
-	ResponseCode GeneralNoSame = new ResponseCode(30, "合成武将非同名");
+	ResponseCode GeneralNoHas = new ResponseCode(29, "没有该合成将领");
+	ResponseCode GeneralNoSame = new ResponseCode(30, "合成将领非同名");
 	ResponseCode ArmyNotEnough = new ResponseCode(31, "队伍数不足");
 	ResponseCode TongShuaiNotEnough = new ResponseCode(32, "统帅不足");
 	ResponseCode GeneralStarMax = new ResponseCode(33, "升级到最大星级");
@@ -90,7 +90,7 @@ public interface NetResponseCodeConstants {
 	ResponseCode CanNotDestroy = new ResponseCode(54, "不能拆除建筑");
 	ResponseCode OutCollectTimesLimit = new ResponseCode(55, "超过征收次数");
 	ResponseCode InCdCanNotOperate = new ResponseCode(56, "cd内不能操作");
-	ResponseCode OutGeneralLimit = new ResponseCode(57, "武将超过上限了");
+	ResponseCode OutGeneralLimit = new ResponseCode(57, "将领超过上限了");
 	ResponseCode NotHasJiShi = new ResponseCode(58, "没有集市");
 	ResponseCode OutPosTagLimit = new ResponseCode(59, "超过了收藏上限");
 	ResponseCode OutSkillLimit = new ResponseCode(60, "超过了技能上限");

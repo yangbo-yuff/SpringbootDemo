@@ -50,7 +50,7 @@ public class GameBusinessType {
 	 */
 	public static final String GAME_BUSINESS_TYPE_INTERIOR = "interior";
 	/**
-	 * 游戏武将技能务类型
+	 * 游戏将领技能务类型
 	 */
 	public static final String GAME_BUSINESS_TYPE_SKILL = "skill";
 }

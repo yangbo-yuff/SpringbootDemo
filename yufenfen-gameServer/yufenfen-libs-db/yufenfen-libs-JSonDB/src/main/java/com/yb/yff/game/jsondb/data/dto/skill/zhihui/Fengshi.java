@@ -1,7 +1,8 @@
 package com.yb.yff.game.jsondb.data.dto.skill.zhihui;
 
 import lombok.Data;
-
+import java.util.List;
+import java.util.List;
 import java.util.List;
 
 @Data

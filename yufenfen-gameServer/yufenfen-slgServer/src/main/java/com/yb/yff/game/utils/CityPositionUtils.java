@@ -1,6 +1,7 @@
 package com.yb.yff.game.utils;
 
-import com.yb.yff.sb.data.dto.city.*;
+import com.yb.yff.game.data.dto.city.CityDTO;
+import com.yb.yff.game.data.dto.city.PositionDTO;
 
 import java.util.List;
 import java.util.Random;
@@ -24,22 +25,47 @@ import java.util.Random;
 public class CityPositionUtils {
 
 	/**
+	 * 地图比例尺 1 = 100000
+	 */
+	public static final int MapScale = 100000;
+
+	/**
 	 * 主城安全距离，即新主城与已有主城的距离不能小于该值，否则会重新分配
 	 * 主城与世界尽头 距离不能小于 该值/2
 	 */
 	public static int SafeDistance = 10;
 
 	/**
+	 * 普通建筑边界
+	 */
+	public static int MapBuildBoundary = 200;
+
+	/**
+	 * 主城边界
+	 */
+	public static int MapCityBoundary = 40;
+
+	/**
 	 * 地图宽度
 	 */
-	public static int MapWith = 200;
+	public static int MapWidth = 200;
 
 	/**
 	 * 地图高度
 	 */
 	public static int MapHeight = 200;
 
-	public static int MaxCreateCount = 100 * MapWith * MapHeight;
+	/**
+	 * 扫描范围：地图高度
+	 */
+	public static int ScanWidth = 3;
+
+	/**
+	 * 扫描范围：地图高度
+	 */
+	public static int ScanHeight = 3;
+
+	public static int MaxCreateCount = 100 * MapWidth * MapHeight;
 
 	/**
 	 * 随机获取一个坐标，用于生成主城，预留与世界尽头的距离，避免后续判断浪费资源
@@ -49,7 +75,7 @@ public class CityPositionUtils {
 	public static PositionDTO getCityPositionRandom() {
 		Random random = new Random();
 		PositionDTO cityPosition = new PositionDTO();
-		cityPosition.setX(random.nextInt(SafeDistance / 2, MapWith - SafeDistance / 2));
+		cityPosition.setX(random.nextInt(SafeDistance / 2, MapWidth - SafeDistance / 2));
 		cityPosition.setY(random.nextInt(SafeDistance / 2, MapHeight - SafeDistance / 2));
 		return cityPosition;
 	}
@@ -61,7 +87,18 @@ public class CityPositionUtils {
 	 * @return
 	 */
 	public static int position2Number(PositionDTO CityPos) {
-		return CityPos.getX() + MapWith * CityPos.getY();
+		return position2Number(CityPos.getX(), CityPos.getY());
+	}
+
+	/**
+	 * 将坐标转换为地图编号
+	 *
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public static int position2Number(int x, int y) {
+		return x + MapWidth * y;
 	}
 
 
@@ -72,8 +109,8 @@ public class CityPositionUtils {
 	 * @return
 	 */
 	public static PositionDTO number2Position(Integer cityNum) {
-		int x = cityNum * MapWith;
-		int y = x / MapWith;
+		int x = cityNum * MapWidth;
+		int y = x / MapWidth;
 
 		PositionDTO position = new PositionDTO();
 		position.setX(x);
@@ -84,23 +121,21 @@ public class CityPositionUtils {
 
 	/**
 	 * 获得合适建城的坐标
+	 *
 	 * @param citys 已有的玩家城池
 	 * @return
 	 */
-	public static PositionDTO getIdealPosition(List<CityData> citys, NationalMaps nationalMaps) {
+	public static PositionDTO getIdealPosition(List<CityDTO> citys) {
 		int createdCount = 0;
 		while (true) {
 			// 超出最大次数，返回null
-			if(createdCount > MaxCreateCount){
+			if (createdCount > MaxCreateCount) {
 				return null;
 			}
 
 			PositionDTO cityPosition = getCityPositionRandom();
 
-			int index = position2Number(cityPosition);
-			NationalMap nationalMap = nationalMaps.getNMaps().get(index);
-
-			if(checkPosition(citys, nationalMap, cityPosition)){
+			if (checkPosition(citys, cityPosition)) {
 				return cityPosition;
 			}
 
@@ -108,11 +143,10 @@ public class CityPositionUtils {
 		}
 	}
 
-	private static boolean checkPosition(List<CityData> citys, NationalMap nationalMap, PositionDTO cityPosition){
+	private static boolean checkPosition(List<CityDTO> citys, PositionDTO cityPosition) {
 		//系统城池附近10格不能有玩家城池
-		for (CityData cityData : citys) {
-			CityDTO city = cityData.getCityList().get(0);
-			if(city == null){
+		for (CityDTO city : citys) {
+			if (city == null) {
 				continue;
 			}
 
@@ -120,13 +154,6 @@ public class CityPositionUtils {
 					&& Math.abs(cityPosition.getY() - city.getY()) <= SafeDistance) {
 				return false;
 			}
-		}
-
-		if(nationalMap == null){
-			return false;
-		}
-		if(nationalMap.getType() == 0 ){
-			return false;
 		}
 
 		return true;

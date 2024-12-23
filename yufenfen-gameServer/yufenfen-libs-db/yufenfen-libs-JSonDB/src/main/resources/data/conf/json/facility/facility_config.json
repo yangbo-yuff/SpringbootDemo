@@ -1,0 +1,2953 @@
+{
+  "title": "城内设施配置表",
+  "configs": [
+    {
+      "title": "城内设施-疾风营配置表",
+      "name": "疾风营",
+      "type": 1,
+      "des": "提高本城部队速度",
+      "additions": [
+        4
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 2
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-军机营配置表",
+      "name": "军机营",
+      "type": 3,
+      "des": "提高本城部队谋略",
+      "additions": [
+        6
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 3
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-尚武营配置表",
+      "name": "尚武营",
+      "type": 4,
+      "des": "提高本城部队攻击",
+      "additions": [
+        7
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 3
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-铁壁营配置表",
+      "name": "铁壁营",
+      "type": 2,
+      "des": "提高本城部队防御",
+      "additions": [
+        5
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 2
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-兵营配置表",
+      "name": "兵营",
+      "type": 5,
+      "des": "提高本城部队将领带兵数量",
+      "additions": [
+        24
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 7
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            100
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            200
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            300
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            400
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            500
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-预备役配置表",
+      "name": "预备役所",
+      "type": 6,
+      "des": "提高本城预备役上限",
+      "additions": [
+        9
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 6
+        },
+        {
+          "type": 13,
+          "level": 2
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            1000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            2000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            3000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            4000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            5000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-汉点将台配置表",
+      "name": "汉点将台",
+      "type": 7,
+      "des": "提高汉阵营加成效果",
+      "additions": [
+        11
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 4
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 10
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-群点将台配置表",
+      "name": "群点将台",
+      "type": 11,
+      "des": "提高群阵营加成效果",
+      "additions": [
+        12
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 6
+        },
+        {
+          "type": 8,
+          "level": 1
+        },
+        {
+          "type": 9,
+          "level": 1
+        },
+        {
+          "type": 10,
+          "level": 1
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-蜀点将台配置表",
+      "name": "蜀点将台",
+      "type": 9,
+      "des": "提高蜀阵营加成效果",
+      "additions": [
+        14
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 5
+        },
+        {
+          "type": 7,
+          "level": 1
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-魏点将台配置表",
+      "name": "魏点将台",
+      "type": 8,
+      "des": "提高魏阵营加成效果",
+      "additions": [
+        13
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 5
+        },
+        {
+          "type": 7,
+          "level": 1
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-吴点将台配置表",
+      "name": "吴点将台",
+      "type": 10,
+      "des": "提高吴阵营加成效果",
+      "additions": [
+        15
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 5
+        },
+        {
+          "type": 7,
+          "level": 1
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "主城配置",
+      "name": "主城",
+      "type": 0,
+      "des": "提高本城的耐久上限部队统帅上限",
+      "additions": [
+        1,
+        2
+      ],
+      "conditions": [],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            10000,
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            20000,
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            30000,
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            40000,
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            50000,
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        },
+        {
+          "level": 6,
+          "values": [
+            60000,
+            30
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 6000,
+            "wood": 6000,
+            "iron": 6000,
+            "stone": 6000
+          },
+          "time": 60
+        },
+        {
+          "level": 7,
+          "values": [
+            70000,
+            35
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 7000,
+            "wood": 7000,
+            "iron": 7000,
+            "stone": 7000
+          },
+          "time": 70
+        },
+        {
+          "level": 8,
+          "values": [
+            80000,
+            40
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 8000,
+            "wood": 8000,
+            "iron": 8000,
+            "stone": 8000
+          },
+          "time": 80
+        },
+        {
+          "level": 9,
+          "values": [
+            90000,
+            45
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 9000,
+            "wood": 9000,
+            "iron": 9000,
+            "stone": 9000
+          },
+          "time": 90
+        },
+        {
+          "level": 10,
+          "values": [
+            100000,
+            50
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 10000,
+            "wood": 10000,
+            "iron": 10000,
+            "stone": 10000
+          },
+          "time": 100
+        }
+      ]
+    },
+    {
+      "title": "城内设施-封禅台配置",
+      "name": "封禅台",
+      "type": 12,
+      "des": "提高本城部队的统帅上限",
+      "additions": [
+        2
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 8
+        },
+        {
+          "type": 5,
+          "level": 5
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-校场配置表",
+      "name": "校场",
+      "type": 13,
+      "des": "使本城可以配置部队，并提高本城可配置部队数量",
+      "additions": [
+        3
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 1
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            1
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            2
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            3
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            4
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-统帅厅配置表",
+      "name": "统帅厅",
+      "type": 14,
+      "des": "使本城可以配置前锋，并提高本城可配置前锋部队数量",
+      "additions": [
+        25
+      ],
+      "conditions": [
+        {
+          "type": 16,
+          "level": 1
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            1
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            2
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            3
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            4
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-集市配置表",
+      "des": "提高交易兑换率",
+      "name": "集市",
+      "type": 15,
+      "additions": [
+        16
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 5
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        },
+        {
+          "level": 6,
+          "values": [
+            30
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 6000,
+            "wood": 6000,
+            "iron": 6000,
+            "stone": 6000
+          },
+          "time": 60
+        },
+        {
+          "level": 7,
+          "values": [
+            35
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 7000,
+            "wood": 7000,
+            "iron": 7000,
+            "stone": 7000
+          },
+          "time": 70
+        },
+        {
+          "level": 8,
+          "values": [
+            40
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 8000,
+            "wood": 8000,
+            "iron": 8000,
+            "stone": 8000
+          },
+          "time": 80
+        },
+        {
+          "level": 9,
+          "values": [
+            45
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 9000,
+            "wood": 9000,
+            "iron": 9000,
+            "stone": 9000
+          },
+          "time": 90
+        },
+        {
+          "level": 10,
+          "values": [
+            50
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 10000,
+            "wood": 10000,
+            "iron": 10000,
+            "stone": 10000
+          },
+          "time": 100
+        }
+      ]
+    },
+    {
+      "title": "募兵所配置表",
+      "des": "开启本城部队征兵，并缩短征兵时间",
+      "name": "募兵所",
+      "type": 16,
+      "additions": [
+        10
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 2
+        },
+        {
+          "type": 13,
+          "level": 2
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            10
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            15
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            20
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            25
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        },
+        {
+          "level": 6,
+          "values": [
+            30
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 6000,
+            "wood": 6000,
+            "iron": 6000,
+            "stone": 6000
+          },
+          "time": 60
+        },
+        {
+          "level": 7,
+          "values": [
+            35
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 7000,
+            "wood": 7000,
+            "iron": 7000,
+            "stone": 7000
+          },
+          "time": 70
+        },
+        {
+          "level": 8,
+          "values": [
+            40
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 8000,
+            "wood": 8000,
+            "iron": 8000,
+            "stone": 8000
+          },
+          "time": 80
+        },
+        {
+          "level": 9,
+          "values": [
+            45
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 9000,
+            "wood": 9000,
+            "iron": 9000,
+            "stone": 9000
+          },
+          "time": 90
+        },
+        {
+          "level": 10,
+          "values": [
+            50
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 10000,
+            "wood": 10000,
+            "iron": 10000,
+            "stone": 10000
+          },
+          "time": 100
+        }
+      ]
+    },
+    {
+      "title": "城内设施-采石场配置表",
+      "name": "采石场",
+      "des": "额外获得石矿产量",
+      "type": 20,
+      "additions": [
+        20
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 3
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            1000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            2000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            3000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            4000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            5000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        },
+        {
+          "level": 6,
+          "values": [
+            6000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 6000,
+            "wood": 6000,
+            "iron": 6000,
+            "stone": 6000
+          },
+          "time": 60
+        },
+        {
+          "level": 7,
+          "values": [
+            7000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 7000,
+            "wood": 7000,
+            "iron": 7000,
+            "stone": 7000
+          },
+          "time": 70
+        },
+        {
+          "level": 8,
+          "values": [
+            8000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 8000,
+            "wood": 8000,
+            "iron": 8000,
+            "stone": 8000
+          },
+          "time": 80
+        },
+        {
+          "level": 9,
+          "values": [
+            9000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 9000,
+            "wood": 9000,
+            "iron": 9000,
+            "stone": 9000
+          },
+          "time": 90
+        },
+        {
+          "level": 10,
+          "values": [
+            10000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 10000,
+            "wood": 10000,
+            "iron": 10000,
+            "stone": 10000
+          },
+          "time": 100
+        }
+      ]
+    },
+    {
+      "title": "城内设施-伐木场配置表",
+      "name": "伐木场",
+      "des": "额外获得木材产量",
+      "type": 17,
+      "additions": [
+        17
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 2
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            1000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            2000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            3000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            4000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            5000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        },
+        {
+          "level": 6,
+          "values": [
+            6000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 6000,
+            "wood": 6000,
+            "iron": 6000,
+            "stone": 6000
+          },
+          "time": 60
+        },
+        {
+          "level": 7,
+          "values": [
+            7000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 7000,
+            "wood": 7000,
+            "iron": 7000,
+            "stone": 7000
+          },
+          "time": 70
+        },
+        {
+          "level": 8,
+          "values": [
+            8000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 8000,
+            "wood": 8000,
+            "iron": 8000,
+            "stone": 8000
+          },
+          "time": 80
+        },
+        {
+          "level": 9,
+          "values": [
+            9000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 9000,
+            "wood": 9000,
+            "iron": 9000,
+            "stone": 9000
+          },
+          "time": 90
+        },
+        {
+          "level": 10,
+          "values": [
+            10000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 10000,
+            "wood": 10000,
+            "iron": 10000,
+            "stone": 10000
+          },
+          "time": 100
+        }
+      ]
+    },
+    {
+      "title": "城内设施-炼铁场配置表",
+      "name": "炼铁场",
+      "des": "额外获得铁矿产量",
+      "type": 18,
+      "additions": [
+        18
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 2
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            1000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            2000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            3000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            4000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            5000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        },
+        {
+          "level": 6,
+          "values": [
+            6000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 6000,
+            "wood": 6000,
+            "iron": 6000,
+            "stone": 6000
+          },
+          "time": 60
+        },
+        {
+          "level": 7,
+          "values": [
+            7000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 7000,
+            "wood": 7000,
+            "iron": 7000,
+            "stone": 7000
+          },
+          "time": 70
+        },
+        {
+          "level": 8,
+          "values": [
+            8000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 8000,
+            "wood": 8000,
+            "iron": 8000,
+            "stone": 8000
+          },
+          "time": 80
+        },
+        {
+          "level": 9,
+          "values": [
+            9000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 9000,
+            "wood": 9000,
+            "iron": 9000,
+            "stone": 9000
+          },
+          "time": 90
+        },
+        {
+          "level": 10,
+          "values": [
+            10000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 10000,
+            "wood": 10000,
+            "iron": 10000,
+            "stone": 10000
+          },
+          "time": 100
+        }
+      ]
+    },
+    {
+      "title": "城内设施-磨坊配置表",
+      "name": "磨坊",
+      "des": "额外获得粮食产量",
+      "type": 19,
+      "additions": [
+        19
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 3
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            1000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            2000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            3000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            4000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            5000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        },
+        {
+          "level": 6,
+          "values": [
+            6000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 6000,
+            "wood": 6000,
+            "iron": 6000,
+            "stone": 6000
+          },
+          "time": 60
+        },
+        {
+          "level": 7,
+          "values": [
+            7000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 7000,
+            "wood": 7000,
+            "iron": 7000,
+            "stone": 7000
+          },
+          "time": 70
+        },
+        {
+          "level": 8,
+          "values": [
+            8000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 8000,
+            "wood": 8000,
+            "iron": 8000,
+            "stone": 8000
+          },
+          "time": 80
+        },
+        {
+          "level": 9,
+          "values": [
+            9000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 9000,
+            "wood": 9000,
+            "iron": 9000,
+            "stone": 9000
+          },
+          "time": 90
+        },
+        {
+          "level": 10,
+          "values": [
+            10000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 10000,
+            "wood": 10000,
+            "iron": 10000,
+            "stone": 10000
+          },
+          "time": 100
+        }
+      ]
+    },
+    {
+      "title": "城内设施-民居配置表",
+      "name": "民居",
+      "des": "提供税收",
+      "type": 21,
+      "additions": [
+        21
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 1
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            1000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            2000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            3000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            4000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            5000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        },
+        {
+          "level": 6,
+          "values": [
+            6000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 6000,
+            "wood": 6000,
+            "iron": 6000,
+            "stone": 6000
+          },
+          "time": 60
+        },
+        {
+          "level": 7,
+          "values": [
+            7000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 7000,
+            "wood": 7000,
+            "iron": 7000,
+            "stone": 7000
+          },
+          "time": 70
+        },
+        {
+          "level": 8,
+          "values": [
+            8000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 8000,
+            "wood": 8000,
+            "iron": 8000,
+            "stone": 8000
+          },
+          "time": 80
+        },
+        {
+          "level": 9,
+          "values": [
+            9000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 9000,
+            "wood": 9000,
+            "iron": 9000,
+            "stone": 9000
+          },
+          "time": 90
+        },
+        {
+          "level": 10,
+          "values": [
+            10000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 10000,
+            "wood": 10000,
+            "iron": 10000,
+            "stone": 10000
+          },
+          "time": 100
+        }
+      ]
+    },
+    {
+      "title": "城内设施-社稷坛配置",
+      "name": "社稷坛",
+      "type": 22,
+      "des": "每升一级可以额外扩建一次",
+      "additions": [
+        22
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 9
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            1
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            2
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            3
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            4
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            5
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        },
+        {
+          "level": 6,
+          "values": [
+            6
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 6000,
+            "wood": 6000,
+            "iron": 6000,
+            "stone": 6000
+          },
+          "time": 60
+        },
+        {
+          "level": 7,
+          "values": [
+            7
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 7000,
+            "wood": 7000,
+            "iron": 7000,
+            "stone": 7000
+          },
+          "time": 70
+        },
+        {
+          "level": 8,
+          "values": [
+            8
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 8000,
+            "wood": 8000,
+            "iron": 8000,
+            "stone": 8000
+          },
+          "time": 80
+        }
+      ]
+    },
+    {
+      "title": "城内设施-城墙配置",
+      "name": "城墙",
+      "type": 23,
+      "des": "提高本城耐久上限",
+      "additions": [
+        1
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 7
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            10000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            20000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            30000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            40000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            50000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-女墙配置",
+      "name": "女墙",
+      "type": 24,
+      "des": "提高本城耐久上限",
+      "additions": [
+        1
+      ],
+      "conditions": [
+        {
+          "type": 23,
+          "level": 1
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            10000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            20000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            30000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            40000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            50000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        }
+      ]
+    },
+    {
+      "title": "城内设施-仓库配置",
+      "name": "仓库",
+      "type": 25,
+      "des": "每升一级增加仓库容量",
+      "additions": [
+        23
+      ],
+      "conditions": [
+        {
+          "type": 0,
+          "level": 2
+        }
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "values": [
+            10000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 1000,
+            "wood": 1000,
+            "iron": 1000,
+            "stone": 1000
+          },
+          "time": 10
+        },
+        {
+          "level": 2,
+          "values": [
+            20000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 2000,
+            "wood": 2000,
+            "iron": 2000,
+            "stone": 2000
+          },
+          "time": 20
+        },
+        {
+          "level": 3,
+          "values": [
+            30000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 3000,
+            "wood": 3000,
+            "iron": 3000,
+            "stone": 3000
+          },
+          "time": 30
+        },
+        {
+          "level": 4,
+          "values": [
+            40000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 4000,
+            "wood": 4000,
+            "iron": 4000,
+            "stone": 4000
+          },
+          "time": 40
+        },
+        {
+          "level": 5,
+          "values": [
+            50000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 5000,
+            "wood": 5000,
+            "iron": 5000,
+            "stone": 5000
+          },
+          "time": 50
+        },
+        {
+          "level": 6,
+          "values": [
+            60000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 6000,
+            "wood": 6000,
+            "iron": 6000,
+            "stone": 6000
+          },
+          "time": 60
+        },
+        {
+          "level": 7,
+          "values": [
+            70000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 7000,
+            "wood": 7000,
+            "iron": 7000,
+            "stone": 7000
+          },
+          "time": 70
+        },
+        {
+          "level": 8,
+          "values": [
+            80000
+          ],
+          "need": {
+            "decree": 0,
+            "grain": 8000,
+            "wood": 8000,
+            "iron": 8000,
+            "stone": 8000
+          },
+          "time": 80
+        }
+      ]
+    }
+  ]
+}

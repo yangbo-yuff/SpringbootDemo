@@ -1,9 +1,11 @@
 package com.yb.yff.game.data.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.FieldNameConstants;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +16,7 @@ import java.util.Date;
 * </p>
 *
 * @author yangbo
-* @since 2024-10-27
+* @since 2024-11-05
 */
 @Data
 @TableName("tb_map_role_city")
@@ -51,7 +53,8 @@ public class MapRoleCityEntity implements Serializable {
     /**
     * 是否是主城
     */
-    private Byte isMain;
+    @TableField("is_main")
+    private Integer isMain;
 
     /**
     * 当前耐久

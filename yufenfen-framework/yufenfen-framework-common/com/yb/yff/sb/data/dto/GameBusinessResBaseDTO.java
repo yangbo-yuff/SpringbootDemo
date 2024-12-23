@@ -1,7 +1,9 @@
 package com.yb.yff.sb.data.dto;
 
-import com.yb.yff.sb.taskCallback.DelayedExecuteTask;
+import com.yb.yff.sb.taskCallback.TimeConsumingTask;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.
@@ -14,7 +16,7 @@ import lombok.Data;
  *
  * @author : YangBo
  * @Project: SpringbootDemo
- * @Class: ArmyDTO
+ * @Class: ArmyResDTO
  * @CreatedOn 2024/10/21.
  * @Email: yangboyff@gmail.com
  * @Description: 军队DTO
@@ -29,5 +31,5 @@ public class GameBusinessResBaseDTO {
 	/**
 	 * 延迟执行任务
 	 */
-	private DelayedExecuteTask delayedTask;
+	private List<TimeConsumingTask> delayedTask;
 }

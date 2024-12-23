@@ -40,6 +40,11 @@
         <jackson.databind.version>2.17.1</jackson.databind.version>
         <!-- javax -->
         <javax.version>1.2</javax.version>
+
+        <!-- protobuf -->
+        <protobuf-java.version>4.29.0</protobuf-java.version>
+        <grpc-spring-boot-starter.version>3.1.0.RELEASE</grpc-spring-boot-starter.version>
+        <protobuf-java-format.version>1.4</protobuf-java-format.version>
     </properties>
 
     <dependencyManagement>
@@ -115,6 +120,28 @@
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
                 <version>${javax.version}</version>
+            </dependency>
+
+            <!-- protobuf -->
+            <!-- Protobuf Java -->
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf-java.version}</version>
+            </dependency>
+
+            <!-- Spring Boot Starter for Protobuf -->
+            <dependency>
+                <groupId>net.devh</groupId>
+                <artifactId>grpc-spring-boot-starter</artifactId>
+                <version>${grpc-spring-boot-starter.version}</version>
+            </dependency>
+
+            <!-- Spring Boot Starter for Protobuf HTTP -->
+            <dependency>
+                <groupId>com.googlecode.protobuf-java-format</groupId>
+                <artifactId>protobuf-java-format</artifactId>
+                <version>${protobuf-java-format.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

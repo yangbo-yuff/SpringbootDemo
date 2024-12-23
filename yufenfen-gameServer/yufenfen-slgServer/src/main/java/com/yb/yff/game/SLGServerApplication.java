@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -24,11 +25,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableScheduling  // 启用定时任务
+@EnableAsync(proxyTargetClass=true)
 @Slf4j
 @ComponentScan(basePackages = {"com.yb.yff.game", "com.yb.yff.sb", "com.yb.yff.flux"})
 public class SLGServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SLGServerApplication.class, args);
-		log.info("聊天服务启动成功");
+		log.info("逻辑服务启动成功");
 	}
 }

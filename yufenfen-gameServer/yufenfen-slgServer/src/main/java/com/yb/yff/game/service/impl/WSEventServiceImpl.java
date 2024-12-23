@@ -2,17 +2,19 @@ package com.yb.yff.game.service.impl;
 
 import com.yb.yff.flux.server.service.IWSMessageListener;
 import com.yb.yff.flux.server.service.IWSServerManager;
+import com.yb.yff.game.data.dto.ClientSessionIdUidRidDTO;
 import com.yb.yff.game.service.DelayedTask.IDelayedTaskListener;
 import com.yb.yff.game.service.DelayedTask.IDelayedTaskService;
+import com.yb.yff.game.service.IPushSessionManager;
 import com.yb.yff.game.service.IWSEventService;
 import com.yb.yff.game.service.business.IBusinessService;
 import com.yb.yff.game.utils.TaskUitls;
 import com.yb.yff.sb.data.dto.GameMessageEnhancedReqDTO;
 import com.yb.yff.sb.data.dto.GameMessageEnhancedResDTO;
-import com.yb.yff.sb.data.dto.role.RoleDTO;
+import com.yb.yff.game.data.dto.role.EnterServerResDTO;
+import com.yb.yff.game.data.dto.role.RoleDTO;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.socket.WebSocketSession;
@@ -20,6 +22,7 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +53,17 @@ public class WSEventServiceImpl implements IWSEventService, IWSMessageListener, 
 	Map<String, IBusinessService> businessServiceList;
 
 	@Autowired
-	IDelayedTaskService<GameMessageEnhancedResDTO> delayedTaskService;
+	IDelayedTaskService delayedTaskService;
+
+	@Autowired
+	IPushSessionManager pushSessionManager;
+
+	/**
+	 * 缓存客户端SessionID 和 对应的 uid rid
+	 * key： sessionID
+	 * value： uid_rid
+	 */
+	private Map<String, ClientSessionIdUidRidDTO> clientSessionId_uid_rid = new HashMap<>();
 
 	/**
 	 * 用户ID key
@@ -96,19 +109,11 @@ public class WSEventServiceImpl implements IWSEventService, IWSMessageListener, 
 			return;
 		}
 
-		// 插入 uid
-		Object uidObj = session.getAttributes().get(KEY_USER_ID);
-		if (uidObj != null) {
-			Integer uid = Integer.parseInt(uidObj.toString());
-			requestDTO.setUid(uid);
-		}
-
-		// 插入 rid
-		Object ridObj = session.getAttributes().get(KEY_ROLE_ID);
-		if (ridObj != null) {
-			RoleDTO roleDTO = new RoleDTO();
-			BeanUtils.copyProperties(ridObj, roleDTO);
-			requestDTO.setRid(roleDTO.getRid());
+		// 插入 uid rid
+		ClientSessionIdUidRidDTO csUR = clientSessionId_uid_rid.get(requestDTO.getSessionClient2Gate());
+		if (csUR != null) {
+			requestDTO.setUid(csUR.getUid());
+			requestDTO.setRid(csUR.getRid());
 		}
 
 
@@ -124,7 +129,10 @@ public class WSEventServiceImpl implements IWSEventService, IWSMessageListener, 
 		}
 
 		businessLogic(session.getId(), requestDTO, businessService, names[1])
-				.doOnNext(response -> sendMessage(session.getId(), response))
+				.doOnNext(response -> {
+					sendMessage(session.getId(), response);
+					CacheUserRole2Session(session, response);
+				})
 				.then(Mono.fromRunnable(() -> {
 					onFinishTask(requestDTO);
 				}))
@@ -134,18 +142,59 @@ public class WSEventServiceImpl implements IWSEventService, IWSMessageListener, 
 	private Mono<GameMessageEnhancedResDTO> businessLogic(String sessionId, GameMessageEnhancedReqDTO requestDTO, IBusinessService businessService, String businessName) {
 		return Mono.fromCallable(() -> businessService.dispathBusiness(businessName, requestDTO))
 				.flatMap(resDTO -> {
-					if (resDTO.getDelayedTask() == null) {
+					if (resDTO.getDelayedTasks() == null) {
 						return Mono.just(resDTO);
 					} else {
-						resDTO.getDelayedTask().setSessionId(sessionId);
-						delayedTaskService.addDelayedTask(resDTO, this);
+						resDTO.getDelayedTasks().forEach(delayedTask -> {
+							delayedTask.setSessionId(sessionId);
+							// 添加耗时任务
+							delayedTaskService.addDelayedTask(delayedTask, this);
+						});
 
-						// 返回空结果，不再调用 doOnNext
-						return Mono.empty();
+						resDTO.setDelayedTasks(null);
+
+						// 返回响应
+						return Mono.just(resDTO);
 
 					}
 				})
 				.subscribeOn(Schedulers.boundedElastic());
+	}
+
+	/**
+	 * 缓存角色信息 到  session
+	 *
+	 * @param session
+	 * @param resDTO
+	 */
+	private void CacheUserRole2Session(WebSocketSession session, GameMessageEnhancedResDTO resDTO) {
+		if (!resDTO.getName().equals("role.enterServer")) {
+			return;
+		}
+
+		EnterServerResDTO enterServerResDTO = (EnterServerResDTO) resDTO.getMsg();
+		RoleDTO role = enterServerResDTO.getRole();
+		if (role == null) {
+			return;
+		}
+
+		log.info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx CacheUserRole2Session sessionId = {}, uid = {}, rid = {}",
+				session.getId(), role.getUid(), role.getRid());
+
+		ClientSessionIdUidRidDTO csUR = new ClientSessionIdUidRidDTO(resDTO.getSessionClient2Gate(),role.getUid(), role.getRid());
+		// 移除失效的玩家信息
+		for (Map.Entry<String, ClientSessionIdUidRidDTO> entry : clientSessionId_uid_rid.entrySet()){
+			ClientSessionIdUidRidDTO csiURB = entry.getValue();
+			if (csiURB.getUid().equals(role.getUid()) && csiURB.getRid().equals(role.getRid())){
+				clientSessionId_uid_rid.remove(entry.getKey());
+				break;
+			}
+		}
+
+		clientSessionId_uid_rid.put(resDTO.getSessionClient2Gate(), csUR);
+
+		// 推送服务缓存 SessionID
+		pushSessionManager.addSession(role.getRid(), session.getId(), resDTO.getSessionClient2Gate());
 	}
 
 	private IBusinessService getBusinessService(String typeName) {
@@ -159,12 +208,13 @@ public class WSEventServiceImpl implements IWSEventService, IWSMessageListener, 
 	 */
 	@Override
 	public void sendMessage(String sessionID, GameMessageEnhancedResDTO gameMessageEnhancedResDTO) {
-
+		log.info("===================== return to client Message " + gameMessageEnhancedResDTO.getName());
 		wsServerManager.sendMessage(sessionID, gameMessageEnhancedResDTO);
 	}
 
 	/**
 	 * 延时任务执行完成
+	 *
 	 * @param sessionID
 	 * @param takskId
 	 * @param result

@@ -94,6 +94,7 @@ public class JSon2EntityUtils {
 
 			createEntity((JSONObject) data, packageName, parentName + classSimpleName);
 		} catch (Exception e) {
+			System.err.println("创建文件失败: " + filePath);
 			e.printStackTrace();
 		}
 	}

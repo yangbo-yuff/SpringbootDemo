@@ -4,10 +4,13 @@ import com.yb.yff.game.service.business.IBusinessService;
 import com.yb.yff.sb.data.dto.GameBusinessResBaseDTO;
 import com.yb.yff.sb.data.dto.GameMessageEnhancedReqDTO;
 import com.yb.yff.sb.data.dto.GameMessageEnhancedResDTO;
+import com.yb.yff.sb.taskCallback.TimeConsumingTask;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -27,6 +30,7 @@ import java.util.function.Function;
  * @Email: yangboyff@gmail.com
  * @Description: 游戏业务服务
  */
+@Slf4j
 public abstract class BusinessServiceImpl implements IBusinessService {
 	/**
 	 * 初始化 业务处理器的 配置器
@@ -52,12 +56,28 @@ public abstract class BusinessServiceImpl implements IBusinessService {
 	public GameMessageEnhancedResDTO dispathBusiness(String businessName, GameMessageEnhancedReqDTO requestDTO) {
 
 		GameMessageEnhancedResDTO resDTO = new GameMessageEnhancedResDTO();
+		BeanUtils.copyProperties(requestDTO, resDTO);
 
 		GameBusinessResBaseDTO gameBusinessResDTO = businessHandlerMap.get(businessName).apply(requestDTO);
-		BeanUtils.copyProperties(requestDTO, resDTO);
+		if(gameBusinessResDTO == null){
+			log.error("==================== business: {} handle failed", businessName);
+			resDTO.setCode(500);
+			return resDTO;
+		} else {
+			log.info("==================== business: {} handle finish", businessName);
+		}
+
+		// 处理code
 		resDTO.setCode(gameBusinessResDTO.getCode());
-		resDTO.setDelayedTask(gameBusinessResDTO.getDelayedTask());
 		gameBusinessResDTO.setCode(null);
+
+		// 处理延时任务
+		List<TimeConsumingTask> delayedTasks = gameBusinessResDTO.getDelayedTask();
+		if (delayedTasks != null) {
+			resDTO.setDelayedTasks(delayedTasks);
+			gameBusinessResDTO.setDelayedTask(null);
+		}
+
 		resDTO.setMsg(gameBusinessResDTO);
 
 		return resDTO;

@@ -9,7 +9,9 @@ spring:
   webflux:
     compress:
       enabled: true
-      min-response-size: 1024 # 设置最小响应大小（字节）
+      min-response-size: 10240 # 设置最小响应大小（字节）
+    websocket:
+      max-frame-payload-length: 1048576  # 设置最大帧长度为 1MB
 
 game:
   server:
@@ -33,7 +35,7 @@ game:
         node: http://192.168.1.3:18003
 
 
-logging:
-  level:
-    reactor:
-      netty=DEBUG:
+#logging:
+#  level:
+#    reactor:
+#      netty=DEBUG:

@@ -7,7 +7,6 @@ import com.yb.yff.game.constant.GlobalString;
 import com.yb.yff.game.service.IWSClientService;
 import com.yb.yff.game.service.IWSRouterService;
 import com.yb.yff.game.webClient.HttpClientHandler;
-import com.yb.yff.sb.constant.NetResponseCodeConstants;
 import com.yb.yff.sb.data.dto.GameMessageEnhancedReqDTO;
 import com.yb.yff.sb.data.dto.GameMessageEnhancedResDTO;
 import com.yb.yff.sb.data.dto.GameMessageReqDTO;
@@ -93,12 +92,16 @@ public class WSClientServiceImpl implements IWSClientService, IWSMessageListener
 			accountServerUrl = wSClientsManager.connectToBusinessServer();
 		}
 
+		String businessName = GlobalString.ACCOUNT_BUSINESS_BASE + typeName;
+
 		String jonStr = JSONObject.toJSONString(fromClientDTO.getMsg());
-		httpClientHandler.getHttpRequest(accountServerUrl + GlobalString.ACCount_LOGIN, jonStr)
+		httpClientHandler.getHttpRequest(accountServerUrl + businessName, jonStr)
 				.doOnSuccess(responseDTO -> {
 					GameMessageResDTO gameMessageResDTO = new GameMessageResDTO();
-					BeanUtils.copyProperties(fromClientDTO, gameMessageResDTO);
+					gameMessageResDTO.setName(fromClientDTO.getName());
+					gameMessageResDTO.setSeq(fromClientDTO.getSeq());
 					gameMessageResDTO.setCode(responseDTO.getCode());
+					gameMessageResDTO.setMsg(responseDTO.getData());
 
 					callback.accept(gameMessageResDTO);
 				})
@@ -115,15 +118,15 @@ public class WSClientServiceImpl implements IWSClientService, IWSMessageListener
 	 * * 非网关:  执行业务逻辑
 	 *
 	 * @param session
-	 * @param requestDTO
+	 * @param responseDTO
 	 */
 	@Override
-	public void onMessage(WebSocketSession session, GameMessageEnhancedReqDTO requestDTO) {
+	public void onMessage(WebSocketSession session, GameMessageEnhancedResDTO responseDTO) {
 		// 响应客户端数据
-		GameMessageEnhancedResDTO gameMessageResDTO = new GameMessageEnhancedResDTO();
-		BeanUtils.copyProperties(requestDTO, gameMessageResDTO);
-		gameMessageResDTO.setCode(NetResponseCodeConstants.SUCCESS.getCode());
+//		GameMessageEnhancedResDTO gameMessageResDTO = new GameMessageEnhancedResDTO();
+//		BeanUtils.copyProperties(responseDTO, gameMessageResDTO);
+//		gameMessageResDTO.setCode(NetResponseCodeConstants.SUCCESS.getCode());
 
-		wsRouterService.sendMessage(gameMessageResDTO);
+		wsRouterService.sendMessage(responseDTO);
 	}
 }

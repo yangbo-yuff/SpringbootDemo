@@ -14,7 +14,7 @@ import java.util.Date;
 * </p>
 *
 * @author yangbo
-* @since 2024-10-27
+* @since 2024-11-05
 */
 @Data
 @TableName("tb_city_facility")

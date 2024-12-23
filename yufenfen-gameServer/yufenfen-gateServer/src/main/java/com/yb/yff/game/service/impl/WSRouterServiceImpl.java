@@ -1,7 +1,10 @@
 package com.yb.yff.game.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.yb.yff.flux.server.service.IWSMessageListener;
 import com.yb.yff.flux.server.service.IWSServerManager;
+import com.yb.yff.game.constant.GlobalString;
 import com.yb.yff.game.service.IWSClientService;
 import com.yb.yff.game.service.IWSRouterService;
 import com.yb.yff.sb.constant.WSNetConstant;
@@ -73,7 +76,7 @@ public class WSRouterServiceImpl implements IWSRouterService, IWSMessageListener
 
 		// 账户请求 HTTP请求账户服务器
 		if(typeName.equals(WSNetConstant.SERVER_TYPE_ACCOUNT)){
-		    accountBusiness(session.getId(), typeName, requestDTO);
+		    accountBusiness(session, names[1], requestDTO);
 			return;
 		}
 
@@ -104,13 +107,66 @@ public class WSRouterServiceImpl implements IWSRouterService, IWSMessageListener
 
 	/**
 	 * 账户业务, http非阻塞请求，拿到响应结果后，直接向发送响应结果消息
-	 * @param sessionId
+	 * @param session
 	 * @param typeName
 	 * @param requestDTO
 	 */
-	private void accountBusiness(String sessionId, String typeName, GameMessageReqDTO requestDTO){
+	private void accountBusiness(WebSocketSession session, String typeName, GameMessageReqDTO requestDTO){
+		String sessionId = session.getId();
+
+		if(typeName.contains(GlobalString.ACCOUNT_BUSINESS_LOGOUT)){
+			addUserId2Logout(session, requestDTO);
+		}
+
 		wsClientService.sendGetHttpRequest(typeName, requestDTO, gameMessageResDTO -> {
 			wsServerManager.sendMessage(sessionId, gameMessageResDTO);
+			// 登录成功，缓存用户信息
+			if(gameMessageResDTO.getName().contains(GlobalString.ACCOUNT_BUSINESS_LOGIN)){
+				CacheUserId2Session(session, gameMessageResDTO);
+			}
 		});
 	}
+
+	/**
+	 * 缓存用户ID
+	 * @param session
+	 * @param gameMessageResDTO
+	 */
+	private void CacheUserId2Session(WebSocketSession session, GameMessageResDTO gameMessageResDTO){
+		String jsonString = JSON.toJSONString(gameMessageResDTO.getMsg());
+		JSONObject jData = JSONObject.parseObject(jsonString);
+
+		if(jData.containsKey(GlobalString.JSONOBJ_KEY_USER_ID)){
+			Integer uid = jData.getInteger(GlobalString.JSONOBJ_KEY_USER_ID);
+
+			session.getAttributes().put(GlobalString.JSONOBJ_KEY_USER_ID, uid);
+		}
+	}
+
+	/**
+	 * 添加用户ID到请求参数中
+	 * @param session
+	 * @param requestDTO
+	 */
+	private void addUserId2Logout(WebSocketSession session, GameMessageReqDTO requestDTO){
+		Object msg = requestDTO.getMsg();
+		if(msg == null){
+			msg = new Object();
+		}
+
+		JSONObject reqJSONData = JSONObject.parseObject(msg.toString());
+
+
+		Object uidObj = session.getAttributes().get(GlobalString.JSONOBJ_KEY_USER_ID);
+		if (uidObj == null) {
+			return;
+		}
+
+		Integer uid = Integer.parseInt(uidObj.toString());
+
+		reqJSONData.put(GlobalString.JSONOBJ_KEY_USER_ID, uid);
+
+		requestDTO.setMsg(reqJSONData);
+	}
+
 }

@@ -1,11 +1,12 @@
 package com.yb.yff.game.jsondb.data.dto.general;
 
 import lombok.Data;
-
 import java.util.List;
 
 @Data
 public class GeneralList {
+
+    private Integer cfgId;
 
     private Integer speed_grow;
 
@@ -36,8 +37,6 @@ public class GeneralList {
     private Integer force;
 
     private List<Integer> arms;
-
-    private Integer cfgId;
 
     private Integer strategy;
 

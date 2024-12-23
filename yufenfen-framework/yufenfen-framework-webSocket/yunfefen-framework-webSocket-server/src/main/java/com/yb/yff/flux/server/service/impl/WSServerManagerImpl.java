@@ -167,7 +167,7 @@ public class WSServerManagerImpl implements IWSServerManager, IWSEventListener {
 			}
 
 			wsMessageListeners.stream().forEach(listener -> listener.onMessage(session, gameMessageClientDTO));
-		} catch (Exception e){
+		} catch (Exception e) {
 			log.info("=========== 非法数据：" + data);
 		}
 	}
@@ -184,7 +184,7 @@ public class WSServerManagerImpl implements IWSServerManager, IWSEventListener {
 		if (session != null) {
 			sendMessage(session, message);
 		} else {
-			log.info("====== No active session for serverUri: " + sessions);
+			log.info("====== No active session for serverID: " + sessionID);
 		}
 	}
 
@@ -220,11 +220,15 @@ public class WSServerManagerImpl implements IWSServerManager, IWSEventListener {
 	 */
 	private void sendMessage(WebSocketSession session, byte[] message) {
 		// 发送
-		session.send(
-				Mono.just(
-						session.binaryMessage(data -> data.wrap(message))
-				)
-		).subscribe();
+		try {
+			session.send(
+					Mono.just(
+							session.binaryMessage(data -> data.wrap(message))
+					)
+			).subscribe();
+		} catch (Exception e) {
+			log.error("====== Send message error: " + e.getMessage());
+		}
 	}
 
 	/**
@@ -233,7 +237,7 @@ public class WSServerManagerImpl implements IWSServerManager, IWSEventListener {
 	 * @param session
 	 */
 	private void Handshake(WebSocketSession session) {
-		if(!checkSecret){
+		if (!checkSecret) {
 			return;
 		}
 

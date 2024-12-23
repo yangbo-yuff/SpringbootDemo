@@ -22,6 +22,7 @@
         <module>yufenfen-libs-db-mongo</module>
         <module>yufenfen-libs-db-redis</module>
         <module>yufenfen-libs-JSonDB</module>
+        <module>yufenfen-libs-data-model</module>
     </modules>
 
     <properties>

@@ -10,10 +10,16 @@
     </parent>
 
     <artifactId>yufenfen-framework-common</artifactId>
+    <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <description>framework common for Spring Boot </description>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
         <!--lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -30,9 +36,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.yb.yff.sb</groupId>
-            <artifactId>yufenfen-framework-common</artifactId>
-            <version>${yufenfen.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
         </dependency>
     </dependencies>
 </project>

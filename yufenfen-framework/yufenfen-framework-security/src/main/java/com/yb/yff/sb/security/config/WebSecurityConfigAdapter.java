@@ -78,7 +78,7 @@ public class WebSecurityConfigAdapter {
 				// 基于 token 机制，所以不需要 Session
 				.sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/public/**", "/account/login", "/account/register").permitAll()  // 不需要认证的接口
+						.requestMatchers("/public/**", "/account/login", "/account/logout", "/account/reLogin", "/account/register").permitAll()  // 不需要认证的接口
 						.requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")  // 需要管理员权限的接口
 						.anyRequest().authenticated()  // 其他所有请求都需要认证
 				)

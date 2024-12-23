@@ -1,7 +1,9 @@
 package com.yb.yff.sb.data.dto;
 
-import com.yb.yff.sb.taskCallback.DelayedExecuteTask;
+import com.yb.yff.sb.taskCallback.TimeConsumingTask;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.
@@ -30,5 +32,5 @@ public class GameMessageEnhancedResDTO extends GameMessageResDTO {
 	/**
 	 * 延迟执行任务
 	 */
-	private DelayedExecuteTask delayedTask;
+	private List<TimeConsumingTask> delayedTasks;
 }

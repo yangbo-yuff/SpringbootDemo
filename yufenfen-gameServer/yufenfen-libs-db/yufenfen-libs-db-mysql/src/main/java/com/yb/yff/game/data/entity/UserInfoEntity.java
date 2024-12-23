@@ -14,7 +14,7 @@ import java.util.Date;
 * </p>
 *
 * @author yangbo
-* @since 2024-10-09
+* @since 2024-11-05
 */
 @Data
 @TableName("tb_user_info")
@@ -43,7 +43,7 @@ public class UserInfoEntity implements Serializable {
     /**
     * 用户账号状态。0-默认；1-冻结；2-停号
     */
-    private Byte status;
+    private Integer status;
 
     /**
     * 记录创建时间

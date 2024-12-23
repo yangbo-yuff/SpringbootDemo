@@ -18,18 +18,10 @@ import com.yb.yff.sb.data.dto.GameMessageResDTO;
  * @Email: yangboyff@gmail.com
  * @Description: websocket 服务器管理器
  */
-public interface IWSServerManager {
+public interface IWSServerManager extends IWSServerSender {
 	/**
 	 * 添加消息监听
 	 * @param listener
 	 */
 	void addWSMessageListener(IWSMessageListener listener);
-
-	/**
-	 * 向客户端发送消息
-	 *
-	 * @param sessionID
-	 * @param message
-	 */
-	void sendMessage(String sessionID, GameMessageResDTO message);
 }

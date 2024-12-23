@@ -8,6 +8,7 @@ import com.yb.yff.flux.client.handler.WSClientHandler;
 import com.yb.yff.flux.client.service.IWSCLientsManager;
 import com.yb.yff.flux.client.service.IWSMessageListener;
 import com.yb.yff.sb.data.dto.GameMessageEnhancedReqDTO;
+import com.yb.yff.sb.data.dto.GameMessageEnhancedResDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -185,9 +186,9 @@ public class WSClientsManagerImpl implements IWSClientEventListener, IWSCLientsM
 		String josnStr = message.getPayloadAsText();
 		log.info("=========== 收到 Server-" + session.getId() + "的消息: " + josnStr);
 
-		GameMessageEnhancedReqDTO requestDTO = JSONObject.parseObject(josnStr, GameMessageEnhancedReqDTO.class);
+		GameMessageEnhancedResDTO responseDTO = JSONObject.parseObject(josnStr, GameMessageEnhancedResDTO.class);
 
-		wsMessageListeners.stream().forEach(listener -> listener.onMessage(session, requestDTO));
+		wsMessageListeners.stream().forEach(listener -> listener.onMessage(session, responseDTO));
 	}
 
 

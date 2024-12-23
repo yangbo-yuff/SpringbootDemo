@@ -19,4 +19,15 @@ public class BasicConscript {
 
     private Integer cost_iron;
 
+    public BasicConscript(){
+
+    }
+    public BasicConscript(Integer initVal){
+        cost_gold = initVal;
+        cost_grain = initVal;
+        cost_wood = initVal;
+        cost_stone = initVal;
+        cost_iron = initVal;
+        cost_time = initVal;
+    }
 }

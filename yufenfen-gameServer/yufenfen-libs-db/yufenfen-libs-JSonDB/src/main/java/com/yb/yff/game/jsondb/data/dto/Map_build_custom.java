@@ -1,7 +1,6 @@
 package com.yb.yff.game.jsondb.data.dto;
 
 import lombok.Data;
-
 import java.util.List;
 
 @Data

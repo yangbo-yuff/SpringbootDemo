@@ -35,9 +35,10 @@
             <version>${mygame.version}</version>
         </dependency>
 
+        <!-- data model -->
         <dependency>
             <groupId>com.yb.yff.game</groupId>
-            <artifactId>yufenfen-libs-JSonDB</artifactId>
+            <artifactId>yufenfen-libs-data-model</artifactId>
             <version>${mygame.version}</version>
         </dependency>
     </dependencies>

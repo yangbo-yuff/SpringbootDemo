@@ -14,7 +14,7 @@ import java.util.Date;
 * </p>
 *
 * @author yangbo
-* @since 2024-10-20
+* @since 2024-11-05
 */
 @Data
 @TableName("tb_role")
@@ -41,7 +41,7 @@ public class RoleEntity implements Serializable {
     /**
     * 性别，0:女 1男
     */
-    private Byte sex;
+    private Integer sex;
 
     /**
     * nick_name
@@ -51,12 +51,12 @@ public class RoleEntity implements Serializable {
     /**
     * 上级联盟id
     */
-    private Byte parentId;
+    private Integer parentId;
 
     /**
     * 征收次数
     */
-    private Byte collectTimes;
+    private Integer collectTimes;
 
     /**
     * 最后征收时间

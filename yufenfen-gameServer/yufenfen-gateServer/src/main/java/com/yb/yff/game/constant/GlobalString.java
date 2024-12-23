@@ -17,7 +17,11 @@ package com.yb.yff.game.constant;
  * @Description: 账户业务类型
  */
 public class GlobalString {
-	public static final String ACCount_LOGIN = "/account/login";
+	public static final String ACCOUNT_BUSINESS_BASE = "/account/";
+	public static final String ACCOUNT_BUSINESS_LOGIN = "login";
 
+	public static final String JSONOBJ_KEY_USER_ID = "uid";
+
+	public static final String ACCOUNT_BUSINESS_LOGOUT = "logout";
 	public static final String MESSAGE_SECRETKEY = "secretKey";
 }
