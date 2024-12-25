@@ -114,8 +114,8 @@ public class ArmyWarLogic {
 	}
 
 	public void newBattle(WarArmyDTO attackArmy) {
-		Integer toX = attackArmy.getArmy().getTo_x();
-		Integer toY = attackArmy.getArmy().getTo_y();
+		Integer toX = attackArmy.getArmy().getToX();
+		Integer toY = attackArmy.getArmy().getToY();
 
 		CityDTO city = cityMgr.getPositionCity(toX, toY);
 
@@ -151,8 +151,8 @@ public class ArmyWarLogic {
 
 			WarReportDTO wr = newEmptyWar(attackArmy);
 			wr.setResult(2);
-			wr.setD_rid(city.getRid());
-			wr.setD_is_read(false);
+			wr.setDRid(city.getRid());
+			wr.setDIsRead(false);
 			checkCityOccupy(wr, attackArmy, city);
 
 			warReportDataPusher.syncExecute(null, wr);
@@ -173,10 +173,10 @@ public class ArmyWarLogic {
 	private void checkCityOccupy(WarReportDTO wr, WarArmyDTO attackArmy, CityDTO city) {
 		int destroy = armyMgr.getDestroy(attackArmy.getArmy());
 
-		wr.setDestroy(Math.min(destroy, city.getCur_durable()));
+		wr.setDestroy(Math.min(destroy, city.getCurDurable()));
 		cityMgr.durableChange(city, -destroy);
 
-		if (city.getCur_durable() == 0) {
+		if (city.getCurDurable() == 0) {
 			RoleDTO role = roleDataManager.getRoleDTO(attackArmy.getArmy().getRid());
 			Integer allianceId = role.getUnionId();
 			if (allianceId != null && allianceId != 0) {
@@ -186,7 +186,7 @@ public class ArmyWarLogic {
 				dRole.setParentId(allianceId);
 //				Union.getInstance().putChild(allianceId, city.getRid());
 //				dRole.syncExecute();
-				city.setOccupy_time(new Date());
+				city.setOccupyTime(new Date());
 			} else {
 				wr.setOccupy(0);
 			}
@@ -209,7 +209,7 @@ public class ArmyWarLogic {
 	private WarResultBO createWar(WarArmyDTO army, List<WarArmyDTO> enemies, boolean isRoleEnemy, List<WarReportDTO> warReports) {
 		AtomicReference<WarResultBO> lastWar = new AtomicReference<>();
 
-		int posId = CityPositionUtils.position2Number(army.getArmy().getTo_x(), army.getArmy().getTo_y());
+		int posId = CityPositionUtils.position2Number(army.getArmy().getToX(), army.getArmy().getToY());
 
 		enemies.forEach(enemy -> {
 			// 战斗
@@ -232,7 +232,7 @@ public class ArmyWarLogic {
 				armyLogic.checkSyncCell(enemy);
 			} else {
 				// NPC 直接已读
-				wr.setD_is_read(true);
+				wr.setDIsRead(true);
 			}
 
 			lastWar.set(warResultBO);
@@ -316,20 +316,20 @@ public class ArmyWarLogic {
 
 		String rounds = JSONArray.toJSONString(warResultBO.getWarRounds());
 		WarReportDTO wr = new WarReportDTO();
-		wr.setX(army.getArmy().getTo_x());
-		wr.setY(army.getArmy().getTo_y());
-		wr.setA_rid(army.getArmy().getRid());
-		wr.setA_is_read(false);
-		wr.setD_is_read(false);
-		wr.setD_rid(enemy.getArmy().getRid());
-		wr.setB_a_army(begArmy1Str);
-		wr.setB_d_army(begArmy2Set);
-		wr.setE_a_army(endArmy1Str);
-		wr.setE_d_army(endArmy2Set);
-		wr.setB_a_general(begGeneral1Str);
-		wr.setB_d_general(begGeneral2Str);
-		wr.setE_a_general(endGeneral1Str);
-		wr.setE_d_general(endGeneral2Str);
+		wr.setX(army.getArmy().getToX());
+		wr.setY(army.getArmy().getToY());
+		wr.setARid(army.getArmy().getRid());
+		wr.setAIsRead(false);
+		wr.setDIsRead(false);
+		wr.setDRid(enemy.getArmy().getRid());
+		wr.setBAArmy(begArmy1Str);
+		wr.setBDArmy(begArmy2Set);
+		wr.setEAArmy(endArmy1Str);
+		wr.setEDArmy(endArmy2Set);
+		wr.setBAGeneral(begGeneral1Str);
+		wr.setBDGeneral(begGeneral2Str);
+		wr.setEAGeneral(endGeneral1Str);
+		wr.setEDGeneral(endGeneral2Str);
 		wr.setRounds(rounds);
 		wr.setResult(warResultBO.getResult());
 		wr.setCtime(System.currentTimeMillis() / 1000);
@@ -352,20 +352,20 @@ public class ArmyWarLogic {
 		String attackArmyStr = JSON.toJSONString(attackArmy.getArmy());
 
 		WarReportDTO wr = new WarReportDTO();
-		wr.setX(attackArmy.getArmy().getTo_x());
-		wr.setY(attackArmy.getArmy().getTo_y());
-		wr.setA_rid(attackArmy.getArmy().getRid());
-		wr.setA_is_read(false);
-		wr.setD_is_read(true);
-		wr.setD_rid(0);
-		wr.setB_a_army(attackArmyStr);
-		wr.setB_d_army(null);
-		wr.setE_a_army(attackArmyStr);
-		wr.setE_d_army(null);
-		wr.setB_a_general(bgGeneralStr);
-		wr.setE_a_general(bgGeneralStr);
-		wr.setB_d_general(null);
-		wr.setE_d_general(null);
+		wr.setX(attackArmy.getArmy().getToX());
+		wr.setY(attackArmy.getArmy().getToY());
+		wr.setARid(attackArmy.getArmy().getRid());
+		wr.setAIsRead(false);
+		wr.setDIsRead(true);
+		wr.setDRid(0);
+		wr.setBAArmy(attackArmyStr);
+		wr.setBDArmy(null);
+		wr.setEAArmy(attackArmyStr);
+		wr.setEDArmy(null);
+		wr.setBAGeneral(bgGeneralStr);
+		wr.setEAGeneral(bgGeneralStr);
+		wr.setBDGeneral(null);
+		wr.setEDGeneral(null);
 		wr.setRounds("");
 		wr.setResult(0);
 		wr.setCtime(System.currentTimeMillis() / 1000);
@@ -375,8 +375,8 @@ public class ArmyWarLogic {
 
 
 	private void attackBuild(WarArmyDTO army) {
-		Integer toX = army.getArmy().getTo_x();
-		Integer toY = army.getArmy().getTo_y();
+		Integer toX = army.getArmy().getToX();
+		Integer toY = army.getArmy().getToY();
 
 		boolean isRoleEnemy = false;
 		List<WarArmyDTO> enemies = armyMgr.getStopInPosArmyListWar(toX, toY);
@@ -399,9 +399,9 @@ public class ArmyWarLogic {
 			if (roleBuild != null && roleBuild.getRid() > 0) {
 				int destroy = armyMgr.getDestroy(army.getArmy());
 				WarReportDTO wr = warReports.get(warReports.size() - 1);
-				wr.setDestroy(Math.min(destroy, roleBuild.getCur_durable()));
-				roleBuild.setCur_durable(Math.max(0, roleBuild.getCur_durable() - destroy));
-				if (roleBuild.getCur_durable() == 0) {
+				wr.setDestroy(Math.min(destroy, roleBuild.getCurDurable()));
+				roleBuild.setCurDurable(Math.max(0, roleBuild.getCurDurable() - destroy));
+				if (roleBuild.getCurDurable() == 0) {
 					// 攻占了玩家的领地
 					int bLimit = roleDataManager.getRoleConfig().getBuild_limit();
 					if (bLimit > buildMgr.buildCnt(army.getArmy().getRid())) {
@@ -433,6 +433,7 @@ public class ArmyWarLogic {
 		}
 
 		// 领地发生变化
+		roleDataManager.updateRoleRessourceYield(army.getArmy().getRid());
 		MapBuildDTO newRoleBuild = buildMgr.getPositionBuild(toX, toY);
 		if (newRoleBuild != null) {
 			nationMapPusher.syncExecute(newRoleBuild.getRid(), newRoleBuild);
@@ -446,8 +447,8 @@ public class ArmyWarLogic {
 
 		MapBuildDTO build = buildMgr.getPositionBuild(toX, toY);
 		if (build != null) {
-			build.setCur_durable(build.getMax_durable());
-			build.setOccupy_time(System.currentTimeMillis());
+			build.setCurDurable(build.getMaxDurable());
+			build.setOccupyTime(System.currentTimeMillis());
 
 			int oldId = build.getRid();
 			log.info("hit in role build", "oldRId", oldId, "newRId", newId);

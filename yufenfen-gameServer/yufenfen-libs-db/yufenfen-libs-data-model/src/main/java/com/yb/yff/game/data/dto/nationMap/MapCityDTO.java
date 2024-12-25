@@ -23,17 +23,17 @@ import java.util.Date;
 @Data
 public class MapCityDTO extends MapCellBaseData {
 	private Integer cityId;
-	private Integer cur_durable;
+	private Integer curDurable;
 	/**
 	 * 是否是主要城池，0：不是，1：是
 	 */
-	private Boolean is_main;
-	private Integer max_durable;
+	private Boolean isMain;
+	private Integer maxDurable;
 	private String name;
-	private Date occupy_time;
-	private Integer parent_id;
-	private Integer union_id;
-	private String union_name;
+	private Date occupyTime;
+	private Integer parentId;
+	private Integer unionId;
+	private String unionName;
 	private Integer x;
 	private Integer y;
 }

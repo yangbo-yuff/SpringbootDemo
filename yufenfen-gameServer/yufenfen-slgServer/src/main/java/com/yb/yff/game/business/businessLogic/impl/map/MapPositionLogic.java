@@ -100,7 +100,8 @@ public class MapPositionLogic {
 	/**
 	 * 是否能驻守
 	 * @param rid
-	 * @param pos
+	 * @param x
+	 * @param y
 	 * @return
 	 */
 	public boolean isCanDefend(int rid, Integer x, Integer y) {
@@ -116,9 +117,9 @@ public class MapPositionLogic {
 			Integer tParentId = roleDataMgrImpl.getRoleDTO(b.getRid()).getParentId();
 			if (b.getRid() == rid) {
 				return true;
-			} else if (unionId > 0 && tUnionId > 0) {
+			} else if (unionId != null && unionId > 0 && tUnionId != null && tUnionId > 0) {
 				return tUnionId == unionId;
-			} else if (unionId > 0 && tParentId > 0) {
+			} else if (unionId != null && unionId > 0 && tParentId != null && tParentId > 0) {
 				return tParentId == unionId;
 			}
 		}

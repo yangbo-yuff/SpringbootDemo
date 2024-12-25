@@ -154,7 +154,7 @@ public class RoleLogicImpl extends BusinessDataSyncImpl<RoleResourceData> implem
 		/**********      check the resource       **********/
 		/***************************************************/
 		RoleResourceData roleResourceResDTO = roleDataMgr.getRoleResourceData(roleDTO.getRid());
-		enterServerResDTO.setRole_res(roleResourceResDTO);
+		enterServerResDTO.setRoleRes(roleResourceResDTO);
 
 		return NetResponseCodeConstants.SUCCESS;
 	}
@@ -193,13 +193,13 @@ public class RoleLogicImpl extends BusinessDataSyncImpl<RoleResourceData> implem
 	@Override
 	public ResponseCode integrateRoleProperty(Integer rid, MyPropertyResDTO myPropertyResDTO) {
 		// 资源
-		myPropertyResDTO.setRole_res(roleDataMgr.getRoleResourceData(rid));
+		myPropertyResDTO.setRoleRes(roleDataMgr.getRoleResourceData(rid));
 
 		// 主城信息
 		myPropertyResDTO.setCitys(cityMgrImpl.getCitys(rid));
 
 		// 建筑
-		myPropertyResDTO.setMr_builds(buildMgrImpl.getRoleBuildDTOs(rid));
+		myPropertyResDTO.setMrBuilds(buildMgrImpl.getRoleBuildDTOs(rid));
 
 		// 军队
 		List<ArmyDTO> rmyS = new ArrayList<>();

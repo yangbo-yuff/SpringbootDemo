@@ -21,5 +21,5 @@ import lombok.Data;
 @Data
 public class MBCustomConfigLevelResultDTO {
 
- private Integer army_cnt;
+ private Integer armyCnt;
 }

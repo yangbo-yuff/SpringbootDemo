@@ -32,9 +32,11 @@ public class ArmyPosition {
 	private int destroy;
 	private int arms;
 	private int position;
+	private boolean isAttack; // true-攻城方，false-守城方
 	private List<AttachSkill> skills;
 
-	public ArmyPosition(GeneralDTO general, int soldiers, int force, int defense, int speed, int strategy, int destroy, int position) {
+	public ArmyPosition(GeneralDTO general, int soldiers, int force, int defense, int speed, int strategy, int destroy,
+	                    int position, boolean isAttack) {
 		this.general = general;
 		this.soldiers = soldiers;
 		this.force = force;
@@ -42,7 +44,8 @@ public class ArmyPosition {
 		this.speed = speed;
 		this.strategy = strategy;
 		this.destroy = destroy;
-		this.arms = general.getCurArms();
+		this.arms = general.getArms();
 		this.position = position;
+		this.isAttack = isAttack;
 	}
 }

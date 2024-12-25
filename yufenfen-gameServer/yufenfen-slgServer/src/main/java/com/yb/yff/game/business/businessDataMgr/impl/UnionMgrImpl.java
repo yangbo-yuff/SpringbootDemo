@@ -94,7 +94,7 @@ public class UnionMgrImpl implements IJsonDataHandler {
 			return;
 		}
 
-		dbList.stream().forEach(entity -> {
+		dbList.forEach(entity -> {
 			addUnion2Cache(unionEntity2DTO(entity));
 		});
 	}
@@ -172,9 +172,6 @@ public class UnionMgrImpl implements IJsonDataHandler {
 		CoalitionLogEntity entity = new CoalitionLogEntity();
 		BeanUtils.copyProperties(dto, entity);
 
-		entity.setOpRid(dto.getOp_rid());
-		entity.setTargetId(dto.getTarget_id());
-
 		return entity;
 	}
 
@@ -182,8 +179,8 @@ public class UnionMgrImpl implements IJsonDataHandler {
 		UnionLogDTO dto = new UnionLogDTO();
 		BeanUtils.copyProperties(entity, dto);
 
-		dto.setOp_rid(entity.getOpRid());
-		dto.setTarget_id(entity.getTargetId());
+		dto.setOpRid(entity.getOpRid());
+		dto.setTargetId(entity.getTargetId());
 
 		return dto;
 	}
@@ -197,8 +194,8 @@ public class UnionMgrImpl implements IJsonDataHandler {
 			List<CityDTO> citys = cityMgr.getCitys(memberId);
 //			if(citys != null && citys.size() > 0){
 				citys.forEach(city -> {
-					city.setUnion_id(unionDTO.getId());
-					city.setUnion_name(unionDTO.getName());
+					city.setUnionId(unionDTO.getId());
+					city.setUnionName(unionDTO.getName());
 				});
 //			}
 		});
@@ -349,8 +346,8 @@ public class UnionMgrImpl implements IJsonDataHandler {
 			 UnionLogDTO logDTO = new UnionLogDTO();
 			 BeanUtils.copyProperties(entity, logDTO);
 
-			 logDTO.setOp_rid(entity.getOpRid());
-			 logDTO.setTarget_id(entity.getTargetId());
+			 logDTO.setOpRid(entity.getOpRid());
+			 logDTO.setTargetId(entity.getTargetId());
 			 logDTO.setCtime(entity.getCtime().getTime());
 
 			 logs.add(logDTO);
@@ -374,7 +371,7 @@ public class UnionMgrImpl implements IJsonDataHandler {
 			BeanUtils.copyProperties(entity, applyDTO);
 
 			RoleDTO role = roleDataMgr.getRoleDTO(entity.getRid());
-			applyDTO.setNick_name(role.getNickName());
+			applyDTO.setNickName(role.getNickName());
 
 			applys.put(applyDTO.getId(), applyDTO);
 		});

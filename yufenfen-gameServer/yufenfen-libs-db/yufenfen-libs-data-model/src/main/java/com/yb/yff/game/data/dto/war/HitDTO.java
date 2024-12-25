@@ -23,16 +23,16 @@ import java.util.List;
  */
 @Data
 public class HitDTO {
-	private int a_id; // 本回合发起攻击的武将id
-	private int d_id; // 本回合防御方的武将id
-	private int d_loss; // 本回合防守方损失的兵力
-	private List<SkillHitDTO> a_bs; // 攻击方攻击前技能
-	private List<SkillHitDTO> a_as; // 攻击方攻击后技能
-	private List<SkillHitDTO> d_as; // 防守方被攻击后触发技能
+	private int aId; // 本回合发起攻击的武将id
+	private int dId; // 本回合防御方的武将id
+	private int dLoss; // 本回合防守方损失的兵力
+	private List<SkillHitDTO> aBs; // 攻击方攻击前技能
+	private List<SkillHitDTO> aAs; // 攻击方攻击后技能
+	private List<SkillHitDTO> dAs; // 防守方被攻击后触发技能
 
 	public HitDTO() {
-		this.a_bs = new ArrayList<>();
-		this.a_as = new ArrayList<>();
-		this.d_as = new ArrayList<>();
+		this.aBs = new ArrayList<>();
+		this.aAs = new ArrayList<>();
+		this.dAs = new ArrayList<>();
 	}
 }

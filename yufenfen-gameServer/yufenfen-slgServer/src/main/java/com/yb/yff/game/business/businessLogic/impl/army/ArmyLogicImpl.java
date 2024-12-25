@@ -251,7 +251,7 @@ public class ArmyLogicImpl extends BusinessDataSyncImpl<ArmyDTO> implements IArm
 		// 封装延时任务完成时的返回数据
 		ConscriptResDTO conscriptResDTO = new ConscriptResDTO();
 		conscriptResDTO.setArmy(armyMgr.getArmy(conscriptDTO.getArmyId()).getArmy());
-		conscriptResDTO.setRole_res(roleDataManager.getRoleResourceData(rid));
+		conscriptResDTO.setRoleRes(roleDataManager.getRoleResourceData(rid));
 		conscriptResDTO.setCode(NetResponseCodeConstants.SUCCESS.getCode());
 
 		GameMessageEnhancedResDTO gameMessageEnhancedResDTO = new GameMessageEnhancedResDTO();
@@ -394,8 +394,8 @@ public class ArmyLogicImpl extends BusinessDataSyncImpl<ArmyDTO> implements IArm
 			if (armys != null && armys.size() > 0) {
 				armys.forEach(army -> {
 					ArmyDTO armyDTO = army.getArmy();
-					if (PositionUtils.equalsPosition(armyDTO.getFrom_x(), armyDTO.getFrom_y(),
-							armyDTO.getTo_x(), armyDTO.getTo_y())) {
+					if (PositionUtils.equalsPosition(armyDTO.getFromX(), armyDTO.getFromY(),
+							armyDTO.getToX(), armyDTO.getToY())) {
 						targets.add(army);
 						armys.remove(army);
 					}
@@ -525,7 +525,7 @@ public class ArmyLogicImpl extends BusinessDataSyncImpl<ArmyDTO> implements IArm
 		// 设置 征兵指令
 		army.setCmd(ArmyCmd.ArmyCmdConscript.getValue());
 
-		army.setCon_cnts(conscriptDTO.getCnts());
+		army.setConCnts(conscriptDTO.getCnts());
 
 		List<Integer> con_times = new ArrayList<>();
 		needResourceList.forEach(time -> {
@@ -533,14 +533,11 @@ public class ArmyLogicImpl extends BusinessDataSyncImpl<ArmyDTO> implements IArm
 			int cost_time = time.getCost_time() + currentTime.intValue();
 			con_times.add(cost_time + 2); // 推送给客户端的时间，稍晚于 延时任务的执行时间
 		});
-		army.setCon_times(con_times);
+		army.setConTimes(con_times);
 
 		// 更新DB
 		ArmyDTO updateArmy = new ArmyDTO();
-		updateArmy.setId(army.getId());
-		updateArmy.setCmd(army.getCmd());
-		updateArmy.setCon_cnts(army.getCon_cnts());
-		updateArmy.setCon_times(army.getCon_times());
+		BeanUtils.copyProperties(army, updateArmy);
 		armyMgr.updateArmy2DB(updateArmy);
 	}
 
@@ -551,12 +548,12 @@ public class ArmyLogicImpl extends BusinessDataSyncImpl<ArmyDTO> implements IArm
 	 */
 	private synchronized void finishConscript(ConscriptTaskTCTP conscriptParam) {
 		ArmyDTO army = armyMgr.getArmy(conscriptParam.getArmyId()).getArmy();
-		army.getCon_cnts().set(conscriptParam.getPositon(), 0);
+		army.getConCnts().set(conscriptParam.getPositon(), 0);
 
-		army.getCon_times().set(conscriptParam.getPositon(), 0);
+		army.getConTimes().set(conscriptParam.getPositon(), 0);
 
 		AtomicInteger otherCnt = new AtomicInteger();
-		army.getCon_cnts().forEach(cnt -> otherCnt.addAndGet(cnt));
+		army.getConCnts().forEach(cnt -> otherCnt.addAndGet(cnt));
 
 		// 设置 空闲指令
 		if (army.getCmd() == ArmyCmd.ArmyCmdConscript.getValue() && otherCnt.get() == 0) {
@@ -570,13 +567,7 @@ public class ArmyLogicImpl extends BusinessDataSyncImpl<ArmyDTO> implements IArm
 		army.setSoldiers(newSoldiers);
 
 		// 更新DB
-		ArmyDTO updateArmy = new ArmyDTO();
-		updateArmy.setId(army.getId());
-		updateArmy.setCmd(army.getCmd());
-		updateArmy.setCon_cnts(army.getCon_cnts());
-		updateArmy.setCon_times(army.getCon_times());
-		updateArmy.setSoldiers(army.getSoldiers());
-		armyMgr.updateArmy2DB(updateArmy);
+		armyMgr.updateArmy2DB(army);
 	}
 
 	/**
@@ -768,7 +759,7 @@ public class ArmyLogicImpl extends BusinessDataSyncImpl<ArmyDTO> implements IArm
 
 		if (army.getCmd() != ArmyCmd.ArmyCmdIdle.getValue()) {
 			if (army.getCmd() == ArmyCmd.ArmyCmdConscript.getValue()) {
-				if (army.getCon_times().get(armyPosition) == 0) {
+				if (army.getConTimes().get(armyPosition) == 0) {
 					return NetResponseCodeConstants.GeneralBusy;
 				} else {
 					return NetResponseCodeConstants.SUCCESS;

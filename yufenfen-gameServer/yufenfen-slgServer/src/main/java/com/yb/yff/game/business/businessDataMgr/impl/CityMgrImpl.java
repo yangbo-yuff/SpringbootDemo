@@ -79,7 +79,7 @@ public class CityMgrImpl implements IJsonDataHandler {
 		QueryWrapper<MapRoleCityEntity> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("is_main", 1);
 		List<MapRoleCityEntity> citys = mapRoleCityService.getBaseMapper().selectList(queryWrapper);
-		citys.stream().forEach(city -> {
+		citys.forEach(city -> {
 			CityDTO cityDTO = cityEntity2DTO(city);
 			addCityToCache(cityDTO, false);
 		});
@@ -92,17 +92,14 @@ public class CityMgrImpl implements IJsonDataHandler {
 		CityDTO cityDTO = new CityDTO();
 		BeanUtils.copyProperties(city, cityDTO);
 		cityDTO.setCityId(city.getId());
-		cityDTO.setIs_main(city.getIsMain() == 1);
-		cityDTO.setOccupy_time(city.getOccupyTime());
-		cityDTO.setCur_durable(city.getCurDurable());
+		cityDTO.setIsMain(city.getIsMain() == 1);
 
-		cityDTO.setParent_id(role.getParentId());
-		cityDTO.setMax_durable(jsonConfigMgr.getBasicConfig().getCity().getDurable());
+		cityDTO.setMaxDurable(jsonConfigMgr.getBasicConfig().getCity().getDurable());
 
 		UnionDTO union = unionMgr.getUnion(role.getUnionId());
 		if(union != null){
-			cityDTO.setUnion_id(union.getId());
-			cityDTO.setUnion_name(union.getName());
+			cityDTO.setUnionId(union.getId());
+			cityDTO.setUnionName(union.getName());
 		}
 
 		cityDTO.setLevel(facility.getLevel());
@@ -116,9 +113,7 @@ public class CityMgrImpl implements IJsonDataHandler {
 
 		BeanUtils.copyProperties(cityDTO, cityEntity);
 		cityEntity.setId(cityDTO.getCityId());
-		cityEntity.setIsMain(cityDTO.getIs_main() ? 1 : 0);
-		cityEntity.setOccupyTime(cityDTO.getOccupy_time());
-		cityEntity.setCurDurable(cityDTO.getCur_durable());
+		cityEntity.setIsMain(cityDTO.getIsMain() ? 1 : 0);
 
 		return cityEntity;
 	}
@@ -137,19 +132,19 @@ public class CityMgrImpl implements IJsonDataHandler {
 		cityDTO.setRid(rid);
 		cityDTO.setX(cityPosition.getX());
 		cityDTO.setY(cityPosition.getY());
-		cityDTO.setIs_main(true);
-		cityDTO.setCur_durable(jsonConfigMgr.getBasicConfig().getCity().getDurable());
-		cityDTO.setMax_durable(jsonConfigMgr.getBasicConfig().getCity().getDurable());
+		cityDTO.setIsMain(true);
+		cityDTO.setCurDurable(jsonConfigMgr.getBasicConfig().getCity().getDurable());
+		cityDTO.setMaxDurable(jsonConfigMgr.getBasicConfig().getCity().getDurable());
 		cityDTO.setName(role.getNickName());
-		cityDTO.setParent_id(0);
+		cityDTO.setParentId(0);
 
 		UnionDTO union = unionMgr.getUnion(role.getUnionId());
 		if(union == null){
-			cityDTO.setUnion_id(0);
-			cityDTO.setUnion_name("");
+			cityDTO.setUnionId(0);
+			cityDTO.setUnionName("");
 		} else {
-			cityDTO.setUnion_id(union.getId());
-			cityDTO.setUnion_name(union.getName());
+			cityDTO.setUnionId(union.getId());
+			cityDTO.setUnionName(union.getName());
 		}
 
 		cityDTO.setLevel(1);
@@ -234,7 +229,7 @@ public class CityMgrImpl implements IJsonDataHandler {
 	 */
 	public boolean isWarFree(CityDTO city) {
 		Long curTime = System.currentTimeMillis();
-		if (curTime - city.getOccupy_time().getTime() < jsonConfigMgr.getBasicConfig().getBuild().getWar_free() * 1000) {
+		if (curTime - city.getOccupyTime().getTime() < jsonConfigMgr.getBasicConfig().getBuild().getWar_free() * 1000) {
 			return true;
 		} else {
 			return false;
@@ -243,11 +238,11 @@ public class CityMgrImpl implements IJsonDataHandler {
 
 	public void durableChange(CityDTO city, Integer change) {
 
-		Integer current = city.getCur_durable() + change;
+		Integer current = city.getCurDurable() + change;
 		if (current < 0) {
-			city.setCur_durable(0);
+			city.setCurDurable(0);
 		} else {
-			city.setCur_durable(Math.min(city.getMax_durable(), current));
+			city.setCurDurable(Math.min(city.getMaxDurable(), current));
 		}
 	}
 

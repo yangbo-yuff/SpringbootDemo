@@ -25,10 +25,6 @@ public class CreateDTO {
 	 * 用户UID
 	 */
 	private Integer uid;
-
-	/**
-	 * nick_name
-	 */
 	private String nickName;
 
 	/**

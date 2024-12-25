@@ -116,11 +116,11 @@ public class WarReportLogicImpl extends BusinessDataSyncImpl<WarReportDTO> imple
 		warReportMgr.updateWartReport2DB(warReport);
 
 		// 攻击方
-		pushData(warReport.getA_rid(), warReport);
+		pushData(warReport.getARid(), warReport);
 
 		// 防守方，0为系统，无需推送结果
-		if (warReport.getD_rid() == 0) {
-			pushData(warReport.getD_rid(), warReport);
+		if (warReport.getDRid() == 0) {
+			pushData(warReport.getDRid(), warReport);
 		}
 	}
 }

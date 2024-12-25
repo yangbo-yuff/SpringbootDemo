@@ -43,9 +43,6 @@ public class RoleDTO {
 	 */
 	private Integer sex;
 
-	/**
-	 * nick_name
-	 */
 	private String nickName;
 
 	/**

@@ -27,7 +27,7 @@ public class MapBuildDTO extends MapCellDTO {
 	private Integer grain;
 
 	/**
-	 * 要塞操作类型 的操作类型，0 无操作，1 新建，2升级，3拆除
+	 * build操作类型 的操作类型，0 无操作，1 新建，2升级，3拆除
 	 * 配合 endTime 使用
 	 * 默认0
 	 */

@@ -102,6 +102,7 @@ public class JsonConfigMgr {
 		try {
 			return nationConfig.getNmcMap().get(type).get(level);
 		} catch (Exception e) {
+			log.error("==================== type:{}, level:{} nationlMap config is null!", type, level);
 			return null;
 		}
 	}
@@ -120,7 +121,7 @@ public class JsonConfigMgr {
 
 	public Integer getNationArmyCntConfig(Integer type, Integer level) {
 		try {
-			return nationConfig.getNmccMap().get(type).getLevelMap().get(level).getResult().getArmy_cnt();
+			return nationConfig.getNmccMap().get(type).getLevelMap().get(level).getResult().getArmyCnt();
 		} catch (Exception e) {
 			return null;
 		}

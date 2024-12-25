@@ -143,13 +143,13 @@ public class CityLogicImpl extends BusinessDataSyncImpl<CityDTO> implements ICit
 		// 封装返回数据
 		FacilityDTO facilityData = cityFacilityMgrImpl.getFacility(roleId, cityId, fType);
 		Long upTime = System.currentTimeMillis() / 1000;// 开始时间，不是结束时间 + newPropertyLevel.getTime();
-		facilityData.setUp_time(upTime.intValue());
+		facilityData.setUpTime(upTime.intValue());
 
 		// 封装延时任务完成时，返回数据
 		UpFacilitieResDTO upFacilitieResDTO = new UpFacilitieResDTO();
 		upFacilitieResDTO.setFacility(facilityData);
 		upFacilitieResDTO.setCityId(cityId);
-		upFacilitieResDTO.setRole_res(roleLogic.getRoleResource(roleId));
+		upFacilitieResDTO.setRoleRes(roleLogic.getRoleResource(roleId));
 		upFacilitieResDTO.setCode(NetResponseCodeConstants.SUCCESS.getCode());
 
 		GameMessageEnhancedResDTO gameMessageEnhancedResDTO = new GameMessageEnhancedResDTO();
@@ -207,7 +207,7 @@ public class CityLogicImpl extends BusinessDataSyncImpl<CityDTO> implements ICit
 		List<CityDTO> cityList = cityMgrImpl.getCitys(rid);
 
 		for (CityDTO city : cityList) {
-			if (city.getIs_main()) {
+			if (city.getIsMain()) {
 				return city;
 			}
 		}
@@ -258,7 +258,7 @@ public class CityLogicImpl extends BusinessDataSyncImpl<CityDTO> implements ICit
 
 		// 检测其它设施的等级条件
 		AtomicInteger checkOhterFacitlityFalse = new AtomicInteger();
-		facilitiesBO.getConditions().stream().forEach(condition -> {
+		facilitiesBO.getConditions().forEach(condition -> {
 			FacilityDTO conditionFDTO = roleCtiyFacilityMap.get(condition.getType());
 			if (conditionFDTO.getLevel() < condition.getLevel()) {
 				checkOhterFacitlityFalse.getAndIncrement();

@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Data
 public class ConvertResDTO extends GameBusinessResBaseDTO {
-	private Integer add_gold;
+	private Integer addGold;
 	private List<Integer> gIds;
 	private Integer gold;
 }

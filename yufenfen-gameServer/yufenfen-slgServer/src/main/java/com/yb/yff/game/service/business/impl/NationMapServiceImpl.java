@@ -8,7 +8,6 @@ import com.yb.yff.game.data.dto.LogicTaskResultDTO;
 import com.yb.yff.game.data.dto.army.ArmyDTO;
 import com.yb.yff.game.data.dto.city.BuildDTO;
 import com.yb.yff.game.data.dto.city.CityDTO;
-import com.yb.yff.game.data.dto.city.PositionDTO;
 import com.yb.yff.game.data.dto.nationMap.*;
 import com.yb.yff.game.service.business.impl.base.BusinessServiceImpl;
 import com.yb.yff.game.utils.CityPositionUtils;
@@ -100,10 +99,10 @@ public class NationMapServiceImpl extends BusinessServiceImpl {
 		ScanDTO scanDTO = JSONObject.toJavaObject((JSONObject) reqDTO.getMsg(), ScanDTO.class);
 
 		List<BuildDTO> roleBuildList = nationMapLogic.scan(scanDTO.getX(), scanDTO.getY(), CityPositionUtils.MapBuildBoundary, BuildDTO.class);
-		scanBlockResDTO.setMr_builds(roleBuildList);
+		scanBlockResDTO.setMrBuilds(roleBuildList);
 
 		List<CityDTO> roleCityList = nationMapLogic.scan(scanDTO.getX(), scanDTO.getY(), CityPositionUtils.MapCityBoundary, CityDTO.class);
-		scanBlockResDTO.setMc_builds(roleCityList);
+		scanBlockResDTO.setMcBuilds(roleCityList);
 
 		scanBlockResDTO.setCode(NetResponseCodeConstants.SUCCESS.getCode());
 
@@ -128,10 +127,10 @@ public class NationMapServiceImpl extends BusinessServiceImpl {
 		ScanBlockDTO scanBlockDTO = JSONObject.toJavaObject((JSONObject) reqDTO.getMsg(), ScanBlockDTO.class);
 
 		List<BuildDTO> roleBuildList = nationMapLogic.scanBlock(scanBlockDTO.getX(), scanBlockDTO.getY(), scanBlockDTO.getLength(), BuildDTO.class);
-		scanBlockResDTO.setMr_builds(roleBuildList);
+		scanBlockResDTO.setMrBuilds(roleBuildList);
 
 		List<CityDTO> roleCityList = nationMapLogic.scanBlock(scanBlockDTO.getX(), scanBlockDTO.getY(), scanBlockDTO.getLength(), CityDTO.class);
-		scanBlockResDTO.setMc_builds(roleCityList);
+		scanBlockResDTO.setMcBuilds(roleCityList);
 
 		List<ArmyDTO> armys = new ArrayList<>();
 		scanBlockResDTO.setArmys(armys);

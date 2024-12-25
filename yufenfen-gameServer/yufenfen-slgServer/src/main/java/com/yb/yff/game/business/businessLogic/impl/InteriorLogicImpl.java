@@ -80,7 +80,7 @@ public class InteriorLogicImpl implements IInteriorLogic {
 		updateRole.setLastCollectTime(role.getLastCollectTime());
 		roleDataMgrImpl.updateRoleDataToDB(updateRole);
 
-		Integer collectGold = 5 * roleLogic.getRoleResource(rid).getGrain_yield();
+		Integer collectGold = 5 * roleLogic.getRoleResource(rid).getGrainYield();
 		collectResDTO.setGold(collectGold);
 
 		getCollectInfo(rid, collectResDTO);
@@ -110,12 +110,12 @@ public class InteriorLogicImpl implements IInteriorLogic {
 
 		BasicRole roleConfig = roleDataMgrImpl.getRoleConfig();
 
-		collectResDTO.setCur_times(role.getCollectTimes());
+		collectResDTO.setCurTimes(role.getCollectTimes());
 		collectResDTO.setLimit(roleConfig.getCollect_times_limit());
 
 		if(role.getCollectTimes() < roleConfig.getCollect_times_limit()){
 			Long nextTime = role.getLastCollectTime().getTime() / 1000 + roleConfig.getCollect_interval();
-			collectResDTO.setNext_time(nextTime.intValue());
+			collectResDTO.setNextTime(nextTime.intValue());
 		}
 	}
 }

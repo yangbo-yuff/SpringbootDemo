@@ -109,60 +109,70 @@ public class BattleLogic {
 			Skill cfg = aSkill.getCfg();
 			SkillHitDTO sHit = new SkillHitDTO();
 			sHit.setLv(aSkill.getLv());
-			sHit.setC_id(cfg.getCfgId());
-			sHit.setT_id(new ArrayList<>());
-			sHit.setF_id(att.getGeneral().getId());
-			sHit.setI_e(cfg.getInclude_effect());
-			sHit.setE_v(cfg.getLevels().get(aSkill.getLv() - 1).getEffect_value());
-			sHit.setE_r(cfg.getLevels().get(aSkill.getLv() - 1).getEffect_round());
+			sHit.setCId(cfg.getCfgId());
+			sHit.setTId(new ArrayList<>());
+			sHit.setFId(att.getGeneral().getCfgId());
+			sHit.setFIsA(att.isAttack()); // 0-攻城方，1-守城方
+			sHit.setIE(cfg.getInclude_effect());
+			sHit.setEV(cfg.getLevels().get(aSkill.getLv() - 1).getEffect_value());
+			sHit.setER(cfg.getLevels().get(aSkill.getLv() - 1).getEffect_round());
 
 			switch (EnumUtils.fromValue(TargetType.class, aSkill.getCfg().getTarget())) {
 				case MySelf:
 					aSkill.setEnemy(false);
 					List<ArmyPosition> ps = List.of(att);
 					_acceptSkill_(ps, aSkill, sHit);
+					sHit.setTIsA(att.isAttack());
 					break;
 				case OurSingle:
 					aSkill.setEnemy(false);
 					ArmyPosition s = warCampLogic.randArmyPosition(our);
 					ps = List.of(s);
 					_acceptSkill_(ps, aSkill, sHit);
+					sHit.setTIsA(att.isAttack());
 					break;
 				case OurMostTwo:
 					aSkill.setEnemy(false);
 					ps = warCampLogic.randMostTwoArmyPosition(our);
 					_acceptSkill_(ps, aSkill, sHit);
+					sHit.setTIsA(att.isAttack());
 					break;
 				case OurMostThree:
 					aSkill.setEnemy(false);
 					ps = warCampLogic.randMostThreeArmyPosition(our);
 					_acceptSkill_(ps, aSkill, sHit);
+					sHit.setTIsA(att.isAttack());
 					break;
 				case OurAll:
 					aSkill.setEnemy(false);
 					ps = warCampLogic.allArmyPosition(our);
 					_acceptSkill_(ps, aSkill, sHit);
+					sHit.setTIsA(att.isAttack());
 					break;
 				case EnemySingle:
 					aSkill.setEnemy(true);
 					s = warCampLogic.randArmyPosition(enemy);
 					ps = List.of(s);
 					_acceptSkill_(ps, aSkill, sHit);
+					sHit.setTIsA(!att.isAttack());
 					break;
 				case EnemyMostTwo:
 					aSkill.setEnemy(true);
 					ps = warCampLogic.randMostTwoArmyPosition(enemy);
 					_acceptSkill_(ps, aSkill, sHit);
+					sHit.setTIsA(!att.isAttack());
 					break;
 				case EnemyMostThree:
 					aSkill.setEnemy(true);
 					ps = warCampLogic.randMostThreeArmyPosition(enemy);
 					_acceptSkill_(ps, aSkill, sHit);
+					sHit.setTIsA(!att.isAttack());
 					break;
 				case EnemyAll:
 					aSkill.setEnemy(true);
 					ps = warCampLogic.allArmyPosition(enemy);
 					_acceptSkill_(ps, aSkill, sHit);
+					sHit.setTIsA(!att.isAttack());
 					break;
 			}
 			ret.add(sHit);
@@ -176,7 +186,7 @@ public class BattleLogic {
 		}
 		for (ArmyPosition p : ps) {
 			armyPositionLogic.acceptSkill(p, skill);
-			sh.getT_id().add(p.getGeneral().getCfgId());
+			sh.getTId().add(p.getGeneral().getCfgId());
 		}
 	}
 
@@ -253,17 +263,18 @@ public class BattleLogic {
 	 */
 	private boolean hit(WarResultBO warResultBO, ArmyPosition attacker, ArmyPosition defender, List<ArmyPosition> attacks, List<ArmyPosition> defenses) {
 		HitDTO h = new HitDTO();
-		h.setA_bs(beforeSkill(attacker, attacks, defenses));
+		h.setABs(beforeSkill(attacker, attacks, defenses));
 
-		skillKill(attacker, defenses, h.getA_bs());
+		skillKill(attacker, defenses, h.getABs());
 
 		if (defender.getSoldiers() > 0) {
 			RealBattleAttr realA = armyPositionLogic.calRealBattleAttr(attacker);
 			RealBattleAttr realB = armyPositionLogic.calRealBattleAttr(defender);
 			int attKill = kill(attacker, defender, realA.getForce(), realB.getDefense());
-			h.setA_id(attacker.getGeneral().getCfgId());
-			h.setD_id(defender.getGeneral().getCfgId());
-			h.setD_loss(attKill);
+			// NPC 军团没有过数据库，故没有ID,统一用cfgid
+			h.setAId(attacker.getGeneral().getCfgId());
+			h.setDId(defender.getGeneral().getCfgId());
+			h.setDLoss(attKill);
 		}
 
 		armyPositionLogic.checkHit(attacker);
@@ -273,11 +284,11 @@ public class BattleLogic {
 			warResultBO.getCurRound().getB().add(h);
 			return true;
 		} else {
-			h.setA_as(afterSkill(attacker, defenses, attacks));
-			skillKill(attacker, defenses, h.getA_as());
+			h.setAAs(afterSkill(attacker, defenses, attacks));
+			skillKill(attacker, defenses, h.getAAs());
 
-			h.setD_as(afterSkill(defender, attacks, defenses));
-			skillKill(defender, attacks, h.getD_as());
+			h.setDAs(afterSkill(defender, attacks, defenses));
+			skillKill(defender, attacks, h.getDAs());
 
 			warResultBO.getCurRound().getB().add(h);
 			return false;
@@ -304,11 +315,11 @@ public class BattleLogic {
 	private void skillKill(ArmyPosition hit, List<ArmyPosition> defenses, List<SkillHitDTO> skills) {
 		for (SkillHitDTO skillHitDTO : skills) {
 			skillHitDTO.setKill(new ArrayList<>());
-			for (int i = 0; i < skillHitDTO.getI_e().size(); i++) {
-				if (skillHitDTO.getI_e().get(i) == EffectType.HurtRate.getValue()) {
-					int v = skillHitDTO.getE_v().get(i);
-					for (int j = 0; j < skillHitDTO.getT_id().size(); j++) {
-						int to = skillHitDTO.getT_id().get(j);
+			for (int i = 0; i < skillHitDTO.getIE().size(); i++) {
+				if (skillHitDTO.getIE().get(i) == EffectType.HurtRate.getValue()) {
+					int v = skillHitDTO.getEV().get(i);
+					for (int j = 0; j < skillHitDTO.getTId().size(); j++) {
+						int to = skillHitDTO.getTId().get(j);
 						ArmyPosition hitTarget = warCampLogic.findByCfgId(defenses, to);
 						if (hitTarget != null && hitTarget.getSoldiers() > 0) {
 							RealBattleAttr realB = armyPositionLogic.calRealBattleAttr(hitTarget);

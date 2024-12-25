@@ -166,7 +166,7 @@ public class WSServerManagerImpl implements IWSServerManager, IWSEventListener {
 				return;
 			}
 
-			wsMessageListeners.stream().forEach(listener -> listener.onMessage(session, gameMessageClientDTO));
+			wsMessageListeners.forEach(listener -> listener.onMessage(session, gameMessageClientDTO));
 		} catch (Exception e) {
 			log.info("=========== 非法数据：" + data);
 		}

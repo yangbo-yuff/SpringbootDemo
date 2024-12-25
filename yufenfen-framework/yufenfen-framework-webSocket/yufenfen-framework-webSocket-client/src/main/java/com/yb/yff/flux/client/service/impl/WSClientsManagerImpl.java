@@ -188,7 +188,7 @@ public class WSClientsManagerImpl implements IWSClientEventListener, IWSCLientsM
 
 		GameMessageEnhancedResDTO responseDTO = JSONObject.parseObject(josnStr, GameMessageEnhancedResDTO.class);
 
-		wsMessageListeners.stream().forEach(listener -> listener.onMessage(session, responseDTO));
+		wsMessageListeners.forEach(listener -> listener.onMessage(session, responseDTO));
 	}
 
 

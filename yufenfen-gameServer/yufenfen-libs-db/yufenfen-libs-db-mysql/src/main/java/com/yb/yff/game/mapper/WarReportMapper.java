@@ -18,6 +18,17 @@ import java.util.List;
  */
 public interface WarReportMapper extends BaseMapper<WarReportEntity> {
 	/**
+	 * 获取最近N条战报
+	 * @param rid
+	 * @param lastNum
+	 * @return
+	 */
+	@Select("SELECT * FROM tb_war_report " +
+			"WHERE (a_rid = #{rid} OR d_rid = #{rid}) " +
+			"ORDER BY ctime DESC " +
+			"LIMIT #{lastNum}")
+	List<WarReportEntity> selectWarReport(@Param("rid") Integer rid, @Param("lastNum") Integer lastNum);
+	/**
 	 * 获取最近几条未读的战报
 	 * @param rid
 	 * @param lastNum

@@ -27,6 +27,6 @@ import java.util.List;
 @Data
 public class ScanBlockResDTO extends GameBusinessResBaseDTO {
 	private List<ArmyDTO> armys;
-	private List<CityDTO> mc_builds;
-	private List<BuildDTO> mr_builds;
+	private List<CityDTO> mcBuilds;
+	private List<BuildDTO> mrBuilds;
 }

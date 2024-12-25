@@ -23,6 +23,6 @@ public class FacilityDTO {
  private Integer level;
  private String name;
  private Integer type;
- private Integer up_time;
+ private Integer upTime;
  private FacilityPropertyDTO property;
 }

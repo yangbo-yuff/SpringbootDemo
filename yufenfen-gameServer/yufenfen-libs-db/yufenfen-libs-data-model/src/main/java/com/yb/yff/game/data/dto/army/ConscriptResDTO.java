@@ -30,5 +30,5 @@ public class ConscriptResDTO extends GameBusinessResBaseDTO {
 	/**
 	 * 其它信息
 	 */
-	private RoleResourceData role_res;
+	private RoleResourceData roleRes;
 }

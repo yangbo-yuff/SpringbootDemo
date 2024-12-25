@@ -99,21 +99,21 @@ public class BuildMgrImpl implements IJsonDataHandler {
 	/**
 	 * 恢复处理中的 giveUpRoleBildMap 和 destroyRoleBildMap
 	 */
-	public void recoverPendingMap(){
+	public void recoverPendingMap() {
 		getMapBuildMap().forEach((k, v) -> {
-			Long giveUpTime = v.getGiveUp_time();
-			if(giveUpTime != null && giveUpTime > 0){
+			Long giveUpTime = v.getGiveUpTime();
+			if (giveUpTime != null && giveUpTime > 0) {
 				putGiveUpBuild(v);
 			}
 
-			Long endTime = v.getEnd_time();
-			if(endTime != null && endTime > 0){
+			Long endTime = v.getEndTime();
+			if (endTime != null && endTime > 0) {
 				putInOperationBild(v);
 			}
 		});
 	}
 
-	private void initCache(){
+	private void initCache() {
 		if (dbRoleBildMap.size() > 0) {
 			return;
 		}
@@ -124,11 +124,12 @@ public class BuildMgrImpl implements IJsonDataHandler {
 		long count = mapRoleBuildService.count(queryWrapper);
 
 		if (count > 0) {
-			List<MapRoleBuildEntity> dbList = mapRoleBuildService.getBaseMapper().selectList(queryWrapper);
-			dbList.forEach(mapRoleBuildEntity -> {
-				MapBuildDTO mapRoleBuild = buildEntity2DTO(mapRoleBuildEntity);
-				addMapBuildDTO2Cache(mapRoleBuild);
-			});
+			// 由 饿加载 调整为 懒加载
+//			List<MapRoleBuildEntity> dbList = mapRoleBuildService.getBaseMapper().selectList(queryWrapper);
+//			dbList.forEach(mapRoleBuildEntity -> {
+//				MapBuildDTO mapRoleBuild = buildEntity2DTO(mapRoleBuildEntity);
+//				addMapBuildDTO2Cache(mapRoleBuild);
+//			});
 			return;
 		}
 
@@ -160,6 +161,29 @@ public class BuildMgrImpl implements IJsonDataHandler {
 		}
 	}
 
+	/**
+	 * 加载角色建筑
+	 *
+	 * @param rid
+	 * @return
+	 */
+	private List<MapBuildDTO> loadRoleBuildsFromDB(Integer rid) {
+		try {
+			QueryWrapper<MapRoleBuildEntity> queryWrapper = new QueryWrapper<>();
+			queryWrapper.eq("rid", rid);
+			List<MapRoleBuildEntity> dbList = mapRoleBuildService.getBaseMapper().selectList(queryWrapper);
+			dbList.forEach(mapRoleBuildEntity -> {
+				MapBuildDTO mapRoleBuild = buildEntity2DTO(mapRoleBuildEntity);
+				addMapBuildDTO2Cache(mapRoleBuild);
+			});
+
+			return roleRoleBildMap.computeIfAbsent(rid, k -> new ArrayList<>());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	private void addMapBuildDTO2Cache(MapBuildDTO mapBuildDTO) {
 		dbRoleBildMap.put(mapBuildDTO.getId(), mapBuildDTO);
 
@@ -175,13 +199,6 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 		dto.setRNick(roleDataMgr.getRoleNick(entity.getRid()));
 
-		dto.setCur_durable(entity.getCurDurable());
-		dto.setMax_durable(entity.getMaxDurable());
-		dto.setOp_level(entity.getOpLevel());
-		dto.setEnd_time(entity.getEndTime());
-		dto.setOccupy_time(entity.getOccupyTime());
-		dto.setGiveUp_time(entity.getGiveupTime());
-
 		dto.setOperationType(EnumUtils.fromValue(BuildingOperationType.class, entity.getOperationType()));
 
 		return dto;
@@ -193,14 +210,7 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 		BeanUtils.copyProperties(dto, entity);
 
-		entity.setCurDurable(dto.getCur_durable());
-		entity.setMaxDurable(dto.getMax_durable());
-		entity.setOpLevel(dto.getOp_level());
-		entity.setEndTime(dto.getEnd_time());
-		entity.setOccupyTime(dto.getOccupy_time());
-		entity.setGiveupTime(dto.getGiveUp_time());
-
-		if(dto.getOperationType() != null){
+		if (dto.getOperationType() != null) {
 			entity.setOperationType(dto.getOperationType().getValue());
 		}
 
@@ -221,15 +231,14 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 		ConfigDTO buildConfig = jsonConfigMgr.getBuildConfigByTypeAndLevel(type, level);
 		if (buildConfig == null) {
-			log.info("====================  type:{}, level:{} nationlMap config is null!", type, level);
 			return mapRoleBuild;
 		}
 
 		BeanUtils.copyProperties(buildConfig, mapRoleBuild);
 
-		mapRoleBuild.setOp_level(buildConfig.getLevel());
-		mapRoleBuild.setMax_durable(buildConfig.getDurable());
-		mapRoleBuild.setCur_durable(buildConfig.getDurable());
+		mapRoleBuild.setOpLevel(buildConfig.getLevel());
+		mapRoleBuild.setMaxDurable(buildConfig.getDurable());
+		mapRoleBuild.setCurDurable(buildConfig.getDurable());
 
 		return mapRoleBuild;
 	}
@@ -255,8 +264,13 @@ public class BuildMgrImpl implements IJsonDataHandler {
 	 * @param rid
 	 * @return
 	 */
-	public List<MapBuildDTO> getRoleBuilds(Integer rid) {
-		return roleRoleBildMap.computeIfAbsent(rid, k -> new ArrayList<>());
+	public synchronized List<MapBuildDTO> getRoleBuilds(Integer rid) {
+		List<MapBuildDTO> roleBuilds = roleRoleBildMap.computeIfAbsent(rid, k -> new ArrayList<>());
+		if(roleBuilds.size() > 0){
+			return roleBuilds;
+		}
+
+		return loadRoleBuildsFromDB(rid);
 	}
 
 	public List<BuildDTO> getRoleBuildDTOs(Integer rid) {
@@ -279,14 +293,17 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 	/**
 	 * 获取 单元格配置数据
+	 *
 	 * @param posX, posY
 	 */
 	public NationalMap getCellConfigData(Integer posX, Integer posY) {
 		int posId = CityPositionUtils.position2Number(posX, posY);
 		return getCellConfigData(posId);
 	}
+
 	/**
 	 * 获取 单元格配置数据
+	 *
 	 * @param posId
 	 */
 	public NationalMap getCellConfigData(Integer posId) {
@@ -307,17 +324,19 @@ public class BuildMgrImpl implements IJsonDataHandler {
 		if (builds == null || builds.size() == 0) {
 			return null;
 		}
-		builds.stream().forEach(mapRoleBuildBO -> {
-			ConfigDTO configDTO = jsonConfigMgr.getNationConfig().getNmcMap().get(mapRoleBuildBO.getType()).get(mapRoleBuildBO.getLevel());
-			roleResourceYideld.setGrain_yield(roleResourceYideld.getGrain_yield() + configDTO.getGrain());
-			roleResourceYideld.setIron_yield(roleResourceYideld.getIron_yield() + configDTO.getIron());
-			roleResourceYideld.setStone_yield(roleResourceYideld.getStone_yield() + configDTO.getStone());
-			roleResourceYideld.setWood_yield(roleResourceYideld.getWood_yield() + configDTO.getWood());
-		});
+		for(MapBuildDTO build : builds){
+			ConfigDTO configDTO = jsonConfigMgr.getBuildConfigByTypeAndLevel(build.getType(), build.getLevel());
+			if(configDTO == null){
+				continue;
+			}
+			roleResourceYideld.setGrainYield(roleResourceYideld.getGrainYield() + configDTO.getGrain());
+			roleResourceYideld.setIronYield(roleResourceYideld.getIronYield() + configDTO.getIron());
+			roleResourceYideld.setStoneYield(roleResourceYideld.getStoneYield() + configDTO.getStone());
+			roleResourceYideld.setWoodYield(roleResourceYideld.getWoodYield() + configDTO.getWood());
+		};
 
 		return roleResourceYideld;
 	}
-
 
 
 	public ConcurrentHashMap<Integer, MapBuildDTO> getMapBuildMap() {
@@ -355,7 +374,7 @@ public class BuildMgrImpl implements IJsonDataHandler {
 	public synchronized List<MapBuildDTO> getTimeBeforeInOperationBilds(Long endTime) {
 		List<MapBuildDTO> beforeMapList = new ArrayList<>();
 		inOperationBildMap.entrySet().forEach(entry -> {
-			if(entry.getKey() <= endTime){
+			if (entry.getKey() <= endTime) {
 				Map<Integer, MapBuildDTO> map = entry.getValue();
 				beforeMapList.addAll(map.values());
 			}
@@ -369,16 +388,16 @@ public class BuildMgrImpl implements IJsonDataHandler {
 	}
 
 	public synchronized void delInOperationBilds(MapBuildDTO build) {
-		if(build.getEnd_time() == null || build.getEnd_time() == 0){
+		if (build.getEndTime() == null || build.getEndTime() == 0) {
 			return;
 		}
 
-		ConcurrentHashMap<Integer, MapBuildDTO> map = this.getInOperationBilds(build.getEnd_time());
-		if(map != null){
+		ConcurrentHashMap<Integer, MapBuildDTO> map = this.getInOperationBilds(build.getEndTime());
+		if (map != null) {
 			map.computeIfPresent(build.getId(), (id, value) -> null);
 
-			if (map.isEmpty()){
-				delInOperationBildsByEndTime(build.getEnd_time());
+			if (map.isEmpty()) {
+				delInOperationBildsByEndTime(build.getEndTime());
 			}
 		}
 	}
@@ -388,7 +407,7 @@ public class BuildMgrImpl implements IJsonDataHandler {
 	}
 
 	public void putInOperationBild(MapBuildDTO build) {
-		inOperationBildMap.computeIfAbsent(build.getEnd_time(), k -> new ConcurrentHashMap<>()).put(build.getId(), build);
+		inOperationBildMap.computeIfAbsent(build.getEndTime(), k -> new ConcurrentHashMap<>()).put(build.getId(), build);
 	}
 
 	/**
@@ -405,13 +424,14 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 	/**
 	 * 获取 指定时间之前的 待放弃的 城池
+	 *
 	 * @param giveUpTime
 	 * @return
 	 */
 	public synchronized List<MapBuildDTO> getTimeBeforeGiveUpBuilds(Long giveUpTime) {
 		List<MapBuildDTO> beforeMapList = new ArrayList<>();
 		giveUpRoleBildMap.entrySet().forEach(entry -> {
-			if(entry.getKey() < giveUpTime){
+			if (entry.getKey() < giveUpTime) {
 				Map<Integer, MapBuildDTO> map = entry.getValue();
 				beforeMapList.addAll(map.values());
 			}
@@ -422,6 +442,7 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 	/**
 	 * 获取 指定时间之前的 待放弃的 城池
+	 *
 	 * @param giveUpTime
 	 * @return
 	 */
@@ -431,19 +452,20 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 	/**
 	 * 删除 放弃的城池
+	 *
 	 * @param build
 	 */
 	public synchronized void delGiveUpBuild(MapBuildDTO build) {
-		if(build.getGiveUp_time() == null || build.getGiveUp_time() == 0){
+		if (build.getGiveUpTime() == null || build.getGiveUpTime() == 0) {
 			return;
 		}
 
-		ConcurrentHashMap<Integer, MapBuildDTO> map = this.getGiveUpBuild(build.getGiveUp_time());
-		if(map != null){
+		ConcurrentHashMap<Integer, MapBuildDTO> map = this.getGiveUpBuild(build.getGiveUpTime());
+		if (map != null) {
 			map.computeIfPresent(build.getId(), (id, value) -> null);
 
-			if (map.isEmpty()){
-				delGiveUpByEndTime(build.getGiveUp_time());
+			if (map.isEmpty()) {
+				delGiveUpByEndTime(build.getGiveUpTime());
 			}
 		}
 	}
@@ -453,13 +475,13 @@ public class BuildMgrImpl implements IJsonDataHandler {
 	}
 
 	public void putGiveUpBuild(MapBuildDTO build) {
-		giveUpRoleBildMap.computeIfAbsent(build.getGiveUp_time(), k -> new ConcurrentHashMap<>()).put(build.getId(), build);
+		giveUpRoleBildMap.computeIfAbsent(build.getGiveUpTime(), k -> new ConcurrentHashMap<>()).put(build.getId(), build);
 	}
 
 	/**
 	 * 定时处理empty的 giveUpRoleBildMap 和 destroyRoleBildMap
 	 */
-	public void checkPendingMapEmpty(){
+	public void checkPendingMapEmpty() {
 		giveUpRoleBildMap.forEach((time, map) -> {
 			// 移除值为 null 的键值对
 			map.entrySet().removeIf(entry -> entry.getValue() == null);
@@ -500,11 +522,11 @@ public class BuildMgrImpl implements IJsonDataHandler {
 	 * @return
 	 */
 	public synchronized boolean isWarFree(MapBuildDTO buildDTO) {
-		if (buildDTO.getOccupy_time() == null) {
+		if (buildDTO.getOccupyTime() == null) {
 			return false;
 		}
 
-		Long timeInterval = System.currentTimeMillis() / 1000 - buildDTO.getOccupy_time();
+		Long timeInterval = System.currentTimeMillis() - buildDTO.getOccupyTime();
 		if (timeInterval < jsonConfigMgr.getBasicConfig().getBuild().getWar_free()) {
 			return true;
 		} else {
@@ -518,11 +540,12 @@ public class BuildMgrImpl implements IJsonDataHandler {
 	}
 
 	public boolean isBusy(MapBuildDTO mapRoleBuildBO) {
-		return mapRoleBuildBO.getLevel() != mapRoleBuildBO.getOp_level();
+		return mapRoleBuildBO.getLevel() != mapRoleBuildBO.getOpLevel();
 	}
 
 	/**
 	 * 是否资源产地
+	 *
 	 * @param mapRoleBuildBO
 	 * @return
 	 */
@@ -535,6 +558,7 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 	/**
 	 * 是否有调兵权限
+	 *
 	 * @param build
 	 * @return
 	 */
@@ -544,11 +568,12 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 	/**
 	 * 是否在处理放弃过程中
+	 *
 	 * @param build
 	 * @return
 	 */
 	public boolean isInGiveUp(MapBuildDTO build) {
-		return build.getGiveUp_time() != null && build.getGiveUp_time() != 0;
+		return build.getGiveUpTime() != null && build.getGiveUpTime() != 0;
 	}
 
 	public Integer buildCnt(Integer rid) {
@@ -558,18 +583,18 @@ public class BuildMgrImpl implements IJsonDataHandler {
 	}
 
 	public void reset(MapBuildDTO build) {
-		NationalMap cellConfig =  getCellConfigData(build.getX(), build.getY());
+		NationalMap cellConfig = getCellConfigData(build.getX(), build.getY());
 		ConfigDTO buildConfig = jsonConfigMgr.getBuildConfigByTypeAndLevel(cellConfig.getType(), cellConfig.getLevel());
 		if (buildConfig != null) {
 			BeanUtils.copyProperties(buildConfig, build);
 		}
 
 
-		build.setGiveUp_time(0l);
+		build.setGiveUpTime(0l);
 		build.setRid(0);
-		build.setEnd_time(0l);
-		build.setOp_level(cellConfig.getLevel());
-		build.setCur_durable(Math.min(build.getMax_durable(), build.getCur_durable()));
+		build.setEndTime(0l);
+		build.setOpLevel(cellConfig.getLevel());
+		build.setCurDurable(Math.min(build.getMaxDurable(), build.getCurDurable()));
 	}
 
 	public synchronized boolean isCanBuild(PositionDTO pos) {
@@ -594,20 +619,21 @@ public class BuildMgrImpl implements IJsonDataHandler {
 		clearOperationState(build);
 
 		Integer rid = build.getRid();
-		Long giveUpTime = build.getGiveUp_time();
+		Long giveUpTime = build.getGiveUpTime();
 		reset(build);
 		build.setRid(rid);
-		build.setGiveUp_time(giveUpTime);
+		build.setGiveUpTime(giveUpTime);
 	}
 
 	/**
 	 * 完成操作后， 清理操作状态
+	 *
 	 * @param build
 	 */
 	public void clearOperationState(MapBuildDTO build) {
-		build.setEnd_time(0l);
+		build.setEndTime(0l);
 		build.setOperationType(BuildingOperationType.BUILD_NOTHING);
-		build.setLevel(build.getOp_level());
+		build.setLevel(build.getOpLevel());
 	}
 
 	private synchronized MapBuildDTO createMapBuildFromConfig(Integer posKey) {
@@ -647,13 +673,10 @@ public class BuildMgrImpl implements IJsonDataHandler {
 	 * @param mapRoleBuild
 	 * @return
 	 */
-	public boolean updateBuild2DB(MapBuildDTO mapRoleBuild) {
+	public boolean saveOrUpdateBuild2DB(MapBuildDTO mapRoleBuild) {
 		MapRoleBuildEntity mapRoleBuildEntity = buildDTO2Entity(mapRoleBuild);
 
-		UpdateWrapper<MapRoleBuildEntity> updateWrapper = new UpdateWrapper<>();
-		updateWrapper.eq("id", mapRoleBuild.getId());
-
-		return mapRoleBuildService.update(mapRoleBuildEntity, updateWrapper);
+		return mapRoleBuildService.saveOrUpdate(mapRoleBuildEntity);
 	}
 
 
@@ -663,14 +686,14 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 		RoleDTO role = roleDataMgr.getRoleDTO(mapBuild.getRid());
 
-		buildDTO.setParent_id(role.getParentId());
+		buildDTO.setParentId(role.getParentId());
 
 		UnionDTO union = unionMgr.getUnion(role.getUnionId());
 		if (union != null) {
 
-			buildDTO.setUnion_id(union.getId());
+			buildDTO.setUnionId(union.getId());
 			// TODO 联盟名称
-			buildDTO.setUnion_name(union.getName());
+			buildDTO.setUnionName(union.getName());
 		}
 
 		return buildDTO;
@@ -711,7 +734,7 @@ public class BuildMgrImpl implements IJsonDataHandler {
 
 		// 归属新主
 		rb.setRid(rid);
-		rb.setOccupy_time(System.currentTimeMillis());
+		rb.setOccupyTime(System.currentTimeMillis());
 		addRoleBuilds(rb);
 
 		return true;

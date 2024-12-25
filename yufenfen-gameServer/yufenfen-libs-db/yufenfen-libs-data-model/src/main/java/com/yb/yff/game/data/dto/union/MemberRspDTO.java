@@ -26,5 +26,5 @@ public class MemberRspDTO extends GameBusinessResBaseDTO {
 	//联盟id
 	private Integer id;
 
-	private List<MemberDTO> Members;
+	private List<MemberDTO> members;
 }

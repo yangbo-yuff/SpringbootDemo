@@ -2,8 +2,6 @@ package com.yb.yff.game.data.dto.nationMap;
 
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * Copyright (c) 2024 to 2045  YangBo.
  * All rights reserved.
@@ -22,16 +20,16 @@ import java.util.Date;
  */
 @Data
 public class MapCellDTO extends MapCellBaseData {
-	private String RNick;
+	private String rNick;
 	private Integer id;
-	private Integer op_level;
+	private Integer opLevel;
 	private Integer x;
 	private Integer y;
 	private String name;
 	private Integer defender;
-	private Integer cur_durable;
-	private Integer max_durable;
-	private Long occupy_time;
-	private Long end_time;
-	private Long giveUp_time;
+	private Integer curDurable;
+	private Integer maxDurable;
+	private Long occupyTime;
+	private Long endTime;
+	private Long giveUpTime;
 }

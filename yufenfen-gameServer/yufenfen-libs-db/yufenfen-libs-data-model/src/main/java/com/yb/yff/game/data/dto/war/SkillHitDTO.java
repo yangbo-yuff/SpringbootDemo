@@ -22,12 +22,14 @@ import java.util.List;
  */
 @Data
 public class SkillHitDTO {
-	private int f_id; // 发起的id
-	private List<Integer> t_id; // 作用目标id
-	private int c_id; // 技能配置id
+	private int fId; // 发起的id
+	private boolean fIsA; // 发起方是否攻城方, true-攻城方，false-守城方
+	private boolean tIsA; // 作用方是否攻城方, true-攻城方，false-守城方
+	private List<Integer> tId; // 作用目标id
+	private int cId; // 技能配置id
 	private int lv; // 技能等级
-	private List<Integer> i_e; // 技能包括的效果
-	private List<Integer> e_v; // 效果值
-	private List<Integer> e_r; // 效果持续回合数
+	private List<Integer> iE; // 技能包括的效果
+	private List<Integer> eV; // 效果值
+	private List<Integer> eR; // 效果持续回合数
 	private List<Integer> kill; // 技能杀死数量
 }

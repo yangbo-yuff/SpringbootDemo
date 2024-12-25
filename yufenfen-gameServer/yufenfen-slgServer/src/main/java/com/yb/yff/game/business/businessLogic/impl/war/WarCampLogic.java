@@ -93,7 +93,8 @@ public class WarCampLogic {
 						generalMgr.getSpeed(general) + attackAdds.get(2) + aCampAdds.get(0),
 						generalMgr.getStrategy(general) + attackAdds.get(3) + aCampAdds.get(0),
 						generalMgr.getDestroy(general) + aCampAdds.get(0),
-						i
+						i,
+						true
 				);
 				attackPos.add(pos);
 			}
@@ -112,7 +113,8 @@ public class WarCampLogic {
 						generalMgr.getSpeed(general) + defenseAdds.get(2) + dCampAdds.get(0),
 						generalMgr.getStrategy(general) + defenseAdds.get(3) + dCampAdds.get(0),
 						generalMgr.getDestroy(general) + dCampAdds.get(0),
-						i
+						i,
+						false
 				);
 				defensePos.add(pos);
 			}

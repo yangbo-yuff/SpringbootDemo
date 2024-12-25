@@ -21,18 +21,18 @@ import lombok.Data;
 @Data
 public class UnionLogDTO {
 	private Integer unionId;
-	private Integer op_rid;
-	private Integer target_id;
+	private Integer opRid;
+	private Integer targetId;
 	private Integer state;
 	private String des;
 	private Long ctime;
 
 	public UnionLogDTO(){}
 
-	public UnionLogDTO(Integer unionId, Integer op_rid, Integer target_id, Integer state, String des, Long ctime) {
+	public UnionLogDTO(Integer unionId, Integer opRid, Integer targetId, Integer state, String des, Long ctime) {
 		this.unionId = unionId;
-		this.op_rid = op_rid;
-		this.target_id = target_id;
+		this.opRid = opRid;
+		this.targetId = targetId;
 		this.state = state;
 		this.des = des;
 		this.ctime = ctime;

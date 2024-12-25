@@ -132,13 +132,13 @@ public class GeneralLogicImpl extends BusinessDataSyncImpl<GeneralDTO> implement
 		// 流放回收
 		AtomicInteger recovering = new AtomicInteger();
 
-		convertGenerals.stream().forEach(general -> {
+		convertGenerals.forEach(general -> {
 			// 只有 不在军队中 的将领可以流放
 			if (general.getOrder() == 0) {
 				general.setState(GeneralState.GeneralConvert.getValue());
 
 				if (generalMgrImpl.updateGeneralState(general)) {
-					recovering.addAndGet(10 * (general.getStar()) * (1 + general.getStar_lv()));
+					recovering.addAndGet(10 * (general.getStar()) * (1 + general.getStarLv()));
 					killIDs.add(general.getId());
 				}
 			}
@@ -150,7 +150,7 @@ public class GeneralLogicImpl extends BusinessDataSyncImpl<GeneralDTO> implement
 		roleLogic.updateRoleResource(rid, roleResource, true);
 
 		convertRes.setGold(roleLogic.getRole(rid).getGold());
-		convertRes.setAdd_gold(recovering.get());
+		convertRes.setAddGold(recovering.get());
 		convertRes.setGIds(killIDs);
 
 		return NetResponseCodeConstants.SUCCESS;
@@ -190,12 +190,12 @@ public class GeneralLogicImpl extends BusinessDataSyncImpl<GeneralDTO> implement
 		}
 
 		//是否超过武将星级
-		if ((gs.getStar() - gs.getStar_lv()) < gss.size()) {
+		if ((gs.getStar() - gs.getStarLv()) < gss.size()) {
 			rsp.setCode(NetResponseCodeConstants.GeneralStarMax);
 			return rsp;
 		}
 
-		gs.setStar_lv(gs.getStar_lv() + gss.size());
+		gs.setStarLv(gs.getStarLv() + gss.size());
 		gs.setHasPrPoint(gs.getHasPrPoint() + gss.size());
 		this.syncExecute(rid, gs);
 
@@ -236,11 +236,11 @@ public class GeneralLogicImpl extends BusinessDataSyncImpl<GeneralDTO> implement
 			return rsp;
 		}
 
-		gs.setForce_added(addPrGeneralReq.getForceAdd());
-		gs.setStrategy_added(addPrGeneralReq.getStrategyAdd());
-		gs.setDefense_added(addPrGeneralReq.getDefenseAdd());
-		gs.setSpeed_added(addPrGeneralReq.getSpeedAdd());
-		gs.setDestroy_added(addPrGeneralReq.getDestroyAdd());
+		gs.setForceAdded(addPrGeneralReq.getForceAdd());
+		gs.setStrategyAdded(addPrGeneralReq.getStrategyAdd());
+		gs.setDefenseAdded(addPrGeneralReq.getDefenseAdd());
+		gs.setSpeedAdded(addPrGeneralReq.getSpeedAdd());
+		gs.setDestroyAdded(addPrGeneralReq.getDestroyAdd());
 		gs.setUsePrPoint(all);
 		this.syncExecute(rid, gs);
 
@@ -281,7 +281,7 @@ public class GeneralLogicImpl extends BusinessDataSyncImpl<GeneralDTO> implement
 //			return
 //		}
 
-		if (!skillMgrImpl.checkSKillsArmy(g.getCurArms(), killReq.getCfgId())) {
+		if (!skillMgrImpl.checkSKillsArmy(g.getArms(), killReq.getCfgId())) {
 			return NetResponseCodeConstants.OutArmNotMatch;
 		}
 

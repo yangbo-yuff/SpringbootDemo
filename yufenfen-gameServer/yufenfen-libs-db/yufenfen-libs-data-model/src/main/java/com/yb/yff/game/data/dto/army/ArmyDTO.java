@@ -28,45 +28,45 @@ public class ArmyDTO {
 	private Integer order;
 	private List<Integer> generals;
 	private List<Integer> soldiers;
-	private List<Integer> con_cnts;
-	private List<Integer> con_times;
+	private List<Integer> conCnts;
+	private List<Integer> conTimes;
 	/**
 	 *  0:空闲 1:攻击 2：驻军 3:返回
 	 */
 	private Integer cmd;
-	private Integer from_x;
-	private Integer from_y;
-	private Integer to_x;
-	private Integer to_y;
+	private Integer fromX;
+	private Integer fromY;
+	private Integer toX;
+	private Integer toY;
 	private Long start;
 	private Long end;
 	private Integer state;
-	private Integer union_id;
+	private Integer unionId;
 
-	public void  setFrom(Integer from_x, Integer from_y){
-		this.from_x = from_x;
-		this.from_y = from_y;
+	public void  setFrom(Integer fromX, Integer fromY){
+		this.fromX = fromX;
+		this.fromY = fromY;
 	}
 
-	public void setTo(Integer to_x, Integer to_y){
-		this.to_x = to_x;
-		this.to_y = to_y;
+	public void setTo(Integer toX, Integer toY){
+		this.toX = toX;
+		this.toY = toY;
 	}
 
-	public void setFromTo(Integer from_x, Integer from_y, Integer to_x, Integer to_y){
-		this.from_x = from_x;
-		this.from_y = from_y;
-		this.to_x = to_x;
-		this.to_y = to_y;
+	public void setFromTo(Integer fromX, Integer fromY, Integer toX, Integer toY){
+		this.fromX = fromX;
+		this.fromY = fromY;
+		this.toX = toX;
+		this.toY = toY;
 	}
 	public void swapFromTo(){
-		Integer oldToX = to_x;
-		Integer oldToY = to_y;
+		Integer oldToX = toX;
+		Integer oldToY = toY;
 
-		this.to_x = this.from_x;
-		this.to_y =this.from_y;
+		this.toX = this.fromX;
+		this.toY =this.fromY;
 
-		this.from_x = oldToX;
-		this.from_y = oldToY;
+		this.fromX = oldToX;
+		this.fromY = oldToY;
 	}
 }

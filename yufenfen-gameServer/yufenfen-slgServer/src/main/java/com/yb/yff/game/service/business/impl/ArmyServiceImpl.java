@@ -176,7 +176,7 @@ public class ArmyServiceImpl extends BusinessServiceImpl {
 		ConscriptResDTO delayedRes = (ConscriptResDTO) result.getResult().get(0).getResDTO().getMsg();
 
 		conscriptResDTO.setArmy(delayedRes.getArmy());
-		conscriptResDTO.setRole_res(delayedRes.getRole_res());
+		conscriptResDTO.setRoleRes(delayedRes.getRoleRes());
 
 		conscriptResDTO.setDelayedTask(result.getResult());
 

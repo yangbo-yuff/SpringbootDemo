@@ -21,7 +21,7 @@ import lombok.Data;
  */
 @Data
 public class OpenCollectResDTO extends GameBusinessResBaseDTO {
-	private Integer cur_times;
+	private Integer curTimes;
 	private Integer limit;
-	private Integer next_time;
+	private Integer nextTime;
 }

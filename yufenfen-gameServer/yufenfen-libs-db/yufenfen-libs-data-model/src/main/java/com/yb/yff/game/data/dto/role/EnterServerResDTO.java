@@ -22,7 +22,7 @@ import lombok.Data;
 @Data
 public class EnterServerResDTO extends GameBusinessResBaseDTO {
 	private RoleDTO role;
-	private RoleResourceData role_res;
+	private RoleResourceData roleRes;
 	private Long time;
 	private String token;
 }

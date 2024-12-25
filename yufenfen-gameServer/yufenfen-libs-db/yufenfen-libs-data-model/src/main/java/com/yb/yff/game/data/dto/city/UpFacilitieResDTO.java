@@ -25,5 +25,5 @@ public class UpFacilitieResDTO extends GameBusinessResBaseDTO {
 	private Integer cityId;
 	private FacilityDTO facility;
 
-	private RoleResourceData role_res;
+	private RoleResourceData roleRes;
 }

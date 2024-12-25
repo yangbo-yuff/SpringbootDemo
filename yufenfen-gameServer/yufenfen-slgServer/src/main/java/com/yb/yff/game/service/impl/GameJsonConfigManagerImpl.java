@@ -247,7 +247,7 @@ public class GameJsonConfigManagerImpl implements IGameJsonConfigManager {
 				MBCustomConfigLevelDTO mbCustomConfigLevel = new MBCustomConfigLevelDTO();
 				BeanUtils.copyProperties(levelItem, mbCustomConfigLevel);
 				MBCustomConfigLevelResultDTO result = new MBCustomConfigLevelResultDTO();
-				result.setArmy_cnt(levelItem.getResult().getArmy_cnt());
+				result.setArmyCnt(levelItem.getResult().getArmy_cnt());
 				MBCustomConfigLevelNeedDTO need = new MBCustomConfigLevelNeedDTO();
 				BeanUtils.copyProperties(levelItem.getNeed(), need);
 				mbCustomConfigLevel.setNeed(need);
@@ -285,7 +285,7 @@ public class GameJsonConfigManagerImpl implements IGameJsonConfigManager {
 				BeanUtils.copyProperties(additionList.get(additionItem - 1), addition);
 				additionDetails.add(addition);
 			});
-			facilityPropertyDTO.setAddition_details(additionDetails);
+			facilityPropertyDTO.setAdditionDetails(additionDetails);
 
 			facilityPropertyMaps.put(facilityPropertyDTO.getType(), facilityPropertyDTO);
 		});
@@ -304,7 +304,7 @@ public class GameJsonConfigManagerImpl implements IGameJsonConfigManager {
 			facility.setType(item.getType());
 			facility.setName(item.getName());
 			facility.setLevel(0);
-			facility.setUp_time(0);
+			facility.setUpTime(0);
 			facility.setProperty(facilityPropertyMaps.get(item.getType()));
 			facilitieList.add(facility);
 

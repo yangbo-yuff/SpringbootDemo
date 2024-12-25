@@ -86,7 +86,7 @@ public class CityFacilityMgrImpl implements IJsonDataHandler {
 
 		facilityConfigMap = jsonConfigMgr.getFacilitiesConfig().getFacilityMap();
 		newFacilityConfigList = new ArrayList<>();
-		jsonConfigMgr.getFacilitiesConfig().getFacilities().stream().forEach(facility -> {
+		jsonConfigMgr.getFacilitiesConfig().getFacilities().forEach(facility -> {
 			com.yb.yff.game.data.dto.city.FacilityDTO facilityDTO = new com.yb.yff.game.data.dto.city.FacilityDTO();
 			BeanUtils.copyProperties(facility, facilityDTO);
 			newFacilityConfigList.add(facilityDTO);
@@ -101,7 +101,7 @@ public class CityFacilityMgrImpl implements IJsonDataHandler {
 	}
 
 	private void initData(List<CityFacilityEntity> cityFacilityEntities) {
-		cityFacilityEntities.stream().forEach(cityFac -> {
+		cityFacilityEntities.forEach(cityFac -> {
 			Integer rid = cityFac.getRid();
 			Integer cid = cityFac.getCityId();
 
@@ -121,7 +121,7 @@ public class CityFacilityMgrImpl implements IJsonDataHandler {
 
 		Map<Integer, com.yb.yff.game.data.dto.city.FacilityDTO> facilityMap = new HashMap();
 
-		newFacilityConfigList.stream().forEach(item -> {
+		newFacilityConfigList.forEach(item -> {
 			com.yb.yff.game.data.dto.city.FacilityDTO facilityDTO = new com.yb.yff.game.data.dto.city.FacilityDTO();
 			BeanUtils.copyProperties(item, facilityDTO);
 			facilityMap.put(item.getType(), facilityDTO);
@@ -139,7 +139,7 @@ public class CityFacilityMgrImpl implements IJsonDataHandler {
 
 		List<com.yb.yff.game.data.dto.city.FacilityDTO> facilityList = new ArrayList<>();
 
-		newFacilityConfigList.stream().forEach(item -> {
+		newFacilityConfigList.forEach(item -> {
 			com.yb.yff.game.data.dto.city.FacilityDTO facilityDTO = new com.yb.yff.game.data.dto.city.FacilityDTO();
 			BeanUtils.copyProperties(item, facilityDTO);
 			facilityList.add(facilityDTO);

@@ -28,7 +28,7 @@ public class RoleResourceData {
 	/**
 	 * 仓库容量
 	 */
-	private Integer depot_capacity;
+	private Integer depotCapacity;
 
 	/**
 	 * 令牌
@@ -42,7 +42,7 @@ public class RoleResourceData {
 	/**
 	 * 木 产量
 	 */
-	private Integer wood_yield;
+	private Integer woodYield;
 
 	/**
 	 * 铁
@@ -51,7 +51,7 @@ public class RoleResourceData {
 	/**
 	 * 铁 产量
 	 */
-	private Integer iron_yield;
+	private Integer ironYield;
 
 	/**
 	 * 石头
@@ -60,7 +60,7 @@ public class RoleResourceData {
 	/**
 	 * 石头 产量
 	 */
-	private Integer stone_yield;
+	private Integer stoneYield;
 
 	/**
 	 * 粮食
@@ -69,7 +69,7 @@ public class RoleResourceData {
 	/**
 	 * 粮食 产量
 	 */
-	private Integer grain_yield;
+	private Integer grainYield;
 
 	/**
 	 * 金币
@@ -78,5 +78,5 @@ public class RoleResourceData {
 	/**
 	 * 金币 产量
 	 */
-	private Integer gold_yield;
+	private Integer goldYield;
 }

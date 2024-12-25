@@ -29,27 +29,27 @@ public class RoleResourceYideldDTO {
 	/**
 	 * 木 产量
 	 */
-	private Integer wood_yield;
+	private Integer woodYield;
 
 	/**
 	 * 铁 产量
 	 */
-	private Integer iron_yield;
+	private Integer ironYield;
 
 	/**
 	 * 石头 产量
 	 */
-	private Integer stone_yield;
+	private Integer stoneYield;
 
 	/**
 	 * 粮食 产量
 	 */
-	private Integer grain_yield;
+	private Integer grainYield;
 
 	/**
 	 * 金币 产量
 	 */
-	private Integer gold_yield;
+	private Integer goldYield;
 
 	public RoleResourceYideldDTO(){
 
@@ -57,10 +57,10 @@ public class RoleResourceYideldDTO {
 
 	public RoleResourceYideldDTO(Integer rid){
 		this.rid = rid;
-		this.wood_yield = 0;
-		this.iron_yield = 0;
-		this.stone_yield = 0;
-		this.grain_yield = 0;
-		this.gold_yield = 0;
+		this.woodYield = 0;
+		this.ironYield = 0;
+		this.stoneYield = 0;
+		this.grainYield = 0;
+		this.goldYield = 0;
 	}
 }

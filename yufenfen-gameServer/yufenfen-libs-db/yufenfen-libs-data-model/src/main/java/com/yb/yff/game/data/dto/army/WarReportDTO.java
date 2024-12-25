@@ -1,10 +1,6 @@
 package com.yb.yff.game.data.dto.army;
 
-import com.yb.yff.game.data.dto.general.GeneralDTO;
 import lombok.Data;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.
@@ -32,62 +28,62 @@ public class WarReportDTO {
 	/**
 	 * 攻击方id
 	 */
-	private Integer a_rid;
+	private Integer aRid;
 
 	/**
 	 * 防守方id,0为系统npc
 	 */
-	private Integer d_rid;
+	private Integer dRid;
 
 	/**
 	 * 攻击方战报是否已阅 0:未阅 1:已阅
 	 */
-	private Boolean a_is_read;
+	private Boolean aIsRead;
 
 	/**
 	 * 攻击方战报是否已阅 0:未阅 1:已阅
 	 */
-	private Boolean d_is_read;
+	private Boolean dIsRead;
 
 	/**
 	 * 开始攻击方军队
 	 */
-	private String b_a_army;
+	private String bAArmy;
 
 	/**
 	 * 开始防守方军队
 	 */
-	private String b_d_army;
+	private String bDArmy;
 
 	/**
 	 * 开始攻击方将领
 	 */
-	private String b_a_general;
+	private String bAGeneral;
 
 	/**
 	 * 开始防守方将领
 	 */
-	private String b_d_general;
+	private String bDGeneral;
 
 	/**
 	 * 结束攻击方军队
 	 */
-	private String e_a_army;
+	private String eAArmy;
 
 	/**
 	 * 结束防守方军队
 	 */
-	private String e_d_army;
+	private String eDArmy;
 
 	/**
 	 * 结束攻击方将领
 	 */
-	private String e_a_general;
+	private String eAGeneral;
 
 	/**
 	 * 结束防守方将领
 	 */
-	private String e_d_general;
+	private String eDGeneral;
 
 	/**
 	 * 是否攻占 0:否 1:是

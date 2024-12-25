@@ -38,7 +38,7 @@ public class CityFacilityLogicImpl implements ICityFacilityLogic {
 	public boolean updataFacility(UpFacilityTaskTCTP upFParam) {
 		FacilityDTO facilityDTO = cityFacilityMgrImpl.getFacility(upFParam.getRid(),  upFParam.getCityId(), upFParam.getFType());
 		facilityDTO.setLevel(upFParam.getFacilityPropertyLevel().getLevel());
-		facilityDTO.setUp_time(0);
+		facilityDTO.setUpTime(0);
 
 		return cityFacilityMgrImpl.updateFacilities2DB(upFParam.getRid(),  upFParam.getCityId());
 	}

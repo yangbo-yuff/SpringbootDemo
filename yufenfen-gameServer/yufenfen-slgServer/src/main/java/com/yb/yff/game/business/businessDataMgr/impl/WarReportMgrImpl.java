@@ -1,7 +1,5 @@
 package com.yb.yff.game.business.businessDataMgr.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.yb.yff.game.business.businessDataMgr.IJsonDataHandler;
 import com.yb.yff.game.business.businessLogic.impl.base.BusinessDataSyncImpl;
 import com.yb.yff.game.data.dto.army.WarReportDTO;
@@ -57,7 +55,7 @@ public class WarReportMgrImpl implements IJsonDataHandler {
 	}
 
 	/**
-	 * 获取未读战报
+	 * 获取最近战报
 	 *
 	 * @param rid
 	 * @param lastNum
@@ -69,7 +67,7 @@ public class WarReportMgrImpl implements IJsonDataHandler {
 
 		try {
 			List<WarReportEntity> entityList = ((WarReportMapper)warReportService.getBaseMapper())
-					.selectWarReportUR(rid,lastNum);;
+					.selectWarReport(rid,lastNum);
 
 			entityList.forEach(entity -> {
 				WarReportDTO dto = wartReportEntity2DTO(entity);
@@ -122,21 +120,8 @@ public class WarReportMgrImpl implements IJsonDataHandler {
 		WarReportEntity entity = new WarReportEntity();
 		BeanUtils.copyProperties(warReport, entity);
 
-		entity.setARid(warReport.getA_rid());
-		entity.setDRid(warReport.getD_rid());
-
-		entity.setBAArmy(warReport.getB_a_army());
-		entity.setBDArmy(warReport.getB_d_army());
-		entity.setEAArmy(warReport.getE_a_army());
-		entity.setEDArmy(warReport.getE_d_army());
-
-		entity.setBAGeneral(warReport.getB_a_general());
-		entity.setEDGeneral(warReport.getE_d_general());
-		entity.setBDGeneral(warReport.getB_d_general());
-		entity.setEAGeneral(warReport.getE_a_general());
-
-		entity.setAIsRead(warReport.getA_is_read() ? 1 : 0);
-		entity.setDIsRead(warReport.getD_is_read() ? 1 : 0);
+		entity.setAIsRead(warReport.getAIsRead() ? 1 : 0);
+		entity.setDIsRead(warReport.getDIsRead() ? 1 : 0);
 
 		return entity;
 	}
@@ -145,21 +130,8 @@ public class WarReportMgrImpl implements IJsonDataHandler {
 		WarReportDTO warReport = new WarReportDTO();
 		BeanUtils.copyProperties(entity, warReport);
 
-		warReport.setA_rid(entity.getARid());
-		warReport.setD_rid(entity.getDRid());
-
-		warReport.setB_a_army(entity.getBAArmy());
-		warReport.setB_d_army(entity.getBDArmy());
-		warReport.setE_a_army(entity.getEAArmy());
-		warReport.setE_d_army(entity.getEDArmy());
-
-		warReport.setB_a_general(entity.getBAGeneral());
-		warReport.setE_d_general(entity.getEDGeneral());
-		warReport.setB_d_general(entity.getBDGeneral());
-		warReport.setE_a_general(entity.getEAGeneral());
-
-		warReport.setA_is_read(entity.getAIsRead() == 1 ? true : false);
-		warReport.setD_is_read(entity.getDIsRead() == 1 ? true : false);
+		warReport.setAIsRead(entity.getAIsRead() == 1 ? true : false);
+		warReport.setDIsRead(entity.getDIsRead() == 1 ? true : false);
 
 		return warReport;
 	}

@@ -120,7 +120,7 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 
 		List<ArmyEntity> dbList = armyService.getBaseMapper().selectList(null);
 
-		dbList.stream().forEach(armyEntity -> {
+		dbList.forEach(armyEntity -> {
 			WarArmyDTO armyDTO = armyEntity2ArmyDTO(armyEntity);
 
 			addArmy2Cache(armyDTO);
@@ -185,12 +185,12 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 
 		if (!StringUtil.isNullOrEmpty(armyEntity.getConscriptCnts())) {
 			List<Integer> conscript_cnts = JSONArray.parseArray(armyEntity.getConscriptCnts(), Integer.class);
-			armyDTO.setCon_cnts(conscript_cnts);
+			armyDTO.setConCnts(conscript_cnts);
 		}
 
 		if (!StringUtil.isNullOrEmpty(armyEntity.getConscriptTimes())) {
 			List<Integer> conscript_times = JSONArray.parseArray(armyEntity.getConscriptTimes(), Integer.class);
-			armyDTO.setCon_times(conscript_times);
+			armyDTO.setConTimes(conscript_times);
 		}
 
 		return newWarArmy(armyDTO);
@@ -200,11 +200,6 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 	private ArmyEntity armyDTO2ArmyEntity(ArmyDTO armyDTO) {
 		ArmyEntity armyEntity = new ArmyEntity();
 		BeanUtils.copyProperties(armyDTO, armyEntity);
-
-		armyEntity.setFromX(armyDTO.getFrom_x());
-		armyEntity.setFromY(armyDTO.getFrom_y());
-		armyEntity.setToX(armyDTO.getTo_x());
-		armyEntity.setToY(armyDTO.getTo_y());
 
 		if (armyDTO.getGenerals() != null) {
 			String generalStr = JSONArray.toJSONString(armyDTO.getGenerals());
@@ -216,13 +211,13 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 			armyEntity.setSoldiers(soldierStr);
 		}
 
-		if (armyDTO.getCon_cnts() != null) {
-			String conCntsStr = JSONArray.toJSONString(armyDTO.getCon_cnts());
+		if (armyDTO.getConCnts() != null) {
+			String conCntsStr = JSONArray.toJSONString(armyDTO.getConCnts());
 			armyEntity.setConscriptCnts(conCntsStr);
 		}
 
-		if (armyDTO.getCon_times() != null) {
-			String conTimeStr = JSONArray.toJSONString(armyDTO.getCon_times());
+		if (armyDTO.getConTimes() != null) {
+			String conTimeStr = JSONArray.toJSONString(armyDTO.getConTimes());
 			armyEntity.setConscriptTimes(conTimeStr);
 		}
 
@@ -418,7 +413,7 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 	 * @return
 	 */
 	public void add2StopInPosArmyMap(WarArmyDTO army) {
-		Integer posId = CityPositionUtils.position2Number(army.getArmy().getTo_x(), army.getArmy().getTo_y());
+		Integer posId = CityPositionUtils.position2Number(army.getArmy().getToX(), army.getArmy().getToY());
 		stopInPosArmyMap.computeIfAbsent(posId, k -> new ArrayList<>()).add(army);
 	}
 
@@ -608,9 +603,9 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 
 	public void clearConscript(ArmyDTO army) {
 		if (army.getCmd() == ArmyCmd.ArmyCmdConscript.getValue()) {
-			for (int i = 0; i < army.getCon_cnts().size(); i++) {
-				army.getCon_cnts().set(i, 0);
-				army.getCon_times().set(i, 0);
+			for (int i = 0; i < army.getConCnts().size(); i++) {
+				army.getConCnts().set(i, 0);
+				army.getConTimes().set(i, 0);
 			}
 			army.setCmd(ArmyCmd.ArmyCmdIdle.getValue());
 		}
@@ -632,8 +627,8 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 		armyDTO.setSoldiers(soldiers);
 
 		Integer[] array = {0, 0, 0};
-		armyDTO.setCon_cnts(Arrays.asList(array));
-		armyDTO.setCon_times(Arrays.asList(array));
+		armyDTO.setConCnts(Arrays.asList(array));
+		armyDTO.setConTimes(Arrays.asList(array));
 
 		CityDTO city = cityMgr.getCity(cid);
 		if (city != null) {
@@ -684,7 +679,7 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 			if (general == null) {
 				continue;
 			}
-			if (general.getPhysical_power() < cost) {
+			if (general.getPhysicalPower() < cost) {
 				return false;
 			}
 		}
@@ -703,7 +698,7 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 			if (general == null) {
 				continue;
 			}
-			general.setPhysical_power(general.getPhysical_power() - cost);
+			general.setPhysicalPower(general.getPhysicalPower() - cost);
 		}
 
 		// TODO 更新 DB
@@ -726,7 +721,7 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 				continue;
 			}
 			GeneralList generalConfig = jsonConfigMgr.getGeneralConfig().getGeneralMap().get(general.getCfgId());
-			Integer gSpeed = generalConfig.getSpeed() + generalConfig.getSpeed_grow() * general.getSpeed_added();
+			Integer gSpeed = generalConfig.getSpeed() + generalConfig.getSpeed_grow() * general.getSpeedAdded();
 			// 找出最慢的将领
 			if (gSpeed < speed) {
 				speed = gSpeed;
@@ -765,9 +760,9 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 		}
 
 		for (WarArmyDTO army : armys) {
-			if (PositionUtils.equalsPosition(army.getArmy().getFrom_x(), army.getArmy().getFrom_y(), position) ||
+			if (PositionUtils.equalsPosition(army.getArmy().getFromX(), army.getArmy().getFromY(), position) ||
 					(army.getArmy().getCmd() == ArmyCmd.ArmyCmdTransfer.getValue() &&
-							PositionUtils.equalsPosition(army.getArmy().getTo_x(), army.getArmy().getTo_y(), position))) {
+							PositionUtils.equalsPosition(army.getArmy().getToX(), army.getArmy().getToY(), position))) {
 				cnt += 1;
 			}
 		}
@@ -805,9 +800,9 @@ public class ArmyMgrImpl implements IJsonDataHandler {
 		Double rate = (passTime.doubleValue() / diffTime);
 		PositionDTO curPos;
 		if (army.getCmd() == ArmyCmd.ArmyCmdBack.getValue()) {
-			curPos = PositionUtils.ratePosition(army.getFrom_x(), army.getFrom_y(), army.getTo_x(), army.getTo_y(), rate);
+			curPos = PositionUtils.ratePosition(army.getFromX(), army.getFromY(), army.getToX(), army.getToY(), rate);
 		} else {
-			curPos = PositionUtils.ratePosition(army.getTo_x(), army.getTo_y(), army.getFrom_x(), army.getFrom_y(), rate);
+			curPos = PositionUtils.ratePosition(army.getToX(), army.getToY(), army.getFromX(), army.getFromY(), rate);
 		}
 
 		curPos.setX(Math.min(Math.max(curPos.getX(), 0), CityPositionUtils.MapWidth));

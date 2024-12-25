@@ -30,7 +30,7 @@ public class FacilityPropertyDTO {
 	private Integer type;
 	private List<FacilityPropertyConditionDTO> conditions;
 	private List<FacilityPropertyLevel> levels;
-	private List<FacilityPropertyAdditionDTO> addition_details;
+	private List<FacilityPropertyAdditionDTO> additionDetails;
 	/**
 	 * Key: FacilityPropertyLevel.level
 	 */

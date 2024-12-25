@@ -90,7 +90,7 @@ public class RoleDataMgrImpl implements IJsonDataHandler {
 			return;
 		}
 
-		dbList.stream().forEach(roleEntity -> {
+		dbList.forEach(roleEntity -> {
 			// 插入缓存
 			updateRoleCache(roleEntity);
 		});
@@ -101,7 +101,7 @@ public class RoleDataMgrImpl implements IJsonDataHandler {
 		BeanUtils.copyProperties(role, roleResourceData);
 		roleResourceData.setRid(role.getRid());
 
-		roleResourceData.setDepot_capacity(getRoleConfig().getDepot_capacity());
+		roleResourceData.setDepotCapacity(getRoleConfig().getDepot_capacity());
 
 		updateResourceYield(roleResourceData);
 
@@ -122,11 +122,11 @@ public class RoleDataMgrImpl implements IJsonDataHandler {
 		BasicRole basicRoleConfig = getRoleConfig();
 
 		// 合计 产量
-		roleResourceData.setIron_yield(roleBuildYideld.getIron_yield() + basicRoleConfig.getIron_yield());
-		roleResourceData.setWood_yield(roleBuildYideld.getWood_yield() + basicRoleConfig.getWood_yield());
-		roleResourceData.setGrain_yield(roleBuildYideld.getGrain_yield() + basicRoleConfig.getGrain_yield());
-		roleResourceData.setStone_yield(roleBuildYideld.getStone_yield() + basicRoleConfig.getStone_yield());
-		roleResourceData.setGold_yield(roleBuildYideld.getGold_yield() + basicRoleConfig.getGold_yield());
+		roleResourceData.setIronYield(roleBuildYideld.getIronYield() + basicRoleConfig.getIron_yield());
+		roleResourceData.setWoodYield(roleBuildYideld.getWoodYield() + basicRoleConfig.getWood_yield());
+		roleResourceData.setGrainYield(roleBuildYideld.getGrainYield() + basicRoleConfig.getGrain_yield());
+		roleResourceData.setStoneYield(roleBuildYideld.getStoneYield() + basicRoleConfig.getStone_yield());
+		roleResourceData.setGoldYield(roleBuildYideld.getGoldYield() + basicRoleConfig.getGold_yield());
 	}
 
 	/**
@@ -251,30 +251,30 @@ public class RoleDataMgrImpl implements IJsonDataHandler {
 	 */
 	public void productResourceByYield(Integer multiple) {
 		roleResourceMap.forEach((rid, roleResource) -> {
-			Integer capacity = roleResource.getDepot_capacity();
+			Integer capacity = roleResource.getDepotCapacity();
 
 			if (roleResource.getGold() < capacity) {
-				Integer curGold = roleResource.getGold() + roleResource.getGold_yield() * multiple;
+				Integer curGold = roleResource.getGold() + roleResource.getGoldYield() * multiple;
 				roleResource.setGold(curGold > capacity ? capacity : curGold);
 			}
 
 			if (roleResource.getGrain() < capacity) {
-				Integer curGrain = roleResource.getGrain() + roleResource.getGrain_yield() * multiple;
+				Integer curGrain = roleResource.getGrain() + roleResource.getGrainYield() * multiple;
 				roleResource.setGrain(curGrain > capacity ? capacity : curGrain);
 			}
 
 			if (roleResource.getIron() < capacity) {
-				Integer curIron = roleResource.getIron() + roleResource.getIron_yield() * multiple;
+				Integer curIron = roleResource.getIron() + roleResource.getIronYield() * multiple;
 				roleResource.setIron(curIron > capacity ? capacity : curIron);
 			}
 
 			if (roleResource.getStone() < capacity) {
-				Integer curStone = roleResource.getStone() + roleResource.getStone_yield() * multiple;
+				Integer curStone = roleResource.getStone() + roleResource.getStoneYield() * multiple;
 				roleResource.setStone(curStone > capacity ? capacity : curStone);
 			}
 
 			if (roleResource.getWood() < capacity) {
-				Integer curWood = roleResource.getWood() + roleResource.getWood_yield() * multiple;
+				Integer curWood = roleResource.getWood() + roleResource.getWoodYield() * multiple;
 				roleResource.setWood(curWood > capacity ? capacity : curWood);
 			}
 

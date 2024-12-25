@@ -21,7 +21,7 @@ import lombok.Data;
  */
 @Data
 public class BuildDTO extends MapCellDTO {
-	private Integer parent_id;
-	private Integer union_id;
-	private String union_name;
+	private Integer parentId;
+	private Integer unionId;
+	private String unionName;
 }

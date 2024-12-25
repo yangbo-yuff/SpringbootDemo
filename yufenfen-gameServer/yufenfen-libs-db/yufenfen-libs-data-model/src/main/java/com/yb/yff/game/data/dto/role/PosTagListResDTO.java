@@ -23,5 +23,5 @@ import java.util.List;
  */
 @Data
 public class PosTagListResDTO extends GameBusinessResBaseDTO {
- private List<PosTagDTO> pos_tags;
+ private List<PosTagDTO> posTags;
 }

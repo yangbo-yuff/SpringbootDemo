@@ -41,9 +41,6 @@ public class RoleResDTO extends GameBusinessResBaseDTO {
 	 */
 	private Integer sex;
 
-	/**
-	 * nick_name
-	 */
 	private String nickName;
 
 	/**

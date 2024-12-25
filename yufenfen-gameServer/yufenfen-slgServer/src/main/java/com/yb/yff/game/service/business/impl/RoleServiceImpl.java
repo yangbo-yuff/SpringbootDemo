@@ -157,7 +157,7 @@ public class RoleServiceImpl extends BusinessServiceImpl {
 			return posTagListResDTO;
 		}
 
-		posTagListResDTO.setPos_tags(roleLogic.getRolePosTags(reqDTO.getRid()));
+		posTagListResDTO.setPosTags(roleLogic.getRolePosTags(reqDTO.getRid()));
 
 		posTagListResDTO.setCode(NetResponseCodeConstants.SUCCESS.getCode());
 		return posTagListResDTO;
@@ -248,7 +248,7 @@ public class RoleServiceImpl extends BusinessServiceImpl {
 
 		// 资源
 		RoleResourceData roleResourceDTO = roleLogic.getRoleResource(rid);
-		myPropertyResDTO.setRole_res(roleResourceDTO);
+		myPropertyResDTO.setRoleRes(roleResourceDTO);
 
 		myPropertyResDTO.setCode(NetResponseCodeConstants.SUCCESS.getCode());
 
@@ -272,7 +272,7 @@ public class RoleServiceImpl extends BusinessServiceImpl {
 		MyPropertyResDTO myPropertyResDTO = new MyPropertyResDTO();
 
 		// 资源
-		myPropertyResDTO.setMr_builds(buildMgr.getRoleBuildDTOs(rid));
+		myPropertyResDTO.setMrBuilds(buildMgr.getRoleBuildDTOs(rid));
 
 		myPropertyResDTO.setCode(NetResponseCodeConstants.SUCCESS.getCode());
 

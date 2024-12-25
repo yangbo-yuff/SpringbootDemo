@@ -25,14 +25,14 @@ public class UnionApplyDTO {
 	private Integer unionId;
 	private Integer rid;
 	private Integer state;
-	private String nick_name;
+	private String nickName;
 
 	public UnionApplyDTO(){}
 
-	public UnionApplyDTO(Integer rid, Integer unionId, String nick_name) {
+	public UnionApplyDTO(Integer rid, Integer unionId, String nickName) {
 		this.unionId = unionId;
 		this.rid = rid;
-		this.nick_name = nick_name;
+		this.nickName = nickName;
 		this.state = UnionApplyState.UnionUntreated.getValue();
 	}
 }

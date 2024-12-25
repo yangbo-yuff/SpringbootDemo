@@ -148,7 +148,7 @@ class ArmyCmdLogic {
 		} else if (army.getCmd().equals(ArmyCmd.ArmyCmdIdle.getValue())) {
 			CityDTO city = cityMgr.getCity(army.getCityId());
 
-			if (PositionUtils.equalsPosition(army.getFrom_x(), army.getFrom_y(), city.getX(), city.getY())) {
+			if (PositionUtils.equalsPosition(army.getFromX(), army.getFromY(), city.getX(), city.getY())) {
 				armyRetreat(warArmy);
 			}
 		}
@@ -238,7 +238,7 @@ class ArmyCmdLogic {
 			return code;
 		}
 
-		if (PositionUtils.equalsPosition(army.getFrom_x(), army.getFrom_y(), assignDTO.getX(), assignDTO.getY())) {
+		if (PositionUtils.equalsPosition(army.getFromX(), army.getFromY(), assignDTO.getX(), assignDTO.getY())) {
 			return NetResponseCodeConstants.CanNotTransfer;
 		}
 
@@ -304,8 +304,8 @@ class ArmyCmdLogic {
 	private void clearConscript(ArmyDTO army) {
 		if (army.getCmd().equals(ArmyCmd.ArmyCmdConscript.getValue())) {
 			List<Integer> initVals = List.of(0, 0, 0);
-			army.setCon_cnts(initVals);
-			army.setCon_times(initVals);
+			army.setConCnts(initVals);
+			army.setConTimes(initVals);
 			army.setCmd(ArmyCmd.ArmyCmdIdle.getValue());
 		}
 	}
@@ -386,7 +386,7 @@ class ArmyCmdLogic {
 			army.setEnd(System.currentTimeMillis() / 1000 + 40);
 		} else {
 			Integer speed = armyMgr.countSpeed(army);
-			Integer t = mapPositionLogic.travelTime(speed, army.getFrom_x(), army.getFrom_y(), assignDTO.getX(), assignDTO.getY());
+			Integer t = mapPositionLogic.travelTime(speed, army.getFromX(), army.getFromY(), assignDTO.getX(), assignDTO.getY());
 			army.setStart(System.currentTimeMillis() / 1000);
 			army.setEnd(System.currentTimeMillis() / 1000 + t);
 		}
@@ -419,7 +419,7 @@ class ArmyCmdLogic {
 				break;
 			case ArmyCmdBack:
 
-				if (PositionUtils.equalsPosition(army.getFrom_x(), army.getFrom_y(), army.getTo_x(), army.getTo_y())) {
+				if (PositionUtils.equalsPosition(army.getFromX(), army.getFromY(), army.getToX(), army.getToY())) {
 					//处理调动到其他地方待命的情况，回归属的城池
 					CityDTO city = cityMgr.getCity(army.getCityId());
 					if (city != null) {
@@ -433,7 +433,7 @@ class ArmyCmdLogic {
 							Integer speed = armyMgr.countSpeed(army);
 //						PositionDTO from = new PositionDTO(army.getFrom_x(), army.getFrom_y());
 //						PositionDTO to = new PositionDTO(army.getTo_x(), army.getTo_y());
-							Integer t = mapPositionLogic.travelTime(speed, army.getFrom_x(), army.getFrom_y(), army.getTo_x(), army.getTo_y());
+							Integer t = mapPositionLogic.travelTime(speed, army.getFromX(), army.getFromY(), army.getToX(), army.getToY());
 							army.setStart(System.currentTimeMillis() / 1000);
 							army.setEnd(System.currentTimeMillis() / 1000 + t);
 						}
@@ -492,7 +492,7 @@ class ArmyCmdLogic {
 		ArmyDTO army = warArmy.getArmy();
 		armyLogic.checkSyncCell(warArmy);
 		if (army.getCmd().equals(ArmyCmd.ArmyCmdBack.getValue())) {
-			List<WarArmyDTO> posArmys = armyMgr.getStopInPosArmyMap(new PositionDTO(army.getTo_x(), army.getTo_y()));
+			List<WarArmyDTO> posArmys = armyMgr.getStopInPosArmyMap(new PositionDTO(army.getToX(), army.getToY()));
 			if (posArmys.size() > 0) {
 				posArmys.remove(army.getId());
 			}
@@ -516,9 +516,9 @@ class ArmyCmdLogic {
 
 		switch (EnumUtils.fromValue(ArmyCmd.class, army.getCmd())) {
 			case ArmyCmdAttack:
-				if (!mapPositionLogic.isCanArrive(army.getRid(), army.getTo_x(), army.getTo_y()) ||
-						mapPositionLogic.isWarFree(army.getTo_x(), army.getTo_y()) ||
-						mapPositionLogic.isCanDefend(army.getRid(), army.getTo_x(), army.getTo_y())) {
+				if (!mapPositionLogic.isCanArrive(army.getRid(), army.getToX(), army.getToY()) ||
+						mapPositionLogic.isWarFree(army.getToX(), army.getToY()) ||
+						mapPositionLogic.isCanDefend(army.getRid(), army.getToX(), army.getToY())) {
 					WarReportDTO emptyWar = armyWarLogic.newEmptyWar(warArmy);
 					warReportDataPusher.syncExecute(null, emptyWar);
 				} else {
@@ -528,7 +528,7 @@ class ArmyCmdLogic {
 				break;
 			case ArmyCmdDefend:
 				//呆在哪里不动
-				if (mapPositionLogic.isCanDefend(army.getRid(), army.getTo_x(), army.getTo_y())) {
+				if (mapPositionLogic.isCanDefend(army.getRid(), army.getToX(), army.getToY())) {
 					//目前是自己的领地才能驻守
 					army.setState(ArmyState.ArmyStop.getValue());
 					armyMgr.add2StopInPosArmyMap(warArmy);
@@ -542,7 +542,7 @@ class ArmyCmdLogic {
 				break;
 			case ArmyCmdReclamation:
 				if (army.getState().equals(ArmyState.ArmyRunning.getValue())) {
-					if (nationMapLogic.buildIsRId(army.getRid(), army.getTo_x(), army.getTo_y())) {
+					if (nationMapLogic.buildIsRId(army.getRid(), army.getToX(), army.getToY())) {
 						//目前是自己的领地才能屯田
 						armyMgr.add2StopInPosArmyMap(warArmy);
 						army.setState(ArmyState.ArmyStop.getValue());
@@ -559,7 +559,7 @@ class ArmyCmdLogic {
 					//增加场量
 					RoleResourceData rr = roleDataManager.getRoleResourceData(army.getRid());
 					if (rr != null) {
-						MapBuildDTO b = buildMgr.getPositionBuild(army.getTo_x(), army.getTo_y());
+						MapBuildDTO b = buildMgr.getPositionBuild(army.getToX(), army.getToY());
 						if (b != null) {
 							rr.setStone(rr.getStone() + b.getStone());
 							rr.setIron(rr.getIron() + b.getIron());
@@ -574,17 +574,17 @@ class ArmyCmdLogic {
 			case ArmyCmdBack:
 				army.setState(ArmyState.ArmyStop.getValue());
 				army.setCmd(ArmyCmd.ArmyCmdIdle.getValue());
-				army.setTo(army.getFrom_x(), army.getFrom_y());
+				army.setTo(army.getFromX(), army.getFromY());
 				updateArmys(warArmy);
 				break;
 			case ArmyCmdTransfer:
 				//调动到位置了
 				if (army.getState().equals(ArmyState.ArmyRunning.getValue())) {
 
-					if (!nationMapLogic.buildIsRId(army.getRid(), army.getTo_x(), army.getTo_y())) {
+					if (!nationMapLogic.buildIsRId(army.getRid(), army.getToX(), army.getToY())) {
 						armyLogic.armyBack(warArmy);
 					} else {
-						MapBuildDTO b = buildMgr.getPositionBuild(army.getTo_x(), army.getTo_y());
+						MapBuildDTO b = buildMgr.getPositionBuild(army.getToX(), army.getToY());
 						if (buildMgr.isHasTransferAuth(b)) {
 							army.setState(ArmyState.ArmyStop.getValue());
 							army.setCmd(ArmyCmd.ArmyCmdIdle.getValue());

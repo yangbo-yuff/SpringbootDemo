@@ -99,7 +99,7 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 	 */
 	private void addGenerals2Cache(List<GeneralEntity> generalEntities) {
 
-		generalEntities.stream().forEach(generalEntity -> {
+		generalEntities.forEach(generalEntity -> {
 			GeneralDTO general = generalEntity2DTO(generalEntity);
 
 			addGeneral2Cache(general);
@@ -310,7 +310,7 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 		}
 
 		List<GeneralDTO> newGenerals = new ArrayList<>();
-		generalEntities.stream().forEach(generalEntity -> {
+		generalEntities.forEach(generalEntity -> {
 			GeneralDTO general = generalEntity2DTO(generalEntity);
 			addGeneral2Cache(general);
 			newGenerals.add(general);
@@ -334,7 +334,7 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 		Integer cfgId = general.getCfgId();
 		GeneralList generalConfig = jsonConfigMgr.getGeneralConfig(cfgId);
 
-		return generalConfig.getDestroy() + generalConfig.getDestroy_grow() * general.getLevel() + general.getDestroy_added();
+		return generalConfig.getDestroy() + generalConfig.getDestroy_grow() * general.getLevel() + general.getDestroyAdded();
 	}
 
 	public Integer getSpeed(GeneralDTO general) {
@@ -344,7 +344,7 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 
 		GeneralList generalConfig = jsonConfigMgr.getGeneralConfig(general.getCfgId());
 
-		return generalConfig.getSpeed() + generalConfig.getSpeed_grow() * general.getLevel() + general.getSpeed_added();
+		return generalConfig.getSpeed() + generalConfig.getSpeed_grow() * general.getLevel() + general.getSpeedAdded();
 	}
 
 	public Integer getForce(GeneralDTO general) {
@@ -354,7 +354,7 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 
 		GeneralList generalConfig = jsonConfigMgr.getGeneralConfig(general.getCfgId());
 
-		return generalConfig.getForce() + generalConfig.getForce_grow() * general.getLevel() + general.getForce_added();
+		return generalConfig.getForce() + generalConfig.getForce_grow() * general.getLevel() + general.getForceAdded();
 	}
 
 	public Integer getDefense(GeneralDTO general) {
@@ -365,7 +365,7 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 		GeneralList generalConfig = jsonConfigMgr.getGeneralConfig(general.getCfgId());
 
 		return generalConfig.getDefense() + generalConfig.getDefense_grow() * general.getLevel()
-				+ general.getDefense_added();
+				+ general.getDefenseAdded();
 	}
 
 	public Integer getStrategy(GeneralDTO general) {
@@ -376,7 +376,7 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 		GeneralList generalConfig = jsonConfigMgr.getGeneralConfig(general.getCfgId());
 
 		return generalConfig.getStrategy() + generalConfig.getStrategy_grow() * general.getLevel()
-				+ general.getStrategy_added();
+				+ general.getStrategyAdded();
 	}
 
 	//获取阵营
@@ -402,22 +402,22 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 
 		allValue.add(general.getId());
 		allValue.add(general.getCfgId());
-		allValue.add(general.getPhysical_power());
+		allValue.add(general.getPhysicalPower());
 		allValue.add(general.getOrder());
 		allValue.add(general.getLevel());
 		allValue.add(general.getExp());
 		allValue.add(general.getCfgId());
-		allValue.add(general.getCurArms());
+		allValue.add(general.getArms());
 		allValue.add(general.getHasPrPoint());
 		allValue.add(general.getUsePrPoint());
-		allValue.add(general.getAttack_distance());
-		allValue.add(general.getForce_added());
-		allValue.add(general.getStrategy_added());
-		allValue.add(general.getSpeed_added());
-		allValue.add(general.getDefense_added());
-		allValue.add(general.getDestroy_added());
-		allValue.add(general.getStar_lv());
-		allValue.add(general.getStar_lv());
+		allValue.add(general.getAttackDistance());
+		allValue.add(general.getForceAdded());
+		allValue.add(general.getStrategyAdded());
+		allValue.add(general.getSpeedAdded());
+		allValue.add(general.getDefenseAdded());
+		allValue.add(general.getDestroyAdded());
+		allValue.add(general.getStarLv());
+		allValue.add(general.getStar());
 
 		return allValue;
 	}
@@ -432,7 +432,7 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 	private List<GeneralEntity> createNewGeneralByConfig(Integer rid, Integer cityId, List<Integer> cfgIdList) {
 		List<GeneralEntity> generalEntities = new ArrayList<>();
 
-		cfgIdList.stream().forEach(cfgId -> {
+		cfgIdList.forEach(cfgId -> {
 			GeneralList generalConfig = jsonConfigMgr.getGeneralConfig(cfgId);
 			GeneralEntity generalEntity = generalConfig2Entity(rid, cityId, generalConfig);
 
@@ -451,16 +451,6 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 	private GeneralDTO generalEntity2DTO(GeneralEntity generalEntity) {
 		GeneralDTO generalDTO = new GeneralDTO();
 		BeanUtils.copyProperties(generalEntity, generalDTO);
-
-		generalDTO.setAttack_distance(generalEntity.getAttackDistance());
-		generalDTO.setDefense_added(generalEntity.getDefenseAdded());
-		generalDTO.setDestroy_added(generalEntity.getDestroyAdded());
-		generalDTO.setForce_added(generalEntity.getForceAdded());
-		generalDTO.setPhysical_power(generalEntity.getPhysicalPower());
-		generalDTO.setSpeed_added(generalEntity.getSpeedAdded());
-		generalDTO.setStar_lv(generalEntity.getStarLv());
-		generalDTO.setStrategy_added(generalEntity.getStrategyAdded());
-		generalDTO.setCurArms(generalEntity.getArms());
 
 		if (!StringUtil.isNullOrEmpty(generalEntity.getSkills())) {
 			List<SkillLevelDTO> generals = JSONArray.parseArray(generalEntity.getSkills(), SkillLevelDTO.class);
@@ -482,15 +472,6 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 
 		GeneralEntity generalEntity = new GeneralEntity();
 		BeanUtils.copyProperties(generalDTO, generalEntity);
-
-		generalEntity.setAttackDistance(generalDTO.getAttack_distance());
-		generalEntity.setDefenseAdded(generalDTO.getDefense_added());
-		generalEntity.setDestroyAdded(generalDTO.getDestroy_added());
-		generalEntity.setForceAdded(generalDTO.getForce_added());
-		generalEntity.setPhysicalPower(generalDTO.getPhysical_power());
-		generalEntity.setSpeedAdded(generalDTO.getSpeed_added());
-		generalEntity.setStarLv(generalDTO.getStar_lv());
-		generalEntity.setStrategyAdded(generalDTO.getStrategy_added());
 
 		String skillStr = JSONArray.toJSONString(generalDTO.getSkills());
 
@@ -547,13 +528,13 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 
 		GeneralDTO generalDTO = new GeneralDTO();
 
-		generalDTO.setPhysical_power(jsonConfigMgr.getBasicConfig().getGeneral().getPhysical_power_limit());
+		generalDTO.setPhysicalPower(jsonConfigMgr.getBasicConfig().getGeneral().getPhysical_power_limit());
 		generalDTO.setRid(rid);
 		generalDTO.setCityId(cid);
 		generalDTO.setCfgId(generalConfig.getCfgId());
 		generalDTO.setOrder(0);
 		generalDTO.setLevel(1); // 默认1级
-		generalDTO.setCurArms(generalConfig.getArms().get(0)); // 默认选第一个
+		generalDTO.setArms(generalConfig.getArms().get(0)); // 默认选第一个
 		generalDTO.setHasPrPoint(0);
 		generalDTO.setUsePrPoint(0);
 		generalDTO.setStar(generalConfig.getStar());
@@ -562,14 +543,14 @@ public class GeneralMgrImpl implements IJsonDataHandler {
 		generalDTO.setState(GeneralState.GeneralNormal.getValue());
 
 		generalDTO.setExp(0);
-		generalDTO.setAttack_distance(0);
-		generalDTO.setDefense_added(0);
-		generalDTO.setDestroy_added(0);
-		generalDTO.setForce_added(0);
-		generalDTO.setPhysical_power(0);
-		generalDTO.setSpeed_added(0);
-		generalDTO.setStar_lv(0);
-		generalDTO.setStrategy_added(0);
+		generalDTO.setAttackDistance(0);
+		generalDTO.setDefenseAdded(0);
+		generalDTO.setDestroyAdded(0);
+		generalDTO.setForceAdded(0);
+		generalDTO.setPhysicalPower(0);
+		generalDTO.setSpeedAdded(0);
+		generalDTO.setStarLv(0);
+		generalDTO.setStrategyAdded(0);
 
 		return generalDTO;
 	}

@@ -615,8 +615,8 @@ public class UnionLogicImpl extends BusinessDataSyncImpl<UnionApplyDTO> implemen
 		}
 
 		citys.forEach(city -> {
-			city.setUnion_id(union.getId());
-			city.setUnion_name(union.getName());
+			city.setUnionId(union.getId());
+			city.setUnionName(union.getName());
 			cityPusher.syncExecute(rid, city);
 		});
 	}

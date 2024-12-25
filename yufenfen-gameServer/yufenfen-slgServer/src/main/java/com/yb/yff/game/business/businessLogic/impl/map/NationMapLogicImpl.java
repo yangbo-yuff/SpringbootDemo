@@ -4,7 +4,6 @@ import com.yb.yff.game.business.businessDataMgr.JsonConfigMgr;
 import com.yb.yff.game.business.businessDataMgr.impl.BuildMgrImpl;
 import com.yb.yff.game.business.businessDataMgr.impl.CityMgrImpl;
 import com.yb.yff.game.business.businessDataMgr.impl.RoleDataMgrImpl;
-import com.yb.yff.game.business.businessDataMgr.impl.UnionMgrImpl;
 import com.yb.yff.game.business.businessLogic.IArmyLogic;
 import com.yb.yff.game.business.businessLogic.INationMapLogic;
 import com.yb.yff.game.business.businessLogic.IRoleLogic;
@@ -195,11 +194,11 @@ public class NationMapLogicImpl extends BusinessDataSyncImpl<MapBuildDTO> implem
 			return NetResponseCodeConstants.BuildWarFree;
 		}
 
-		if (b.getGiveUp_time() != null && b.getGiveUp_time() > 0) {
+		if (b.getGiveUpTime() != null && b.getGiveUpTime() > 0) {
 			return NetResponseCodeConstants.BuildGiveUpAlready;
 		}
 		Long giveupTime = System.currentTimeMillis() + buildConfig.getGiveUp_time() * 1000;
-		b.setGiveUp_time(giveupTime);
+		b.setGiveUpTime(giveupTime);
 
 		syncExecute(b.getRid(), b);
 
@@ -318,12 +317,12 @@ public class NationMapLogicImpl extends BusinessDataSyncImpl<MapBuildDTO> implem
 
 		Long endTime = System.currentTimeMillis() + cfg.getTime() * 1000;
 
-		mapBuildDTO.setEnd_time(endTime);
+		mapBuildDTO.setEndTime(endTime);
 		mapBuildDTO.setOperationType(BuildingOperationType.BUILD_DEL);
 
 		buildMgrImpl.putInOperationBild(mapBuildDTO);
 
-		mapBuildDTO.setOp_level(0);
+		mapBuildDTO.setOpLevel(0);
 
 		syncExecute(mapBuildDTO.getRid(), mapBuildDTO);
 
@@ -416,15 +415,15 @@ public class NationMapLogicImpl extends BusinessDataSyncImpl<MapBuildDTO> implem
 		mapRoleBuild.setType(mbCustomConfigDTO.getType());
 		mapRoleBuild.setName(mbCustomConfigDTO.getName());
 		mapRoleBuild.setLevel(cfg.getLevel() - 1);
-		mapRoleBuild.setOp_level(cfg.getLevel());
-		mapRoleBuild.setGiveUp_time(null);
+		mapRoleBuild.setOpLevel(cfg.getLevel());
+		mapRoleBuild.setGiveUpTime(null);
 
 		mapRoleBuild.setWood(0);
 		mapRoleBuild.setIron(0);
 		mapRoleBuild.setStone(0);
 		mapRoleBuild.setGrain(0);
 		Long endTime = System.currentTimeMillis() + cfg.getTime() * 1000;
-		mapRoleBuild.setEnd_time(endTime);
+		mapRoleBuild.setEndTime(endTime);
 		mapRoleBuild.setOperationType(operationType);
 
 		buildMgrImpl.putInOperationBild(mapRoleBuild);
@@ -442,7 +441,7 @@ public class NationMapLogicImpl extends BusinessDataSyncImpl<MapBuildDTO> implem
 	@Override
 	public void syncExecute(Integer rid, MapBuildDTO mapBuild) {
 		// 2DB
-		buildMgrImpl.updateBuild2DB(mapBuild);
+		buildMgrImpl.saveOrUpdateBuild2DB(mapBuild);
 
 		pushData(rid, mapBuild);
 	}
