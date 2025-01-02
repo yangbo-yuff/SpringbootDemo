@@ -51,7 +51,7 @@ public class WSServerManagerImpl implements IWSServerManager, IWSEventListener {
 	@Autowired
 	WSServerHandler wsServerHandler;
 
-	@Value("${game.server.check-secret}")
+	@Value("${game.server.check-secret:false}")
 	boolean checkSecret;
 
 	private List<IWSMessageListener> wsMessageListeners = new ArrayList<>();

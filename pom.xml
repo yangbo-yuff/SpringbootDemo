@@ -17,11 +17,18 @@
 		<module>yufenfen-javaAdvanced</module>
 		<module>yufenfen-gameServer</module>
         <module>yufenfen-Utils</module>
+        <module>yufenfen-robot</module>
     </modules>
 
 	<properties>
 		<!-- version -->
 		<yufenfen.version>0.0.1-SNAPSHOT</yufenfen.version>
+
+		<!-- game version -->
+		<mygame.version>0.0.1-GAME</mygame.version>
+
+		<!-- robot version -->
+		<myrobot.version>0.0.1-ROBOT</myrobot.version>
 
 		<!-- boot -->
 		<spring.boot.version>3.2.1</spring.boot.version>
@@ -52,18 +59,18 @@
 	</dependencyManagement>
 
 	<!-- 使用 huawei / aliyun 的 Maven 源，提升下载速度 -->
-	<repositories>
-		<repository>
-			<id>aliyunmaven</id>
-			<name>aliyun</name>
-			<url>https://maven.aliyun.com/repository/public</url>
-		</repository>
-		<repository>
-			<id>huaweicloud</id>
-			<name>huawei</name>
-			<url>https://mirrors.huaweicloud.com/repository/maven/</url>
-		</repository>
-	</repositories>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>aliyunmaven</id>-->
+<!--			<name>aliyun</name>-->
+<!--			<url>https://maven.aliyun.com/repository/public</url>-->
+<!--		</repository>-->
+<!--		<repository>-->
+<!--			<id>huaweicloud</id>-->
+<!--			<name>huawei</name>-->
+<!--			<url>https://mirrors.huaweicloud.com/repository/maven/</url>-->
+<!--		</repository>-->
+<!--	</repositories>-->
 
 	<build>
 		<pluginManagement>

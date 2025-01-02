@@ -24,11 +24,6 @@
         <module>yufenfen-libs-db</module>
     </modules>
 
-    <properties>
-        <!-- version -->
-        <mygame.version>0.0.1-game-init</mygame.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.yb.yff.sb</groupId>
