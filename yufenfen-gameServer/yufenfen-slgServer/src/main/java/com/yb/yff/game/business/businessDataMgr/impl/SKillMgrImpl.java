@@ -2,7 +2,6 @@ package com.yb.yff.game.business.businessDataMgr.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.yb.yff.game.business.businessDataMgr.IJsonDataHandler;
 import com.yb.yff.game.business.businessDataMgr.JsonConfigMgr;
 import com.yb.yff.game.data.dto.LogicTaskResultDTO;

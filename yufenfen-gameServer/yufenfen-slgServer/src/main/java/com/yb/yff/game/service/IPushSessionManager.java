@@ -1,7 +1,5 @@
 package com.yb.yff.game.service;
 
-import com.yb.yff.sb.data.dto.GameMessageResDTO;
-
 /**
  * Copyright (c) 2024 to 2045  YangBo.
  * All rights reserved.

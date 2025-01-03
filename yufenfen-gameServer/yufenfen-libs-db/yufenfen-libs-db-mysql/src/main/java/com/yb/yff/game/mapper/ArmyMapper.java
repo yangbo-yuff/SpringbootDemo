@@ -1,7 +1,7 @@
 package com.yb.yff.game.mapper;
 
-import com.yb.yff.game.data.entity.ArmyEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.yb.yff.game.data.entity.ArmyEntity;
 
 /**
  * <p>

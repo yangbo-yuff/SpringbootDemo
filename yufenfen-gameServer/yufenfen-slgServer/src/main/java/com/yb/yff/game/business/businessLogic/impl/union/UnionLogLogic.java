@@ -9,8 +9,6 @@ import com.yb.yff.game.data.dto.union.UnionApplyDTO;
 import com.yb.yff.game.data.dto.union.UnionDTO;
 import com.yb.yff.game.data.dto.union.UnionLogDTO;
 
-import java.util.Date;
-
 /**
  * Copyright (c) 2024 to 2045  YangBo.
  * All rights reserved.

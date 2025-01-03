@@ -1,7 +1,5 @@
 package com.yb.yff.game.service.DelayedTask;
 
-import com.yb.yff.game.data.dto.army.ArmyDTO;
-
 /**
  * Copyright (c) 2024 to 2045  YangBo.
  * All rights reserved.

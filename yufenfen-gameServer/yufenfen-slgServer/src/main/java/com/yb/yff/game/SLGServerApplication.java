@@ -27,7 +27,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling  // 启用定时任务
 @EnableAsync(proxyTargetClass=true)
 @Slf4j
-@ComponentScan(basePackages = {"com.yb.yff.game", "com.yb.yff.sb", "com.yb.yff.flux"})
+@ComponentScan(basePackages = {"com.yb.yff.game", "com.yb.yff.sb"})
 public class SLGServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SLGServerApplication.class, args);

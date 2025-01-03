@@ -1,9 +1,9 @@
 package com.yb.yff.game.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yb.yff.game.data.entity.CoalitionApplyEntity;
 import com.yb.yff.game.mapper.CoalitionApplyMapper;
 import com.yb.yff.game.service.ICoalitionApplyService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

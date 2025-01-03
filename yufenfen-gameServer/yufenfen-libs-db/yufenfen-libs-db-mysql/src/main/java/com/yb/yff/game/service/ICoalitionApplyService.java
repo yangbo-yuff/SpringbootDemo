@@ -1,7 +1,7 @@
 package com.yb.yff.game.service;
 
-import com.yb.yff.game.data.entity.CoalitionApplyEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yb.yff.game.data.entity.CoalitionApplyEntity;
 
 /**
  * <p>

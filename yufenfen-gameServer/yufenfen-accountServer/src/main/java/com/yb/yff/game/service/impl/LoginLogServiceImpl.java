@@ -6,8 +6,6 @@ import com.yb.yff.game.data.dto.account.LoginDTO;
 import com.yb.yff.game.data.entity.LoginHistoryEntity;
 import com.yb.yff.game.data.entity.LoginLastEntity;
 import com.yb.yff.game.service.ILoginLogService;
-import com.yb.yff.sb.constant.ResponseCode;
-import com.yb.yff.sb.data.dto.ResponseDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

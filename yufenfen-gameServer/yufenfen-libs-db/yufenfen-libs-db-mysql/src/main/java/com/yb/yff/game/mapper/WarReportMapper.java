@@ -1,7 +1,7 @@
 package com.yb.yff.game.mapper;
 
-import com.yb.yff.game.data.entity.WarReportEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.yb.yff.game.data.entity.WarReportEntity;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

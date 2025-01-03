@@ -1,9 +1,9 @@
 package com.yb.yff.game.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yb.yff.game.data.entity.LoginHistoryEntity;
 import com.yb.yff.game.mapper.LoginHistoryMapper;
 import com.yb.yff.game.service.ILoginHistoryService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

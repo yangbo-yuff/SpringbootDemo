@@ -24,7 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @Slf4j
-@ComponentScan(basePackages = {"com.yb.yff.game", "com.yb.yff.sb", "com.yb.yff.flux"})
+@ComponentScan(basePackages = {"com.yb.yff.game", "com.yb.yff.sb"})
 public class GateServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(GateServerApplication.class, args);

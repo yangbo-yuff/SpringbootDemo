@@ -1,6 +1,5 @@
 package com.yb.yff.game.data.bo;
 
-import com.yb.yff.game.data.dto.war.HitDTO;
 import com.yb.yff.game.data.dto.war.WarCamp;
 import com.yb.yff.game.data.dto.war.WarRoundDTO;
 import com.yb.yff.game.data.dto.war.WarRoundIsEndDTO;

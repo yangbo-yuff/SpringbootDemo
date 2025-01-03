@@ -1,7 +1,7 @@
 package com.yb.yff.game.data.dto.union;
 
-import lombok.Data;
 import com.yb.yff.game.data.constant.myEnum.UnionApplyState;
+import lombok.Data;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.

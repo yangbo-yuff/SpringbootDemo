@@ -1,10 +1,10 @@
 package com.yb.yff.game.service.impl;
 
-import com.yb.yff.flux.server.service.IWSMessageListener;
-import com.yb.yff.flux.server.service.IWSServerManager;
 import com.yb.yff.game.service.IWSEventService;
 import com.yb.yff.sb.data.dto.GameMessageEnhancedReqDTO;
 import com.yb.yff.sb.data.dto.GameMessageResDTO;
+import com.yb.yff.sb.flux.server.service.IWSMessageListener;
+import com.yb.yff.sb.flux.server.service.IWSServerManager;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +44,7 @@ public class WSEventServiceImpl implements IWSEventService, IWSMessageListener {
 	 * 由实现者决定行为
 	 * 网关:  转发业务到其它服务器
 	 * 非网关:  执行业务逻辑
+	 *
 	 * @param requestDTO
 	 */
 	@Override
@@ -74,12 +75,13 @@ public class WSEventServiceImpl implements IWSEventService, IWSMessageListener {
 
 	/**
 	 * 向指定客户端发送消息
+	 *
 	 * @param
 	 * @param sessionID
 	 * @param message
 	 */
 	@Override
-	public void sendMessage(String sessionID, String message){
+	public void sendMessage(String sessionID, String message) {
 
 	}
 }

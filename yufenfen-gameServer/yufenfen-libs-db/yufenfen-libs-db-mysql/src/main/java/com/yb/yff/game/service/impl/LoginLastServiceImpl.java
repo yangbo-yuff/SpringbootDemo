@@ -1,9 +1,9 @@
 package com.yb.yff.game.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yb.yff.game.data.entity.LoginLastEntity;
 import com.yb.yff.game.mapper.LoginLastMapper;
 import com.yb.yff.game.service.ILoginLastService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

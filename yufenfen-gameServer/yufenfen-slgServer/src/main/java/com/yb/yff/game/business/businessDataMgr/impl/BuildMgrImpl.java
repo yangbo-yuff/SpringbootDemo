@@ -1,31 +1,32 @@
 package com.yb.yff.game.business.businessDataMgr.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.yb.yff.game.business.businessDataMgr.IJsonDataHandler;
 import com.yb.yff.game.business.businessDataMgr.JsonConfigMgr;
 import com.yb.yff.game.data.constant.EnumUtils;
+import com.yb.yff.game.data.constant.myEnum.BuildType;
 import com.yb.yff.game.data.constant.myEnum.BuildingOperationType;
 import com.yb.yff.game.data.dto.city.BuildDTO;
+import com.yb.yff.game.data.dto.city.NationalMap;
+import com.yb.yff.game.data.dto.city.PositionDTO;
+import com.yb.yff.game.data.dto.nationMap.ConfigDTO;
+import com.yb.yff.game.data.dto.nationMap.MapBuildDTO;
 import com.yb.yff.game.data.dto.role.RoleDTO;
+import com.yb.yff.game.data.dto.role.RoleResourceYideldDTO;
 import com.yb.yff.game.data.dto.union.UnionDTO;
 import com.yb.yff.game.data.entity.MapRoleBuildEntity;
 import com.yb.yff.game.service.IMapRoleBuildService;
 import com.yb.yff.game.service.IMapRoleCityService;
 import com.yb.yff.game.utils.CityPositionUtils;
-import com.yb.yff.game.data.constant.myEnum.BuildType;
-import com.yb.yff.game.data.dto.city.NationalMap;
-import com.yb.yff.game.data.dto.city.PositionDTO;
-import com.yb.yff.game.data.dto.nationMap.ConfigDTO;
-import com.yb.yff.game.data.dto.nationMap.MapBuildDTO;
-import com.yb.yff.game.data.dto.role.RoleResourceYideldDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**

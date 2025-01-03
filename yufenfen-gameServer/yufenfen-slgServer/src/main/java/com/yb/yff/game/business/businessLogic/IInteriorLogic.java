@@ -1,8 +1,8 @@
 package com.yb.yff.game.business.businessLogic;
 
-import com.yb.yff.sb.constant.ResponseCode;
 import com.yb.yff.game.data.dto.interior.CollectResDTO;
 import com.yb.yff.game.data.dto.interior.OpenCollectResDTO;
+import com.yb.yff.sb.constant.ResponseCode;
 
 /**
  * Copyright (c) 2024 to 2045  YangBo.

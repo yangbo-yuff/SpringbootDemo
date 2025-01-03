@@ -1,7 +1,7 @@
 package com.yb.yff.game.data.dto.army;
 
-import com.yb.yff.sb.data.dto.GameBusinessResBaseDTO;
 import com.yb.yff.game.data.dto.role.RoleResourceData;
+import com.yb.yff.sb.data.dto.GameBusinessResBaseDTO;
 import lombok.Data;
 
 /**

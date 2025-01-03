@@ -1,7 +1,7 @@
 package com.yb.yff.game.service;
 
-import com.yb.yff.game.data.entity.ArmyEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yb.yff.game.data.entity.ArmyEntity;
 
 /**
  * <p>

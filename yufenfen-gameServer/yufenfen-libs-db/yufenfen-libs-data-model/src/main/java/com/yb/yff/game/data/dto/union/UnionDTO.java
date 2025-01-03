@@ -1,10 +1,8 @@
 package com.yb.yff.game.data.dto.union;
 
-import com.yb.yff.game.data.constant.myEnum.UnionMember;
 import com.yb.yff.game.data.constant.myEnum.UnionState;
 import lombok.Data;
 
-import javax.lang.model.type.UnionType;
 import java.util.ArrayList;
 import java.util.List;
 

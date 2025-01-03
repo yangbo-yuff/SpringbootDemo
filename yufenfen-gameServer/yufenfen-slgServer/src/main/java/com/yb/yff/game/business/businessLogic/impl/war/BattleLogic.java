@@ -8,11 +8,11 @@ import com.yb.yff.game.data.bo.WarResultBO;
 import com.yb.yff.game.data.constant.EnumUtils;
 import com.yb.yff.game.data.constant.StaticConf;
 import com.yb.yff.game.data.constant.myEnum.skill.EffectType;
+import com.yb.yff.game.data.constant.myEnum.skill.TargetType;
 import com.yb.yff.game.data.dto.army.WarArmyDTO;
 import com.yb.yff.game.data.dto.war.*;
 import com.yb.yff.game.jsondb.data.dto.skill.Skill;
 
-import com.yb.yff.game.data.constant.myEnum.skill.TargetType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

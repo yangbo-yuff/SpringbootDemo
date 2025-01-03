@@ -23,7 +23,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @Slf4j
-@ComponentScan(basePackages = {"com.yb.yff.flux"})
+@ComponentScan(basePackages = {"com.yb.yff.sb"})
 public class JavaRosApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JavaRosApplication.class, args);

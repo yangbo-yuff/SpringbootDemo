@@ -1,9 +1,9 @@
 package com.yb.yff.game.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yb.yff.game.data.entity.ArmyEntity;
 import com.yb.yff.game.mapper.ArmyMapper;
 import com.yb.yff.game.service.IArmyService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
